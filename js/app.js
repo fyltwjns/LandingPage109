@@ -1851,3 +1851,301 @@ window.resetEventFilters = resetEventFilters;
 window.resetClubFilters = resetClubFilters;
 window.changeCalendarMonth = changeCalendarMonth;
 window.toggleFaq = toggleFaq;
+window.showToast = showToast;
+
+// ==========================================
+// 8. TÍNH NĂNG MÔ PHỎNG CỔNG SỰ KIỆN YOUTH.IS.VNU
+// ==========================================
+
+// A. Bộ lọc trạng thái sự kiện (Đang mở đơn / Sắp diễn ra / Tất cả)
+function filterEventsByStatus(status) {
+  // Update active pill styling
+  document.querySelectorAll('.event-filter-pill').forEach(btn => {
+    btn.classList.remove('bg-[#0B2341]', 'text-white', 'shadow-2xs');
+    btn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+  });
+
+  const activeBtn = event ? event.currentTarget : null;
+  if (activeBtn) {
+    activeBtn.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-200');
+    activeBtn.classList.add('bg-[#0B2341]', 'text-white', 'shadow-2xs');
+  }
+
+  const cards = document.querySelectorAll('.event-card-item');
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const eventId = card.getAttribute('data-event-id');
+    const ev = ULIS_DATA.events.find(e => e.id === eventId);
+    let match = true;
+
+    if (status === 'open') {
+      match = ev && ev.status === 'open';
+    } else if (status === 'closing_soon') {
+      match = ev && ev.status === 'closing_soon';
+    }
+
+    if (match) {
+      card.classList.remove('hidden');
+      visibleCount++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  const countBadge = document.getElementById('events-count-badge');
+  if (countBadge) {
+    countBadge.textContent = `${visibleCount} sự kiện hiển thị`;
+  }
+}
+window.filterEventsByStatus = filterEventsByStatus;
+
+// B. Chuyển đổi Tab Bảng Vinh Danh (Tháng / Học Kỳ)
+function switchLeaderboardTab(type) {
+  const btnMonth = document.getElementById('tab-lb-month');
+  const btnTerm = document.getElementById('tab-lb-term');
+  if (!btnMonth || !btnTerm) return;
+
+  if (type === 'month') {
+    btnMonth.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0B2341] text-white transition shadow-2xs';
+    btnTerm.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:text-blue-950 transition';
+    showToast('Đang hiển thị Bảng vinh danh Tháng 11/2026', 'info');
+  } else {
+    btnTerm.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0B2341] text-white transition shadow-2xs';
+    btnMonth.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:text-blue-950 transition';
+    showToast('Đang hiển thị Bảng vinh danh tích lũy toàn Học Kỳ I (2026-2027)', 'info');
+  }
+}
+window.switchLeaderboardTab = switchLeaderboardTab;
+
+// C. Modal Thông Báo / Tin Tức Chi Tiết
+const NEWS_DATA = {
+  'news-01': {
+    title: 'Kế Hoạch Xét Cấp Chứng Nhận Ngoại Khóa A1 - A2 - A3 Học Kỳ I (2026 - 2027)',
+    date: '15/11/2026',
+    unit: 'Phòng Chính trị & Công tác HSSV • Trường Đại học Ngoại ngữ',
+    img: './assets/news/news-01.webp',
+    content: `
+      <div class="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <p class="font-semibold text-slate-900">Kính gửi toàn thể sinh viên các khóa QH2023, QH2024, QH2025 và QH2026,</p>
+        <p>Nhằm chuẩn hóa việc thẩm định và công nhận quyền lợi tham gia hoạt động ngoại khóa, Phòng CT&CT HSSV phối hợp cùng Đoàn Thanh niên – Hội Sinh viên thông báo kế hoạch nộp và xét cấp chứng nhận A1, A2, A3 cho Học kỳ I năm học 2026 – 2027 như sau:</p>
+        <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 space-y-2">
+          <p><strong>1. Thời gian mở cổng nộp minh chứng:</strong> Từ ngày 01/12/2026 đến hết 23:59 ngày 25/12/2026.</p>
+          <p><strong>2. Hình thức nộp:</strong> Trực tuyến qua hệ thống ULIS Vibe hoặc cổng dịch vụ sinh viên.</p>
+          <p><strong>3. Thời gian công bố kết quả:</strong> Dự kiến ngày 10/01/2027.</p>
+        </div>
+        <p>Sinh viên lưu ý kiểm tra đối chiếu mã hoạt động với <strong>Cert Hub</strong> trên ULIS Vibe để nộp đúng danh mục minh chứng, tránh sai sót khi xét học bổng khuyến khích học tập.</p>
+      </div>
+    `
+  },
+  'news-02': {
+    title: 'Phát Động Chiến Dịch "Sinh Viên 5 Tốt" & Tháng Rèn Luyện Sinh Viên ULIS 2026',
+    date: '10/11/2026',
+    unit: 'Đoàn TNCS Hồ Chí Minh – Hội Sinh viên ULIS',
+    img: './assets/news/news-02.webp',
+    content: `
+      <div class="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <p class="font-semibold text-slate-900">Chào mừng Năm học 2026 - 2027 và phong trào thi đua cao điểm sinh viên,</p>
+        <p>Đoàn Thanh niên - Hội Sinh viên Trường Đại học Ngoại ngữ chính thức phát động chiến dịch "Sinh viên 5 Tốt" cấp trường và cấp ĐHQGHN với 5 tiêu chí toàn diện: <strong>Đạo đức tốt - Học tập tốt - Thể lực tốt - Tình nguyện tốt - Hội nhập tốt</strong>.</p>
+        <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 space-y-2">
+          <p><strong>• Chuỗi 15 hội thảo chuyên môn:</strong> Hỗ trợ sinh viên hoàn thành tiêu chí Học tập tốt (Cert A1).</p>
+          <p><strong>• Hoạt động tình nguyện Ba Vì:</strong> Tích lũy 01 chứng nhận A3 và 15 ngày công tình nguyện.</p>
+          <p><strong>• Quyền lợi đặc biệt:</strong> Ưu tiên xét học bổng Thắp sáng tương lai, vé trao đổi quốc tế.</p>
+        </div>
+      </div>
+    `
+  },
+  'news-03': {
+    title: 'Khai Mạc Tuần Lễ Văn Hóa Quốc Tế & Chung Kết Hùng Biện Ngoại Ngữ 2026',
+    date: '05/11/2026',
+    unit: 'Hội Sinh viên Trường Đại học Ngoại ngữ - ĐHQGHN',
+    img: './assets/news/news-03.webp',
+    content: `
+      <div class="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <p class="font-semibold text-slate-900">Sự kiện văn hóa thường niên lớn nhất trường đã chính thức mở màn!</p>
+        <p>Tuần lễ Văn hóa Quốc tế 2026 quy tụ hơn 30 gian hàng truyền thống từ các khoa ngôn ngữ: Anh, Pháp, Nga, Trung, Đức, Nhật, Hàn và khoa Ngôn ngữ & Văn hóa các nước Ả Rập.</p>
+        <div class="p-4 bg-purple-50 rounded-2xl border border-purple-100 space-y-2">
+          <p><strong>• Địa điểm:</strong> Khuôn viên Sân A1-A2 & Hội trường Vũ Đình Liên.</p>
+          <p><strong>• Quyền lợi tham gia:</strong> Cấp Giấy chứng nhận ngoại khóa chuẩn A2 (Kỹ năng & Hội nhập quốc tế) + 5 điểm rèn luyện.</p>
+        </div>
+      </div>
+    `
+  }
+};
+
+function openNewsModal(newsId) {
+  const item = NEWS_DATA[newsId];
+  if (!item) return;
+
+  const modal = document.getElementById("app-modal");
+  const modalContent = document.getElementById("modal-content");
+  if (!modal || !modalContent) return;
+
+  modalContent.innerHTML = `
+    <div class="relative">
+      <div class="aspect-video w-full overflow-hidden bg-slate-950">
+        <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover" />
+      </div>
+      <button onclick="closeModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-900/70 hover:bg-slate-900 text-white flex items-center justify-center transition backdrop-blur-md">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+    <div class="p-6 sm:p-8">
+      <div class="flex items-center gap-2 text-xs text-slate-500 mb-3">
+        <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-900 font-bold text-[10px]">TIN TỨC CHÍNH THỨC</span>
+        <span>${item.date}</span>
+        <span>•</span>
+        <span>${item.unit}</span>
+      </div>
+      <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mb-4 leading-tight">
+        ${item.title}
+      </h3>
+      ${item.content}
+      <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
+        <a href="#event-hub" onclick="closeModal()" class="text-xs font-bold text-blue-900 hover:underline">
+          ← Khám phá các sự kiện liên quan
+        </a>
+        <button onclick="closeModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition">
+          Đóng thông báo
+        </button>
+      </div>
+    </div>
+  `;
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  document.body.style.overflow = "hidden";
+  initLucide();
+}
+window.openNewsModal = openNewsModal;
+
+// D. Modal Đăng Nhập VNU Mail (@vnu.edu.vn - Mô phỏng SSO ĐHQGHN)
+function openLoginModal() {
+  const modal = document.getElementById("app-modal");
+  const modalContent = document.getElementById("modal-content");
+  if (!modal || !modalContent) return;
+
+  modalContent.innerHTML = `
+    <div class="p-6 sm:p-8">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+        <div class="flex items-center gap-3">
+          <img src="./assets/ulis-logo.png" alt="ULIS Logo" class="w-10 h-10 object-contain" />
+          <div>
+            <h3 class="text-lg font-black text-[#0B2341]">CỔNG ĐĂNG NHẬP VNU MAIL</h3>
+            <p class="text-[11px] text-slate-500 font-medium">Xác thực tài khoản sinh viên ĐHQGHN</p>
+          </div>
+        </div>
+        <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4">
+        <div class="p-4 bg-blue-50 rounded-2xl border border-blue-100 text-xs text-blue-950 flex items-start gap-2.5">
+          <i data-lucide="shield-check" class="w-5 h-5 text-blue-800 shrink-0 mt-0.5"></i>
+          <div>
+            <p class="font-bold">Đăng nhập một điểm chạm (Single Sign-On):</p>
+            <p class="text-blue-900 mt-0.5 leading-relaxed">Sử dụng địa chỉ email sinh viên do Trường cấp (<strong class="underline">@vnu.edu.vn</strong>) để tự động đồng bộ hóa hồ sơ ngoại khóa, tích lũy điểm rèn luyện và nhận thông báo mở đợt tuyển quân CLB.</p>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-800 uppercase mb-1.5">Tài khoản VNU Email:</label>
+          <div class="relative">
+            <i data-lucide="mail" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <input type="email" id="vnu-login-email" placeholder="msv@vnu.edu.vn (Ví dụ: 24040123@vnu.edu.vn)" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:bg-white" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-800 uppercase mb-1.5">Mật khẩu:</label>
+          <div class="relative">
+            <i data-lucide="lock" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <input type="password" id="vnu-login-pass" placeholder="••••••••" class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:bg-white" />
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-slate-600">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" checked class="rounded border-slate-300 text-blue-900 focus:ring-blue-900" />
+            <span>Ghi nhớ đăng nhập</span>
+          </label>
+          <a href="#" onclick="showToast('Vui lòng liên hệ Phòng CT&CT HSSV hoặc TT CNTT để cấp lại mật khẩu VNU Mail.', 'info')" class="text-blue-900 hover:underline">Quên mật khẩu?</a>
+        </div>
+
+        <button onclick="handleVnuLoginSubmit()" class="w-full py-3 bg-[#0B2341] hover:bg-blue-900 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition shadow-sm">
+          <i data-lucide="log-in" class="w-4 h-4 text-amber-400"></i> Đăng nhập qua VNU SSO
+        </button>
+
+        <div class="relative flex items-center justify-center py-2">
+          <span class="absolute inset-x-0 h-px bg-slate-200"></span>
+          <span class="relative bg-white px-3 text-[11px] text-slate-400 font-semibold uppercase">Hoặc</span>
+        </div>
+
+        <button onclick="handleGuestDemoLogin()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition">
+          <i data-lucide="sparkles" class="w-4 h-4 text-blue-800"></i> Trải nghiệm nhanh với Tài khoản Khách (Demo K58)
+        </button>
+      </div>
+    </div>
+  `;
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  document.body.style.overflow = "hidden";
+  initLucide();
+}
+window.openLoginModal = openLoginModal;
+
+function handleVnuLoginSubmit() {
+  const emailInput = document.getElementById("vnu-login-email");
+  const val = emailInput ? emailInput.value.trim() : "";
+  if (!val || !val.includes("@")) {
+    showToast("Vui lòng nhập định dạng email hợp lệ (@vnu.edu.vn)!", "warning");
+    return;
+  }
+  closeModal();
+  showToast(`Xin chào sinh viên ${val.split('@')[0]}! Đã đăng nhập thành công vào cổng ULIS Vibe.`, "success");
+}
+window.handleVnuLoginSubmit = handleVnuLoginSubmit;
+
+function handleGuestDemoLogin() {
+  closeModal();
+  showToast("Đã đăng nhập tài khoản Trải nghiệm: Nguyễn Minh Châu (QH2024.F1) • 98 ĐRL", "success");
+}
+window.handleGuestDemoLogin = handleGuestDemoLogin;
+
+// E. Header search input sync
+document.addEventListener("DOMContentLoaded", () => {
+  const headerSearchInput = document.getElementById("header-search-input");
+  const mobileSearchInput = document.getElementById("mobile-search-input");
+
+  function syncSearch(query) {
+    const mainSearch = document.getElementById("search-event-input");
+    if (mainSearch) {
+      mainSearch.value = query;
+      // Trigger search filter
+      const event = new Event('input', { bubbles: true });
+      mainSearch.dispatchEvent(event);
+    }
+  }
+
+  if (headerSearchInput) {
+    headerSearchInput.addEventListener("input", (e) => syncSearch(e.target.value));
+    headerSearchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const el = document.getElementById("event-hub");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  }
+
+  if (mobileSearchInput) {
+    mobileSearchInput.addEventListener("input", (e) => syncSearch(e.target.value));
+    mobileSearchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const el = document.getElementById("event-hub");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  }
+});
