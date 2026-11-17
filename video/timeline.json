@@ -1,0 +1,125 @@
+{
+  "project": "ULIS Vibe - Video Giới Thiệu Đề Án Nhóm 109",
+  "aspectRatio": "16:9",
+  "resolution": { "width": 1920, "height": 1080 },
+  "fps": 60,
+  "durationSeconds": 45,
+  "totalFrames": 2700,
+  "theme": {
+    "style": "Bright Academic Minimalism & Fluid Motion",
+    "background": "#FFFFFF",
+    "surface": "#F8FAFC",
+    "primary": "#002B7F",
+    "secondary": "#0284C7",
+    "accent": "#38BDF8",
+    "gold": "#D97706",
+    "emerald": "#059669",
+    "textMain": "#0F172A",
+    "textMuted": "#64748B",
+    "font": "Be Vietnam Pro, sans-serif"
+  },
+  "scenes": [
+    {
+      "id": "scene-01-intro",
+      "name": "Mở đầu & Bối cảnh học phần",
+      "startFrame": 0,
+      "endFrame": 420,
+      "durationFrames": 420,
+      "durationSeconds": 7.0,
+      "title": "TRƯỜNG ĐẠI HỌC NGOẠI NGỮ – ĐHQGHN",
+      "subtitle": "BỘ MÔN CÔNG NGHỆ THÔNG TIN & TRUYỀN THÔNG",
+      "heading": "ĐỀ ÁN BÀI TẬP NHÓM GIỮA KỲ • HỌC KỲ I (2026 - 2027)",
+      "badge": "Nhóm 109 - Lớp FLF1007",
+      "productName": "ULIS VIBE",
+      "productTagline": "Cổng Sự Kiện, CLB & Tra Cứu Chuẩn Hóa Cert A1 - A2 - A3",
+      "visuals": ["ulis-logo", "academic-banner", "particle-burst"],
+      "sfx": ["deep-impact", "laser-riser"]
+    },
+    {
+      "id": "scene-02-problem",
+      "name": "Cơ sở thực tiễn từ khảo sát 105 sinh viên",
+      "startFrame": 420,
+      "endFrame": 900,
+      "durationFrames": 480,
+      "durationSeconds": 8.0,
+      "title": "THỰC TIỄN TỪ 105 SINH VIÊN ULIS",
+      "subtitle": "Khó khăn tiếp cận thông tin ngoại khóa",
+      "stats": [
+        { "value": "71.5%", "label": "Sinh viên từng bỏ lỡ sự kiện", "sub": "Do thông tin phân tán, trôi trên MXH" },
+        { "value": "82.9%", "label": "Gặp khó khăn tra cứu Cert", "sub": "Mơ hồ giữa tiêu chí A1, A2, A3" },
+        { "value": "91.4%", "label": "Ủng hộ nền tảng tập trung", "sub": "Cần một cổng kết nối chính thống" }
+      ],
+      "visuals": ["3d-stat-cards", "survey-chart", "alert-pulse"],
+      "sfx": ["whoosh", "counter-tick", "impact-bass"]
+    },
+    {
+      "id": "scene-03-event-hub",
+      "name": "Tính năng 1: Event Hub & Check-in QR",
+      "startFrame": 900,
+      "endFrame": 1500,
+      "durationFrames": 600,
+      "durationSeconds": 10.0,
+      "badge": "TÍNH NĂNG TRỌNG TÂM #01",
+      "heading": "EVENT HUB: LỊCH SỰ KIỆN & TUYỂN QUÂN TẬP TRUNG",
+      "features": [
+        "Lọc thông minh theo tháng & loại chứng nhận A1, A2, A3",
+        "Hiển thị số suất tham gia thời gian thực (Còn 45/100 chỗ)",
+        "Đếm ngược hạn đăng ký chuẩn xác đến từng phút",
+        "Mã QR Check-in thông minh ghi nhận điểm danh tự động"
+      ],
+      "visuals": ["event-posters-showcase", "qr-scanner-overlay", "filter-pills"],
+      "sfx": ["camera-shutter", "qr-beep", "card-swoosh"]
+    },
+    {
+      "id": "scene-04-club-directory",
+      "name": "Tính năng 2: Club Directory",
+      "startFrame": 1500,
+      "endFrame": 1980,
+      "durationFrames": 480,
+      "durationSeconds": 8.0,
+      "badge": "TÍNH NĂNG TRỌNG TÂM #02",
+      "heading": "CLUB DIRECTORY: DANH BẠ TOÀN DIỆN 3 NHÓM CLB",
+      "categories": [
+        { "name": "CLB Học thuật & NCKH", "icon": "book", "examples": "K-ULIS, SRC, Tiếng Anh, Tiếng Trung" },
+        { "name": "CLB Tài năng & Sở thích", "icon": "music", "examples": "MMC Âm nhạc, Dance Club, Guitar, Bóng đá" },
+        { "name": "CLB Kỹ năng & Tình nguyện", "icon": "heart", "examples": "Đội Lễ tân URT, Sắc màu, Máu ULIS" }
+      ],
+      "benefit": "Modal chi tiết đầy đủ thông tin • Nộp đơn gia nhập 1 chạm",
+      "visuals": ["3-pillars-cards", "club-tags-cascade", "modal-unfold-preview"],
+      "sfx": ["whoosh", "card-pop", "click"]
+    },
+    {
+      "id": "scene-05-cert-hub",
+      "name": "Tính năng 3: Cert Hub A1-A2-A3",
+      "startFrame": 1980,
+      "endFrame": 2400,
+      "durationFrames": 420,
+      "durationSeconds": 7.0,
+      "badge": "TÍNH NĂNG TRỌNG TÂM #03",
+      "heading": "CERT HUB: CHUẨN HÓA CHỨNG NHẬN NGOẠI KHÓA",
+      "certs": [
+        { "code": "A1", "name": "Học thuật & NCKH", "color": "#2563EB", "desc": "Hội thảo chuyên môn, nghiên cứu sinh viên" },
+        { "code": "A2", "name": "Kỹ năng mềm", "color": "#D97706", "desc": "Tập huấn kỹ năng, lễ tân, ngoại ngữ ngoại khóa" },
+        { "code": "A3", "name": "Tình nguyện & Cống hiến", "color": "#059669", "desc": "Hiến máu nhân đạo, hoạt động tình nguyện xã hội" }
+      ],
+      "benefit": "Bộ câu hỏi tự vấn tương tác giúp sinh viên chọn đúng sự kiện theo nhu cầu điểm rèn luyện",
+      "visuals": ["cert-3d-stack", "decision-tree-animation"],
+      "sfx": ["harmonic-chime", "badge-sparkle"]
+    },
+    {
+      "id": "scene-06-outro",
+      "name": "Tổng kết & Kêu gọi hành động",
+      "startFrame": 2400,
+      "endFrame": 2700,
+      "durationFrames": 300,
+      "durationSeconds": 5.0,
+      "headline": "ULIS VIBE: MỘT ĐIỂM CHẠM – VẠN CƠ HỘI",
+      "subheadline": "Nền tảng kết nối ngoại khóa dành riêng cho sinh viên ULIS",
+      "teamInfo": "Sản phẩm đề án Nhóm 109 • Lớp FLF1007 • ĐH Ngoại ngữ - ĐHQGHN",
+      "leader": "Nhóm trưởng: Đoàn Thị Phương Thảo (0919 672 122)",
+      "cta": "TRẢI NGHIỆM NGAY TẠI ULIS VIBE & GÓP Ý ẨN DANH",
+      "visuals": ["hero-pulsing-logo", "fireworks-particles", "contact-box"],
+      "sfx": ["finale-impact", "applause-riser"]
+    }
+  ]
+}

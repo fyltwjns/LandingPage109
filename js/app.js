@@ -226,6 +226,10 @@ function renderEvents() {
   container.innerHTML = events.map(ev => {
     const isSaved = state.savedEvents.includes(ev.id);
     const certBadgeClass = ev.certType === "A1" ? "badge-a1" : ev.certType === "A2" ? "badge-a2" : "badge-a3";
+    let typeBadgeClass = "bg-slate-100 text-slate-800 border border-slate-200";
+    if (ev.type === "recruitment") {
+      typeBadgeClass = "bg-purple-100 text-purple-950 border border-purple-200";
+    }
     const dateFormatted = formatDateVietnamese(ev.date);
 
     return `
@@ -246,7 +250,7 @@ function renderEvents() {
                 <span class="px-2 py-0.5 text-xs font-bold rounded-md whitespace-nowrap shrink-0 ${certBadgeClass}">
                   ${ev.certType} • ${ev.certType === "A1" ? "Học thuật" : ev.certType === "A2" ? "Kỹ năng" : "Tình nguyện"}
                 </span>
-                <span class="px-2 py-0.5 text-xs font-semibold rounded-md whitespace-nowrap shrink-0 ${ev.type === 'recruitment' ? 'bg-purple-100 text-purple-900 border border-purple-200' : 'bg-slate-100 text-slate-800 border border-slate-200'}">
+                <span class="px-2 py-0.5 text-xs font-semibold rounded-md whitespace-nowrap shrink-0 ${typeBadgeClass}">
                   ${ev.typeName}
                 </span>
               </div>
@@ -372,11 +376,17 @@ function renderCalendarView(events, container) {
     const dayEvents = eventsByDay[day] || [];
     const hasEvents = dayEvents.length > 0;
     const isToday = (day === 20 && month === 11 && year === 2026);
+    let dayNumClass = "text-slate-800";
+    if (isToday) {
+      dayNumClass = "w-6 h-6 rounded-full bg-blue-800 text-white flex items-center justify-center -ml-1 -mt-1";
+    } else if (hasEvents) {
+      dayNumClass = "text-blue-950 font-extrabold";
+    }
 
     calendarHtml += `
       <div class="min-h-[105px] p-2 rounded-xl border ${hasEvents ? 'bg-blue-50/30 border-blue-200 hover:border-blue-400 cal-day-active' : 'bg-white border-slate-200'} flex flex-col justify-between transition group">
         <div class="flex items-center justify-between mb-1">
-          <span class="text-xs font-bold ${isToday ? 'w-6 h-6 rounded-full bg-blue-800 text-white flex items-center justify-center -ml-1 -mt-1' : hasEvents ? 'text-blue-900 font-extrabold' : 'text-slate-700'}">
+          <span class="text-xs font-bold ${dayNumClass}">
             ${day}
           </span>
           ${hasEvents ? `<span class="w-2 h-2 rounded-full bg-blue-600"></span>` : ''}
@@ -519,6 +529,9 @@ function openEventModal(eventId) {
 
   const certBadgeClass = ev.certType === "A1" ? "badge-a1" : ev.certType === "A2" ? "badge-a2" : "badge-a3";
   const isSaved = state.savedEvents.includes(ev.id);
+  const bookmarkBtnClass = isSaved
+    ? "bg-amber-100 border-amber-300 text-amber-950 font-bold"
+    : "bg-white border-slate-200 text-slate-800 hover:bg-slate-100";
 
   const html = `
     <div class="relative overflow-hidden rounded-3xl flex flex-col bg-white">
@@ -609,7 +622,7 @@ function openEventModal(eventId) {
 
       <!-- Natural Unfolded Footer (Xổ hết ra, không thu gọn, không chồng lấn nội dung) -->
       <div class="p-4 sm:p-5 border-t border-slate-100 bg-slate-50 rounded-b-3xl flex flex-wrap items-center justify-between gap-3">
-        <button onclick="toggleSaveEvent('${ev.id}'); openEventModal('${ev.id}');" class="px-4 py-2.5 border rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 cursor-pointer ${isSaved ? 'bg-amber-100 border-amber-300 text-amber-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'}">
+        <button onclick="toggleSaveEvent('${ev.id}'); openEventModal('${ev.id}');" class="px-4 py-2.5 border rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 cursor-pointer ${bookmarkBtnClass}">
           <i data-lucide="bookmark" class="w-4 h-4 ${isSaved ? 'fill-current' : ''}"></i>
           ${isSaved ? 'Đã lưu trong mục quan tâm' : 'Lưu vào mục quan tâm'}
         </button>
@@ -1024,7 +1037,7 @@ function renderCertContent(certKey) {
             </div>
           </div>
 
-          <div class="p-4 bg-amber-50/60 rounded-xl border border-amber-200 text-xs text-slate-700 space-y-1.5">
+          <div class="p-4 bg-amber-50/60 rounded-xl border border-amber-200 text-xs text-amber-950 space-y-1.5">
             <span class="font-bold text-amber-900 flex items-center gap-1.5">
               <i data-lucide="info" class="w-4 h-4 text-amber-600"></i> Quy định minh chứng & Lưu ý:
             </span>
@@ -1040,7 +1053,7 @@ function renderCertContent(certKey) {
             </h4>
             <div class="grid grid-cols-1 gap-2.5">
               ${cert.examples.map(ex => `
-                <div class="p-3 bg-blue-50/40 rounded-xl border border-blue-100 text-sm font-medium text-slate-800 flex items-center gap-2">
+                <div class="p-3 bg-blue-50/40 rounded-xl border border-blue-100 text-sm font-medium text-blue-950 flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-blue-600"></span>
                   <span>${ex}</span>
                 </div>
@@ -1053,7 +1066,7 @@ function renderCertContent(certKey) {
             <p class="text-xs text-slate-300 mb-4 leading-relaxed">
               Event Hub đã tổng hợp sẵn các sự kiện cấp ${cert.type} trong tháng 11, 12/2026 và tháng 01/2027.
             </p>
-            <button onclick="filterEventsByCert('${cert.type}')" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center gap-2 transition">
+            <button onclick="filterEventsByCert('${cert.type}')" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl text-xs flex items-center gap-2 transition">
               Xem sự kiện ${cert.type} trên Event Hub <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
           </div>
@@ -1185,7 +1198,7 @@ function initCertRecommender() {
     }
 
     resultContainer.innerHTML = `
-      <div class="mt-6 p-6 bg-blue-50 border border-blue-200 rounded-2xl animate-fade-in text-sm text-slate-800">
+      <div class="mt-6 p-6 bg-blue-50 border border-blue-200 rounded-2xl animate-fade-in text-sm text-blue-950">
         <div class="flex items-center gap-2 mb-2">
           <span class="w-3 h-3 rounded-full bg-blue-600"></span>
           <h4 class="font-bold text-blue-900 text-base">Lộ trình rèn luyện được cá nhân hóa cho bạn:</h4>
@@ -1766,7 +1779,7 @@ function initFeedbackForm() {
 function showFeedbackSuccessModal(feedback) {
   const html = `
     <div class="p-8 text-center animate-fade-in">
-      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-200/60 shadow-xs">
         <i data-lucide="check-circle-2" class="w-10 h-10"></i>
       </div>
       <h3 class="text-xl font-bold text-slate-900 mb-2">Góp ý ẩn danh thành công!</h3>

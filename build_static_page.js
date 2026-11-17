@@ -18,6 +18,10 @@ function formatDateVietnamese(dateStr) {
 // 1. Generate Event Cards HTML (Full rich details: 16:9 clean banner + detailed tags & metadata below)
 const eventsHtml = D.events.map(ev => {
   const certBadgeClass = ev.certType === "A1" ? "badge-a1" : ev.certType === "A2" ? "badge-a2" : "badge-a3";
+  let typeBadgeClass = "bg-slate-100 text-slate-800 border border-slate-200";
+  if (ev.type === "recruitment") {
+    typeBadgeClass = "bg-purple-100 text-purple-950 border border-purple-200";
+  }
   const dateFormatted = formatDateVietnamese(ev.date);
   return `
       <div data-event-id="${ev.id}" data-category="${ev.category}" data-cert="${ev.certType}" data-month="${ev.date.substring(0,7)}" class="event-card-item group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md interactive-card flex flex-col justify-between overflow-hidden relative">
@@ -37,7 +41,7 @@ const eventsHtml = D.events.map(ev => {
                 <span class="px-2 py-0.5 text-xs font-bold rounded-md whitespace-nowrap shrink-0 ${certBadgeClass}">
                   ${ev.certType} • ${ev.certType === "A1" ? "Học thuật" : ev.certType === "A2" ? "Kỹ năng" : "Tình nguyện"}
                 </span>
-                <span class="px-2 py-0.5 text-xs font-semibold rounded-md whitespace-nowrap shrink-0 ${ev.type === 'recruitment' ? 'bg-purple-100 text-purple-900 border border-purple-200' : 'bg-slate-100 text-slate-800 border border-slate-200'}">
+                <span class="px-2 py-0.5 text-xs font-semibold rounded-md whitespace-nowrap shrink-0 ${typeBadgeClass}">
                   ${ev.typeName}
                 </span>
               </div>
@@ -308,13 +312,19 @@ const faqHtml = D.faqs.map((faq, index) => `
 `).join("\n");
 
 // 5. Generate Roadmap HTML
+const getRoadmapBadgeClass = (status) => {
+  if (status === 'completed') return 'bg-emerald-100 text-emerald-950';
+  if (status === 'in_progress') return 'bg-blue-100 text-blue-950';
+  return 'bg-slate-100 text-slate-800';
+};
+
 const roadmapHtml = D.roadmap.map(item => `
       <div class="relative pl-8 pb-6 border-l-2 ${item.status === 'completed' ? 'border-emerald-600' : item.status === 'in_progress' ? 'border-blue-700' : 'border-slate-200'} last:border-transparent">
         <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full border-2 border-white ${item.status === 'completed' ? 'bg-emerald-600 ring-4 ring-emerald-100' : item.status === 'in_progress' ? 'bg-blue-700 ring-4 ring-blue-100 animate-pulse' : 'bg-slate-300'}"></div>
         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs hover:shadow-sm transition">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
             <span class="text-xs font-bold text-blue-900 tabular-nums">Bước ${item.step}: ${item.time}</span>
-            <span class="px-2 py-0.5 text-[10px] font-bold rounded ${item.status === 'completed' ? 'bg-emerald-100 text-emerald-950' : item.status === 'in_progress' ? 'bg-blue-100 text-blue-950' : 'bg-slate-100 text-slate-700'}">
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded ${getRoadmapBadgeClass(item.status)}">
               ${item.status === 'completed' ? 'Đã hoàn thành' : item.status === 'in_progress' ? 'Đang triển khai' : 'Dự kiến'}
             </span>
           </div>
@@ -332,7 +342,7 @@ const roadmapTableHtml = D.roadmap.map(item => `
         <td class="py-2.5 px-3 text-xs font-semibold text-blue-950 whitespace-nowrap tabular-nums border-r border-slate-100">${item.time}</td>
         <td class="py-2.5 px-3 text-xs text-slate-600 border-r border-slate-100">${item.participants}</td>
         <td class="py-2.5 px-3 text-xs text-center whitespace-nowrap">
-          <span class="px-2 py-0.5 text-[10px] font-bold rounded ${item.status === 'completed' ? 'bg-emerald-100 text-emerald-950' : item.status === 'in_progress' ? 'bg-blue-100 text-blue-950' : 'bg-slate-100 text-slate-700'}">
+          <span class="px-2 py-0.5 text-[10px] font-bold rounded ${getRoadmapBadgeClass(item.status)}">
             ${item.status === 'completed' ? 'Đã hoàn thành' : item.status === 'in_progress' ? 'Đang triển khai' : 'Dự kiến'}
           </span>
         </td>

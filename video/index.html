@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ULIS VIBE - Video Giới Thiệu Đề Án (Nhóm 109)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Be Vietnam Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: #F8FAFC;
+      color: #0F172A;
+      overflow-x: hidden;
+    }
+    /* 16:9 Canvas Viewport Aspect Ratio Container (Clean Editorial Frame) */
+    .video-aspect-container {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      aspect-ratio: 16 / 9;
+      background: #FFFFFF;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08), 0 1px 3px 0 rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+    }
+    input[type=range] {
+      accent-color: #002B7F;
+    }
+    .scene-jump-btn.active {
+      background-color: #001E5B !important;
+      color: #FFFFFF !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15) !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 sm:p-6 md:p-8">
+
+  <!-- TOP HEADER (Clean Studio Bar) -->
+  <header class="max-w-6xl w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pb-5 border-b border-slate-200">
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="p-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-blue-950 border border-slate-200 shadow-2xs transition flex items-center gap-2 text-xs font-semibold" title="Quay lại Landing Page">
+        <svg class="w-4 h-4 text-blue-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span>Về Trang Chủ</span>
+      </a>
+      <div class="h-5 w-px bg-slate-200"></div>
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-bold tracking-wider text-slate-800 uppercase">ULIS Vibe • Video Giới Thiệu</span>
+        <span id="current-scene-tag" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-900 border border-blue-200/60">
+          01 • Bối cảnh đề án
+        </span>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-2.5">
+      <button id="btn-export-mp4" class="px-4 py-2 bg-blue-950 hover:bg-blue-900 text-white font-bold rounded-xl text-xs flex items-center gap-2 shadow-xs transition transform active:scale-95">
+        <svg class="w-4 h-4 text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Xuất video MP4 (1080p 60fps)</span>
+      </button>
+      <button id="btn-fullscreen" class="p-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-blue-950 border border-slate-200 shadow-2xs transition" title="Toàn màn hình trình chiếu">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN VIDEO STAGE (Pure 16:9 Unoccluded Canvas) -->
+  <main class="flex-1 flex flex-col items-center justify-center my-5">
+    <div id="video-container" class="video-aspect-container relative flex items-center justify-center">
+      <!-- High-DPI 16:9 Canvas -->
+      <canvas id="video-canvas" width="1920" height="1080" class="w-full h-full object-contain block"></canvas>
+
+      <!-- Center Big Play Button when paused -->
+      <button id="big-play-btn" class="absolute inset-0 m-auto w-18 h-18 rounded-full bg-white/95 hover:bg-white text-blue-950 flex items-center justify-center shadow-xl transition transform hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-sm z-20 border border-slate-200/80">
+        <svg class="w-8 h-8 fill-current ml-1 text-blue-950" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+
+      <!-- Exporting Modal Overlay -->
+      <div id="export-overlay" class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-md z-30 flex flex-col items-center justify-center p-6 text-center animate-fade-in text-white">
+        <div class="w-14 h-14 rounded-2xl bg-white/10 text-sky-400 flex items-center justify-center mb-4 border border-white/20 animate-spin">
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+        </div>
+        <h3 class="text-lg font-bold mb-1 text-white">Đang kết xuất video 1080p 60fps...</h3>
+        <p class="text-xs text-slate-400 mb-5">Sử dụng công nghệ WebCodecs GPU nội suy từng khung hình.</p>
+        
+        <div class="w-full max-w-md bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700 mb-3">
+          <div id="export-progress-bar" class="bg-gradient-to-r from-sky-400 to-blue-500 h-full w-0 transition-all duration-100"></div>
+        </div>
+        <span id="export-progress-text" class="text-xs font-mono text-sky-400">0% (0 / 2700 frames)</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- BOTTOM TIMELINE CONTROLS -->
+  <footer class="max-w-6xl w-full mx-auto bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200 p-4 shadow-lg shadow-slate-200/40">
+    <!-- Scrubber Slider -->
+    <div class="relative w-full mb-3">
+      <input type="range" id="time-scrubber" min="0" max="2700" value="0" step="1" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+      
+      <!-- Scene Markers on Scrubber -->
+      <div class="absolute top-3 left-0 w-full flex justify-between px-1 text-[10px] text-slate-500 pointer-events-none font-medium">
+        <span class="hover:text-blue-900">0:00 Intro</span>
+        <span class="hover:text-blue-900">0:07 Khảo sát</span>
+        <span class="hover:text-blue-900">0:15 Event Hub</span>
+        <span class="hover:text-blue-900">0:25 Club Hub</span>
+        <span class="hover:text-blue-900">0:33 Cert Hub</span>
+        <span class="hover:text-blue-900">0:40 Outro</span>
+        <span>0:45</span>
+      </div>
+    </div>
+
+    <!-- Playback Control Toolbar -->
+    <div class="flex flex-wrap items-center justify-between gap-4 pt-1.5">
+      <div class="flex items-center gap-3">
+        <!-- Play / Pause -->
+        <button id="btn-play" class="w-9 h-9 rounded-xl bg-blue-950 hover:bg-blue-900 text-white font-bold flex items-center justify-center transition shadow-2xs">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+        <!-- Restart -->
+        <button id="btn-restart" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition" title="Xem lại từ đầu">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        </button>
+        <!-- Timecode Display -->
+        <div class="text-xs font-mono text-slate-700">
+          <span id="timecode-current" class="text-blue-950 font-bold">00:00</span> / <span id="timecode-total" class="text-slate-500">00:45</span>
+          <span class="text-slate-400 text-[11px] ml-2">60 FPS • 1920x1080</span>
+        </div>
+      </div>
+
+      <!-- Scene Quick Jump Buttons -->
+      <div class="hidden lg:flex items-center gap-1.5 text-xs font-medium">
+        <button data-scene="0" onclick="jumpToFrame(0)" class="scene-jump-btn active px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/60 transition">1. Bối cảnh</button>
+        <button data-scene="1" onclick="jumpToFrame(420)" class="scene-jump-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/60 transition">2. Khảo sát</button>
+        <button data-scene="2" onclick="jumpToFrame(900)" class="scene-jump-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/60 transition">3. Event Hub</button>
+        <button data-scene="3" onclick="jumpToFrame(1500)" class="scene-jump-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/60 transition">4. Club Hub</button>
+        <button data-scene="4" onclick="jumpToFrame(1980)" class="scene-jump-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/60 transition">5. Cert Hub</button>
+        <button data-scene="5" onclick="jumpToFrame(2400)" class="scene-jump-btn px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/60 transition">6. Tổng kết</button>
+      </div>
+
+      <!-- Volume & Shortcuts -->
+      <div class="flex items-center gap-3">
+        <div class="hidden xl:flex items-center gap-1 px-2.5 py-1 bg-slate-100 rounded-lg text-[11px] text-slate-600 border border-slate-200/60" title="Phím tắt điều khiển">
+          <span class="font-mono bg-white px-1 py-0.5 rounded border border-slate-200 text-slate-800 font-semibold">Space</span> Phát • 
+          <span class="font-mono bg-white px-1 py-0.5 rounded border border-slate-200 text-slate-800 font-semibold">← / →</span> Tua 5s • 
+          <span class="font-mono bg-white px-1 py-0.5 rounded border border-slate-200 text-slate-800 font-semibold">F</span> Fullscreen
+        </div>
+        <button id="btn-audio-toggle" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex items-center gap-1.5 text-xs font-medium">
+          <svg id="audio-icon" class="w-4 h-4 text-blue-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <span id="audio-label" class="hidden sm:inline">Nhạc Lofi Acoustic</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script src="./studio.js"></script>
+</body>
+</html>

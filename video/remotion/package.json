@@ -1,0 +1,21 @@
+{
+  "name": "ulis-vibe-remotion",
+  "version": "1.0.0",
+  "description": "Programmatic Video Presentation for ULIS VIBE (Nhóm 109 - Lớp FLF1007)",
+  "scripts": {
+    "start": "remotion preview src/index.ts",
+    "build": "remotion render src/index.ts UlisVibeVideo out/ulis-vibe-presentation.mp4",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.0",
+    "@remotion/cli": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}
