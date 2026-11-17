@@ -42,6 +42,31 @@
       font-weight: 700 !important;
       box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15) !important;
     }
+    /* Embedded Player Mode (when inside iframe on landing page) */
+    body.is-embedded {
+      padding: 0.5rem 0.75rem !important;
+      background: transparent !important;
+      min-height: auto !important;
+      overflow: hidden !important;
+    }
+    body.is-embedded header {
+      padding-bottom: 0.5rem !important;
+      margin-bottom: 0.25rem !important;
+    }
+    body.is-embedded .btn-back-home {
+      display: none !important;
+    }
+    body.is-embedded .btn-back-divider {
+      display: none !important;
+    }
+    body.is-embedded main {
+      margin-top: 0.25rem !important;
+      margin-bottom: 0.25rem !important;
+    }
+    body.is-embedded footer {
+      padding-top: 0.35rem !important;
+      margin-top: 0.25rem !important;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between p-4 sm:p-6 md:p-8">
@@ -49,11 +74,11 @@
   <!-- TOP HEADER (Clean Studio Bar) -->
   <header class="max-w-6xl w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pb-5 border-b border-slate-200">
     <div class="flex items-center gap-3">
-      <a href="../index.html" class="p-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-blue-950 border border-slate-200 shadow-2xs transition flex items-center gap-2 text-xs font-semibold" title="Quay lại Landing Page">
+      <a href="../index.html" class="btn-back-home p-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-blue-950 border border-slate-200 shadow-2xs transition flex items-center gap-2 text-xs font-semibold" title="Quay lại Landing Page">
         <svg class="w-4 h-4 text-blue-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
         <span>Về Trang Chủ</span>
       </a>
-      <div class="h-5 w-px bg-slate-200"></div>
+      <div class="btn-back-divider h-5 w-px bg-slate-200"></div>
       <div class="flex items-center gap-2">
         <span class="text-xs font-bold tracking-wider text-slate-800 uppercase">ULIS Vibe • Video Giới Thiệu</span>
         <span id="current-scene-tag" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-blue-900 border border-blue-200/60">
@@ -163,6 +188,11 @@
   </footer>
 
   <!-- SCRIPT -->
+  <script>
+    if (window.self !== window.top) {
+      document.body.classList.add("is-embedded");
+    }
+  </script>
   <script src="./studio.js"></script>
 </body>
 </html>
