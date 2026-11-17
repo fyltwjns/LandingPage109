@@ -479,28 +479,59 @@ function updateSavedBadge() {
   }
 }
 
-function openEventModal(eventId) {
-  const ev = ULIS_DATA.events.find(e => e.id === eventId);
-  if (!ev) return;
-
+// Helper to open modal cleanly with zero scroll leakage and body scroll lock
+function openModal(htmlContent) {
   const modal = document.getElementById("app-modal");
   const modalContent = document.getElementById("modal-content");
   if (!modal || !modalContent) return;
 
+  modalContent.innerHTML = htmlContent;
+  modal.scrollTop = 0;
+  requestAnimationFrame(() => {
+    modal.scrollTop = 0;
+  });
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  document.body.classList.add("overflow-hidden");
+  initLucide();
+}
+
+function closeModal() {
+  const modal = document.getElementById("app-modal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+    modal.scrollTop = 0;
+  }
+  document.body.classList.remove("overflow-hidden");
+}
+
+// ESC key to close modal
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+});
+
+function openEventModal(eventId) {
+  const ev = ULIS_DATA.events.find(e => e.id === eventId);
+  if (!ev) return;
+
   const certBadgeClass = ev.certType === "A1" ? "badge-a1" : ev.certType === "A2" ? "badge-a2" : "badge-a3";
   const isSaved = state.savedEvents.includes(ev.id);
 
-  modalContent.innerHTML = `
+  const html = `
     <div class="relative overflow-hidden rounded-3xl flex flex-col bg-white">
-      <!-- Modal Banner Image (16:9 full banner display) -->
-      <div class="event-banner-container aspect-video w-full relative">
-        <img src="./assets/events/${ev.id}.webp" alt="${ev.title}" class="event-banner-img w-full h-full object-cover" onerror="this.onerror=null; this.src='./assets/events/${ev.id}.png';" />
-        <button onclick="closeModal()" class="absolute top-4 right-4 p-2.5 text-white bg-slate-900/60 hover:bg-slate-900/90 rounded-xl backdrop-blur-md transition shadow-md" aria-label="Đóng cửa sổ">
+      <!-- Modal Banner Image (Strict framing, 100% full uncropped graphic artwork) -->
+      <div class="w-full aspect-video max-h-72 bg-slate-950 relative overflow-hidden rounded-t-3xl flex items-center justify-center shrink-0">
+        <img src="./assets/events/${ev.id}.webp" alt="${ev.title}" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='./assets/events/${ev.id}.png';" />
+        <button onclick="closeModal()" class="absolute top-3.5 right-3.5 p-2 text-white bg-slate-900/60 hover:bg-slate-900/90 rounded-xl backdrop-blur-md transition shadow-md cursor-pointer z-10" aria-label="Đóng cửa sổ">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div class="p-6 border-b border-slate-100 bg-white">
+      <!-- Title & Classification Header -->
+      <div class="p-5 sm:p-6 border-b border-slate-100 bg-white">
         <div>
           <div class="flex flex-wrap items-center gap-2 mb-2">
             <span class="px-2.5 py-1 text-xs font-bold rounded-lg ${certBadgeClass}">
@@ -513,37 +544,38 @@ function openEventModal(eventId) {
               Nhóm: ${ev.categoryName}
             </span>
           </div>
-          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">${ev.title}</h3>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 leading-snug">${ev.title}</h3>
         </div>
       </div>
 
-      <div class="p-6 space-y-6 bg-white">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-slate-50 rounded-xl text-sm text-slate-700 border border-slate-100">
+      <!-- Main Body Content (Natural flow, fully expanded, zero overlap) -->
+      <div class="p-5 sm:p-6 space-y-5 bg-white">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 p-3.5 sm:p-4 bg-slate-50 rounded-2xl text-xs sm:text-sm text-slate-700 border border-slate-100">
           <div class="flex items-center gap-2">
-            <i data-lucide="building" class="w-4 h-4 text-blue-600"></i>
+            <i data-lucide="building" class="w-4 h-4 text-blue-600 shrink-0"></i>
             <span><strong>Đơn vị:</strong> ${ev.organizer}</span>
           </div>
           <div class="flex items-center gap-2">
-            <i data-lucide="calendar" class="w-4 h-4 text-blue-600"></i>
+            <i data-lucide="calendar" class="w-4 h-4 text-blue-600 shrink-0"></i>
             <span><strong>Thời gian:</strong> ${formatDateVietnamese(ev.date)} (${ev.time})</span>
           </div>
           <div class="flex items-center gap-2">
-            <i data-lucide="map-pin" class="w-4 h-4 text-red-500"></i>
+            <i data-lucide="map-pin" class="w-4 h-4 text-red-500 shrink-0"></i>
             <span><strong>Địa điểm:</strong> ${ev.location}</span>
           </div>
           <div class="flex items-center gap-2">
-            <i data-lucide="clock" class="w-4 h-4 text-amber-500"></i>
+            <i data-lucide="clock" class="w-4 h-4 text-amber-500 shrink-0"></i>
             <span><strong>Hạn đăng ký:</strong> ${ev.registrationDeadline}</span>
           </div>
         </div>
 
         <div>
-          <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Mô tả chương trình</h4>
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Mô tả chương trình</h4>
           <p class="text-sm text-slate-600 leading-relaxed">${ev.description}</p>
         </div>
 
         <div>
-          <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center gap-2">
             <i data-lucide="award" class="w-4 h-4 text-blue-700"></i> Quyền lợi & Chứng nhận nhận được
           </h4>
           <ul class="space-y-2">
@@ -557,36 +589,36 @@ function openEventModal(eventId) {
         </div>
 
         <div>
-          <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+          <h4 class="text-xs sm:text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center gap-2">
             <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600"></i> Yêu cầu tham gia
           </h4>
           <p class="text-sm text-slate-600">${ev.requirements}</p>
         </div>
 
-        <div class="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl flex items-center justify-between gap-4">
+        <div class="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl flex items-center justify-between gap-4">
           <div>
             <span class="inline-block px-2 py-0.5 bg-blue-700 text-white rounded text-[11px] font-bold uppercase mb-1">Tính năng thử nghiệm</span>
             <h5 class="text-sm font-bold text-slate-900">Mã QR Check-in Thông Minh</h5>
             <p class="text-xs text-slate-600">Dùng mã này khi đến tham dự sự kiện tại hội trường để ghi nhận điểm danh tự động.</p>
           </div>
-          <div class="w-20 h-20 bg-white p-1 rounded-lg border border-slate-200 shrink-0 flex items-center justify-center shadow-xs">
+          <div class="w-20 h-20 bg-white p-1 rounded-xl border border-slate-200 shrink-0 flex items-center justify-center shadow-2xs">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://ulis.vnu.edu.vn/vibe/checkin?id=${ev.id}" alt="QR Checkin" class="w-full h-full object-contain" />
           </div>
         </div>
       </div>
 
-      <!-- Pinned Footer (Fully expanded, natural flow) -->
-      <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-3xl flex flex-wrap items-center justify-between gap-3">
-        <button onclick="toggleSaveEvent('${ev.id}'); openEventModal('${ev.id}');" class="px-4 py-2.5 border rounded-xl text-sm font-semibold transition flex items-center gap-2 ${isSaved ? 'bg-amber-100 border-amber-300 text-amber-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'}">
+      <!-- Natural Unfolded Footer (Xổ hết ra, không thu gọn, không chồng lấn nội dung) -->
+      <div class="p-4 sm:p-5 border-t border-slate-100 bg-slate-50 rounded-b-3xl flex flex-wrap items-center justify-between gap-3">
+        <button onclick="toggleSaveEvent('${ev.id}'); openEventModal('${ev.id}');" class="px-4 py-2.5 border rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 cursor-pointer ${isSaved ? 'bg-amber-100 border-amber-300 text-amber-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'}">
           <i data-lucide="bookmark" class="w-4 h-4 ${isSaved ? 'fill-current' : ''}"></i>
           ${isSaved ? 'Đã lưu trong mục quan tâm' : 'Lưu vào mục quan tâm'}
         </button>
 
-        <div class="flex items-center gap-3">
-          <button onclick="closeModal()" class="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-200/60 transition">
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button onclick="closeModal()" class="px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-200/60 transition cursor-pointer">
             Đóng
           </button>
-          <a href="${ev.formUrl || '#'}" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 bg-blue-950 hover:bg-blue-900 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition shadow-sm">
+          <a href="${ev.formUrl || '#'}" target="_blank" rel="noopener noreferrer" class="px-5 sm:px-6 py-2.5 bg-blue-950 hover:bg-blue-900 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition shadow-sm">
             Mở đơn đăng ký chính thức <i data-lucide="external-link" class="w-4 h-4 text-amber-400"></i>
           </a>
         </div>
@@ -594,19 +626,13 @@ function openEventModal(eventId) {
     </div>
   `;
 
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
-  initLucide();
+  openModal(html);
 }
 
 function openSavedEventsModal() {
-  const modal = document.getElementById("app-modal");
-  const modalContent = document.getElementById("modal-content");
-  if (!modal || !modalContent) return;
-
   const savedList = ULIS_DATA.events.filter(e => state.savedEvents.includes(e.id));
 
-  modalContent.innerHTML = `
+  const html = `
     <div class="relative overflow-hidden rounded-3xl flex flex-col bg-white">
       <!-- Header -->
       <div class="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between bg-white">
@@ -614,13 +640,13 @@ function openSavedEventsModal() {
           <i data-lucide="bookmark" class="w-5 h-5 text-amber-500 fill-current"></i>
           Danh sách sự kiện đã lưu (${savedList.length})
         </h3>
-        <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition shrink-0" aria-label="Đóng">
+        <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition shrink-0 cursor-pointer" aria-label="Đóng">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <!-- Body -->
-      <div class="p-5 sm:p-6 space-y-4 max-h-[65vh] overflow-y-auto bg-white">
+      <div class="p-5 sm:p-6 space-y-3 max-h-[60vh] overflow-y-auto bg-white">
         ${savedList.length === 0 ? `
           <div class="text-center py-12">
             <i data-lucide="bookmark-x" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
@@ -635,10 +661,10 @@ function openSavedEventsModal() {
               <p class="text-xs text-slate-500 mt-1">${formatDateVietnamese(ev.date)} • ${ev.location}</p>
             </div>
             <div class="flex items-center gap-2 shrink-0">
-              <button onclick="openEventModal('${ev.id}')" class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 rounded-lg text-xs font-semibold">
+              <button onclick="openEventModal('${ev.id}')" class="px-3 py-1.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 rounded-lg text-xs font-semibold cursor-pointer">
                 Xem
               </button>
-              <button onclick="toggleSaveEvent('${ev.id}'); openSavedEventsModal();" class="p-1.5 text-red-500 hover:bg-red-50 rounded-lg" title="Xóa">
+              <button onclick="toggleSaveEvent('${ev.id}'); openSavedEventsModal();" class="p-1.5 text-red-500 hover:bg-red-50 rounded-lg cursor-pointer" title="Xóa">
                 <i data-lucide="trash-2" class="w-4 h-4"></i>
               </button>
             </div>
@@ -648,24 +674,14 @@ function openSavedEventsModal() {
 
       <!-- Footer -->
       <div class="p-4 border-t border-slate-100 bg-slate-50 rounded-b-3xl text-right">
-        <button onclick="closeModal()" class="px-5 py-2 bg-blue-950 text-white rounded-xl text-xs font-bold hover:bg-blue-900 transition">
+        <button onclick="closeModal()" class="px-5 py-2 bg-blue-950 text-white rounded-xl text-xs font-bold hover:bg-blue-900 transition cursor-pointer">
           Xong
         </button>
       </div>
     </div>
   `;
 
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
-  initLucide();
-}
-
-function closeModal() {
-  const modal = document.getElementById("app-modal");
-  if (modal) {
-    modal.classList.add("hidden");
-    modal.classList.remove("flex");
-  }
+  openModal(html);
 }
 
 // ==========================================
@@ -851,32 +867,28 @@ function openClubModal(clubId) {
   const club = ULIS_DATA.clubs.find(c => c.id === clubId);
   if (!club) return;
 
-  const modal = document.getElementById("app-modal");
-  const modalContent = document.getElementById("modal-content");
-  if (!modal || !modalContent) return;
-
   const badgeColor = club.category === "academic" ? "bg-blue-100 text-blue-800 border-blue-200" :
                      club.category === "talents" ? "bg-amber-100 text-amber-800 border-amber-200" :
                      "bg-emerald-100 text-emerald-800 border-emerald-200";
 
-  modalContent.innerHTML = `
+  const html = `
     <div class="relative overflow-hidden rounded-3xl flex flex-col bg-white">
       <!-- Header -->
-      <div class="p-6 border-b border-slate-100 flex items-start justify-between gap-4 bg-white">
+      <div class="p-5 sm:p-6 border-b border-slate-100 flex items-start justify-between gap-4 bg-white">
         <div>
           <span class="px-2.5 py-1 text-xs font-bold rounded-lg border ${badgeColor} inline-block mb-2">
             ${club.categoryName} • ${club.acronym}
           </span>
-          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">${club.name}</h3>
-          <p class="text-xs text-blue-800 font-medium italic mt-1">"${club.slogan}"</p>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 leading-snug">${club.name}</h3>
+          <p class="text-xs sm:text-sm text-blue-800 font-medium italic mt-1">"${club.slogan}"</p>
         </div>
-        <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition shrink-0" aria-label="Đóng">
+        <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition shrink-0 cursor-pointer" aria-label="Đóng">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <!-- Body (Fully expanded, no crushed body) -->
-      <div class="p-6 space-y-6 bg-white">
+      <!-- Body (Natural expanded flow, perfectly spaced) -->
+      <div class="p-5 sm:p-6 space-y-4 sm:space-y-5 bg-white">
         <div>
           <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Giới thiệu tổng quan</h4>
           <p class="text-sm text-slate-700 leading-relaxed">${club.description}</p>
@@ -886,7 +898,7 @@ function openClubModal(clubId) {
           <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Các hoạt động thường niên</h4>
           <div class="space-y-2">
             ${club.activities.map(act => `
-              <div class="flex items-start gap-2.5 text-sm text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+              <div class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
                 <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
                 <span>${act}</span>
               </div>
@@ -894,14 +906,14 @@ function openClubModal(clubId) {
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="p-4 bg-blue-50/50 rounded-xl border border-blue-100">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="p-3.5 sm:p-4 bg-blue-50/50 rounded-2xl border border-blue-100">
             <h5 class="text-xs font-bold text-blue-900 mb-1 flex items-center gap-1.5">
               <i data-lucide="users" class="w-4 h-4 text-blue-700"></i> Đối tượng phù hợp
             </h5>
             <p class="text-xs text-slate-700 leading-relaxed">${club.targetAudience}</p>
           </div>
-          <div class="p-4 bg-amber-50/50 rounded-xl border border-amber-100">
+          <div class="p-3.5 sm:p-4 bg-amber-50/50 rounded-2xl border border-amber-100">
             <h5 class="text-xs font-bold text-amber-900 mb-1 flex items-center gap-1.5">
               <i data-lucide="calendar" class="w-4 h-4 text-amber-700"></i> Thời điểm tuyển quân
             </h5>
@@ -912,7 +924,7 @@ function openClubModal(clubId) {
           </div>
         </div>
 
-        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-2xl border border-slate-200">
           <h5 class="text-xs font-bold text-slate-800 mb-2">Kênh thông tin & Liên hệ</h5>
           <div class="flex flex-wrap items-center gap-4 text-xs">
             <a href="${club.facebook}" target="_blank" class="flex items-center gap-1.5 text-blue-700 font-semibold hover:underline">
@@ -925,21 +937,19 @@ function openClubModal(clubId) {
         </div>
       </div>
 
-      <!-- Footer (At natural bottom of modal) -->
-      <div class="p-5 border-t border-slate-100 bg-slate-50 rounded-b-3xl flex items-center justify-between">
-        <button onclick="closeModal()" class="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-200/60 transition">
+      <!-- Natural Unfolded Footer (Xổ hết ra, không che lấp, không thu gọn) -->
+      <div class="p-4 sm:p-5 border-t border-slate-100 bg-slate-50 rounded-b-3xl flex items-center justify-between">
+        <button onclick="closeModal()" class="px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-200/60 transition cursor-pointer">
           Đóng
         </button>
-        <a href="${club.formLink}" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 bg-blue-950 hover:bg-blue-900 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition shadow-sm">
+        <a href="${club.formLink}" target="_blank" rel="noopener noreferrer" class="px-5 sm:px-6 py-2.5 bg-blue-950 hover:bg-blue-900 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition shadow-sm">
           Nộp đơn gia nhập CLB <i data-lucide="external-link" class="w-4 h-4 text-amber-400"></i>
         </a>
       </div>
     </div>
   `;
 
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
-  initLucide();
+  openModal(html);
 }
 
 // ==========================================
@@ -1754,11 +1764,7 @@ function initFeedbackForm() {
 }
 
 function showFeedbackSuccessModal(feedback) {
-  const modal = document.getElementById("app-modal");
-  const modalContent = document.getElementById("modal-content");
-  if (!modal || !modalContent) return;
-
-  modalContent.innerHTML = `
+  const html = `
     <div class="p-8 text-center animate-fade-in">
       <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
         <i data-lucide="check-circle-2" class="w-10 h-10"></i>
@@ -1775,15 +1781,13 @@ function showFeedbackSuccessModal(feedback) {
         <p><strong>Nội dung đóng góp:</strong> "${feedback.comment}"</p>
       </div>
 
-      <button onclick="closeModal()" class="px-6 py-2.5 bg-blue-800 text-white font-bold rounded-xl text-sm hover:bg-blue-900 transition">
+      <button onclick="closeModal()" class="px-6 py-2.5 bg-blue-800 text-white font-bold rounded-xl text-sm hover:bg-blue-900 transition cursor-pointer">
         Tiếp tục trải nghiệm ULIS Vibe
       </button>
     </div>
   `;
 
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
-  initLucide();
+  openModal(html);
 }
 
 // ==========================================
