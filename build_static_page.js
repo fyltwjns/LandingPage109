@@ -1924,13 +1924,98 @@ ${teamHtml}
   </div>
 
   <!-- ==================================================== -->
-  <!-- TOAST NOTIFICATION -->
+  <!-- TOAST NOTIFICATION (Repositioned to left to avoid chatbot overlap) -->
   <!-- ==================================================== -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl border border-slate-700 text-xs sm:text-sm">
+  <div id="toast" class="fixed bottom-6 left-6 z-50 flex items-center gap-3 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl border border-slate-700 text-xs sm:text-sm">
     <div id="toast-icon">
       <i data-lucide="info" class="w-5 h-5 text-blue-400"></i>
     </div>
     <span id="toast-message" class="font-medium">Thông báo từ ULIS Vibe</span>
+  </div>
+
+  <!-- ==================================================== -->
+  <!-- CHATBOT AI ASSISTANT (6-PHASE GUIDED CONVERSATION) -->
+  <!-- ==================================================== -->
+  <div id="vibe-chatbot-wrapper" class="relative z-50">
+    <!-- Floating Trigger Button -->
+    <button 
+      id="btn-chatbot-toggle" 
+      onclick="toggleChatbot()" 
+      class="fixed bottom-6 right-6 z-50 p-3 sm:px-4 sm:py-3 bg-[#0B2341] hover:bg-blue-900 text-white rounded-full shadow-2xl border-2 border-amber-400/80 flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer"
+      title="Mở Trợ lý ảo AI ULIS Vibe (Tư vấn 6 Phase)"
+      aria-label="Mở Trợ lý ảo AI ULIS Vibe">
+      <div class="relative w-8 h-8 rounded-full bg-blue-900 flex items-center justify-center text-amber-400 group-hover:rotate-12 transition-transform">
+        <i data-lucide="bot" class="w-5 h-5"></i>
+        <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0B2341] animate-ping"></span>
+        <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0B2341]"></span>
+      </div>
+      <div class="hidden sm:flex flex-col text-left">
+        <span class="text-xs font-black tracking-tight text-white flex items-center gap-1">
+          Hỏi Trợ Lý AI
+          <span class="px-1.5 py-0.2 bg-amber-400 text-amber-950 text-[9px] font-extrabold rounded-full">6 PHASES</span>
+        </span>
+        <span class="text-[10px] text-blue-200 font-medium">Tư vấn CLB, ĐRL & Học bổng</span>
+      </div>
+    </button>
+
+    <!-- Chatbot Window Container -->
+    <div 
+      id="chatbot-window" 
+      class="fixed bottom-24 right-4 sm:right-6 z-50 w-[380px] sm:w-[420px] max-w-[calc(100vw-2rem)] h-[580px] max-h-[calc(100vh-7rem)] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden transition-all duration-300 transform scale-95 opacity-0 pointer-events-none origin-bottom-right">
+      
+      <!-- Chatbot Header -->
+      <div class="p-4 bg-[#0B2341] text-white flex items-center justify-between border-b border-blue-900 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="relative w-10 h-10 rounded-2xl bg-blue-900 flex items-center justify-center text-amber-400 border border-blue-700/60 shadow-xs">
+            <i data-lucide="bot" class="w-6 h-6"></i>
+            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#0B2341]"></span>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <h3 class="text-sm font-black text-white">ULIS Vibe AI Assistant</h3>
+              <span class="px-1.5 py-0.5 bg-blue-800 text-blue-200 text-[9px] font-bold rounded">DEMO</span>
+            </div>
+            <p class="text-[11px] text-blue-200 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Phễu tư vấn ngoại khóa 6 Phase
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <button onclick="resetChatbotSession()" class="p-2 text-blue-200 hover:text-white hover:bg-blue-900/60 rounded-xl transition cursor-pointer" title="Làm mới hội thoại từ đầu">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+          </button>
+          <button onclick="toggleChatbot()" class="p-2 text-blue-200 hover:text-white hover:bg-blue-900/60 rounded-xl transition cursor-pointer" title="Đóng cửa sổ">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages Stream Container -->
+      <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto space-y-3.5 bg-slate-50/70 text-xs sm:text-sm">
+        <!-- Messages will be dynamically rendered here -->
+      </div>
+
+      <!-- Quick Option Chips Container -->
+      <div id="chatbot-chips-container" class="px-4 py-2.5 bg-white border-t border-slate-100 flex flex-wrap gap-1.5 max-h-36 overflow-y-auto shrink-0">
+        <!-- Interactive chips will be dynamically populated here -->
+      </div>
+
+      <!-- Input Bar -->
+      <form id="chatbot-input-form" onsubmit="handleChatbotInputSubmit(event)" class="p-3 bg-white border-t border-slate-200 flex items-center gap-2 shrink-0">
+        <input 
+          type="text" 
+          id="chatbot-text-input" 
+          placeholder="Nhập từ khóa (học bổng, K60, CLB, A1, A2...)..." 
+          class="flex-1 px-3.5 py-2.5 bg-slate-100 hover:bg-slate-50 focus:bg-white border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-900 transition" />
+        <button 
+          type="submit" 
+          class="p-2.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-xl transition shadow-xs shrink-0 cursor-pointer" 
+          title="Gửi tin nhắn">
+          <i data-lucide="send" class="w-4 h-4 text-amber-400"></i>
+        </button>
+      </form>
+
+    </div>
   </div>
 
   <!-- Scripts -->

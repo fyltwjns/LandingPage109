@@ -2149,3 +2149,793 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+// ====================================================
+// 9. CHATBOT AI ASSISTANT (6-PHASE GUIDED CONVERSATION)
+// ====================================================
+
+let chatbotState = {
+  isOpen: false,
+  branch: null, // 'A_SCHOLARSHIP', 'B_CLUB', 'C_RESCUE', 'D_SENIOR', 'E_COMPLAINT'
+  phase: 0,    // 0: Greeting, 1..6: Specific phases
+  answers: {},
+  history: []
+};
+
+function toggleChatbot() {
+  const windowEl = document.getElementById("chatbot-window");
+  if (!windowEl) return;
+  chatbotState.isOpen = !chatbotState.isOpen;
+  if (chatbotState.isOpen) {
+    windowEl.classList.add("open");
+    // If empty, init greeting
+    const msgContainer = document.getElementById("chatbot-messages");
+    if (msgContainer && msgContainer.children.length === 0) {
+      startChatbotPhase0();
+    }
+    setTimeout(() => {
+      const input = document.getElementById("chatbot-text-input");
+      if (input) input.focus();
+    }, 200);
+  } else {
+    windowEl.classList.remove("open");
+  }
+}
+window.toggleChatbot = toggleChatbot;
+
+function resetChatbotSession() {
+  chatbotState.branch = null;
+  chatbotState.phase = 0;
+  chatbotState.answers = {};
+  const msgContainer = document.getElementById("chatbot-messages");
+  if (msgContainer) msgContainer.innerHTML = "";
+  startChatbotPhase0();
+}
+window.resetChatbotSession = resetChatbotSession;
+
+function appendBotMessage(html, chips = []) {
+  const msgContainer = document.getElementById("chatbot-messages");
+  if (!msgContainer) return;
+
+  // Show typing indicator
+  const typingId = "typing-" + Date.now();
+  const typingDiv = document.createElement("div");
+  typingDiv.id = typingId;
+  typingDiv.className = "flex items-start gap-2.5";
+  typingDiv.innerHTML = `
+    <div class="w-7 h-7 rounded-full bg-blue-900 text-amber-400 flex items-center justify-center shrink-0 text-xs">
+      <i data-lucide="bot" class="w-4 h-4"></i>
+    </div>
+    <div class="bot-msg-bubble flex items-center gap-1.5 py-3">
+      <span class="typing-dot"></span>
+      <span class="typing-dot"></span>
+      <span class="typing-dot"></span>
+    </div>
+  `;
+  msgContainer.appendChild(typingDiv);
+  if (window.lucide) lucide.createIcons({ root: typingDiv });
+  msgContainer.scrollTop = msgContainer.scrollHeight;
+
+  setTimeout(() => {
+    const el = document.getElementById(typingId);
+    if (el) el.remove();
+
+    const botMsgDiv = document.createElement("div");
+    botMsgDiv.className = "flex items-start gap-2.5 animate-fade-in";
+    botMsgDiv.innerHTML = `
+      <div class="w-7 h-7 rounded-full bg-blue-900 text-amber-400 flex items-center justify-center shrink-0 text-xs mt-0.5 shadow-2xs">
+        <i data-lucide="bot" class="w-4 h-4"></i>
+      </div>
+      <div class="bot-msg-bubble">
+        ${html}
+      </div>
+    `;
+    msgContainer.appendChild(botMsgDiv);
+    if (window.lucide) lucide.createIcons({ root: botMsgDiv });
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+
+    renderChatbotChips(chips);
+  }, 400);
+}
+
+function appendUserMessage(text) {
+  const msgContainer = document.getElementById("chatbot-messages");
+  if (!msgContainer) return;
+
+  const userMsgDiv = document.createElement("div");
+  userMsgDiv.className = "flex justify-end animate-fade-in";
+  userMsgDiv.innerHTML = `
+    <div class="user-msg-bubble">
+      ${text}
+    </div>
+  `;
+  msgContainer.appendChild(userMsgDiv);
+  msgContainer.scrollTop = msgContainer.scrollHeight;
+  // Clear chips while waiting
+  renderChatbotChips([]);
+}
+
+function renderChatbotChips(chips) {
+  const chipsContainer = document.getElementById("chatbot-chips-container");
+  if (!chipsContainer) return;
+  chipsContainer.innerHTML = "";
+
+  if (!chips || chips.length === 0) {
+    chipsContainer.classList.add("hidden");
+    return;
+  }
+  chipsContainer.classList.remove("hidden");
+
+  chips.forEach(chip => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chatbot-chip";
+    btn.innerHTML = chip.label;
+    btn.onclick = () => handleChipClick(chip);
+    chipsContainer.appendChild(btn);
+  });
+}
+
+// ----------------------------------------------------
+// PHASE 0: GREETING & INITIAL GOAL SELECTION
+// ----------------------------------------------------
+function startChatbotPhase0() {
+  chatbotState.phase = 0;
+  chatbotState.branch = null;
+  chatbotState.answers = {};
+
+  const greetingHtml = `
+    <p class="font-bold text-slate-900 mb-1">Xin chào bạn! Mình là ULIS Vibe AI Assistant 🤖</p>
+    <p class="text-slate-600 mb-2 leading-relaxed">
+      Trợ lý ảo hỗ trợ toàn diện về <strong>Câu lạc bộ</strong>, <strong>Lịch sự kiện</strong>, <strong>Điểm rèn luyện (ĐRL)</strong> và <strong>Chứng nhận A1–A2–A3</strong>.
+    </p>
+    <div class="p-2.5 bg-blue-50/80 rounded-xl border border-blue-100 text-[11px] text-blue-900 mb-2 font-medium">
+      ✨ <em>Hệ thống tư vấn phân tích chuyên sâu qua <strong>6 Phase</strong> giúp bạn xây dựng lộ trình hành động chính xác nhất.</em>
+    </div>
+    <p class="text-slate-700 font-semibold">Hôm nay bạn cần trợ lý đồng hành ở mục tiêu nào?</p>
+  `;
+
+  const chips = [
+    { label: "🎯 A. Săn Học bổng KKHT & ĐRL Xuất sắc (>= 90đ)", branch: "A_SCHOLARSHIP", phase: 1 },
+    { label: "👥 B. Tân sinh viên K60 tìm CLB & Tuyển quân", branch: "B_CLUB", phase: 1 },
+    { label: "🚨 C. Gỡ Điểm Rèn Luyện khẩn cấp (ĐRL < 65)", branch: "C_RESCUE", phase: 1 },
+    { label: "🏆 D. Sinh viên Năm 3-4 chuẩn bị CV & SV5T", branch: "D_SENIOR", phase: 1 },
+    { label: "📜 E. Xử lý sự cố minh chứng Cert A1–A3", branch: "E_COMPLAINT", phase: 1 }
+  ];
+
+  appendBotMessage(greetingHtml, chips);
+}
+
+// ----------------------------------------------------
+// STATE MACHINE: 6 PHASES DISPATCHER
+// ----------------------------------------------------
+function handleChipClick(chip) {
+  if (chip.phase === 0) {
+    resetChatbotSession();
+    return;
+  }
+
+  appendUserMessage(chip.label);
+
+  if (chip.branch) {
+    chatbotState.branch = chip.branch;
+  }
+  if (chip.saveKey && chip.saveVal) {
+    chatbotState.answers[chip.saveKey] = chip.saveVal;
+  }
+  chatbotState.phase = chip.phase;
+
+  // Process next step
+  processCurrentState();
+}
+
+function processCurrentState() {
+  const b = chatbotState.branch;
+  const p = chatbotState.phase;
+
+  if (b === "A_SCHOLARSHIP") {
+    processFlowA(p);
+  } else if (b === "B_CLUB") {
+    processFlowB(p);
+  } else if (b === "C_RESCUE") {
+    processFlowC(p);
+  } else if (b === "D_SENIOR") {
+    processFlowD(p);
+  } else if (b === "E_COMPLAINT") {
+    processFlowE(p);
+  } else {
+    startChatbotPhase0();
+  }
+}
+
+// ====================================================
+// LUỒNG A: SĂN HỌC BỔNG & ĐRL XUẤT SẮC (6 PHASES)
+// ====================================================
+function processFlowA(p) {
+  if (p === 1) {
+    // Phase 1: Background (Khóa SV)
+    const html = `
+      <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-bold text-[10px] uppercase">Phase 1/6 • Xuất Phát Điểm</span>
+      <p class="mt-2 font-semibold text-slate-900">Để tính toán chính xác điều kiện học bổng, bạn cho mình biết bạn đang là sinh viên khóa mấy tại ULIS?</p>
+    `;
+    const chips = [
+      { label: "Sinh viên Năm 1 (Khóa K60)", phase: 2, saveKey: "year", saveVal: "K60" },
+      { label: "Sinh viên Năm 2 (Khóa K59)", phase: 2, saveKey: "year", saveVal: "K59" },
+      { label: "Sinh viên Năm 3 (Khóa K58)", phase: 2, saveKey: "year", saveVal: "K58" },
+      { label: "Sinh viên Năm 4 (Khóa K57)", phase: 2, saveKey: "year", saveVal: "K57" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 2) {
+    // Phase 2: Goal (Mức học bổng)
+    const html = `
+      <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-bold text-[10px] uppercase">Phase 2/6 • Mục Tiêu Học Bổng</span>
+      <p class="mt-2 font-semibold text-slate-900">Tuyệt vời sinh viên <strong>${chatbotState.answers.year || 'ULIS'}</strong>! Bạn đặt mục tiêu săn học bổng ở mức xếp loại nào trong học kỳ này?</p>
+    `;
+    const chips = [
+      { label: "🥇 Học bổng Xuất sắc (Cần ĐRL >= 90 & GPA >= 3.6)", phase: 3, saveKey: "target", saveVal: "Xuất sắc (90+)" },
+      { label: "🥈 Học bổng loại Giỏi (Cần ĐRL >= 80 & GPA >= 3.2)", phase: 3, saveKey: "target", saveVal: "Giỏi (80+)" },
+      { label: "🥉 Duy trì mức Khá an toàn (ĐRL 70 - 79 điểm)", phase: 3, saveKey: "target", saveVal: "Khá (70+)" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 3) {
+    // Phase 3: Gap Analysis (Khảo sát thiếu hụt)
+    const html = `
+      <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-bold text-[10px] uppercase">Phase 3/6 • Khảo Sát Thiếu Hụt</span>
+      <p class="mt-2 font-semibold text-slate-900">Để đạt mục tiêu <strong>${chatbotState.answers.target}</strong>, bạn cần tối đa điểm ở Tiêu chí 1 (Học thuật) và Tiêu chí 2 (Kỹ năng). Hiện tại bạn đã tích lũy được chứng nhận nào chưa?</p>
+    `;
+    const chips = [
+      { label: "Chưa có chứng nhận nào (Bắt đầu từ số 0)", phase: 4, saveKey: "gap", saveVal: "Chưa có chứng nhận" },
+      { label: "Đã có Cert A2 (Kỹ năng), đang thiếu Cert A1 (Học thuật)", phase: 4, saveKey: "gap", saveVal: "Thiếu A1" },
+      { label: "Đã có Cert A1 (Học thuật), đang thiếu Cert A3 (Tình nguyện)", phase: 4, saveKey: "gap", saveVal: "Thiếu A3" },
+      { label: "Đã tham gia sự kiện nhưng chưa nhận được chứng nhận", phase: 4, saveKey: "gap", saveVal: "Chưa duyệt" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 4) {
+    // Phase 4: Constraints (Ràng buộc thời gian)
+    const html = `
+      <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-bold text-[10px] uppercase">Phase 4/6 • Ràng Buộc Thời Gian</span>
+      <p class="mt-2 font-semibold text-slate-900">Lịch học chuyên ngành ngoại ngữ khá dày. Quỹ thời gian và hình thức tham gia thuận tiện nhất với bạn là gì?</p>
+    `;
+    const chips = [
+      { label: "Sáng cuối tuần (Thứ 7 / CN) tham gia trực tiếp tại trường", phase: 5, saveKey: "time", saveVal: "Cuối tuần trực tiếp" },
+      { label: "Chỉ rảnh buổi tối trong tuần (Ưu tiên Online Zoom)", phase: 5, saveKey: "time", saveVal: "Tối Online" },
+      { label: "Thời gian linh hoạt, sự kiện chất lượng là mình tham gia", phase: 5, saveKey: "time", saveVal: "Linh hoạt" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 5) {
+    // Phase 5: Strategy Selection (Chọn gói giải pháp)
+    const html = `
+      <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-bold text-[10px] uppercase">Phase 5/6 • Lựa Chọn Chiến Lược</span>
+      <p class="mt-2 font-semibold text-slate-900">Dựa trên điều kiện <strong>${chatbotState.answers.time}</strong>, mình đề xuất 2 gói chiến lược lấy chứng nhận chuẩn hóa. Bạn chọn hướng nào?</p>
+    `;
+    const chips = [
+      { label: "Chiến lược 1: Tham gia Hội thảo NCKH Sunwah (Nghe báo cáo 1 buổi, lấy ngay Cert A1)", phase: 6, saveKey: "strat", saveVal: "Hội thảo NCKH (ev-01)" },
+      { label: "Chiến lược 2: Thi Hùng biện English Challenge (Lấy Cert A1 + cơ hội đạt giải)", phase: 6, saveKey: "strat", saveVal: "English Challenge (ev-03)" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 6) {
+    // Phase 6: Action Plan (Kế hoạch hành động chi tiết)
+    const eventId = chatbotState.answers.strat && chatbotState.answers.strat.includes("ev-03") ? "ev-03" : "ev-01";
+    const ev = ULIS_DATA.events.find(e => e.id === eventId) || ULIS_DATA.events[0];
+
+    const html = `
+      <span class="px-2 py-0.5 bg-emerald-100 text-emerald-950 rounded font-bold text-[10px] uppercase">Phase 6/6 • Kế Hoạch Hành Động Toàn Diện</span>
+      <h4 class="font-extrabold text-slate-900 text-sm mt-2 mb-2">🎯 LỘ TRÌNH SĂN HỌC BỔNG XUẤT SẮC DÀNH CHO BẠN:</h4>
+      
+      <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2 mb-3 text-xs">
+        <p class="font-bold text-blue-950 flex items-center gap-1.5">
+          <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i> Sự kiện khớp 100%: <strong>${ev.title}</strong>
+        </p>
+        <p>• <strong>Thời gian:</strong> ${ev.date} (${ev.time})</p>
+        <p>• <strong>Địa điểm:</strong> ${ev.location}</p>
+        <p>• <strong>Quyền lợi ĐRL:</strong> <span class="badge-a1 px-2 py-0.5 rounded font-bold">+5 Điểm Rèn Luyện (Chuẩn Cert A1)</span></p>
+        <p>• <strong>Tình trạng:</strong> Còn ${ev.spotsLeft}/${ev.totalSpots} suất đăng ký.</p>
+      </div>
+
+      <div class="p-3 bg-blue-50/70 rounded-xl border border-blue-100 text-xs text-blue-950 mb-3 space-y-1">
+        <p class="font-bold">📊 Điểm Rèn Luyện dự kiến sau khi hoàn thành:</p>
+        <p>80đ (Gốc) + 5đ (Cert A1) + 5đ (Cert A2) + 3đ (Chuyên cần) = <strong>93 Điểm (Xếp loại Xuất sắc)</strong> ✨</p>
+      </div>
+
+      <p class="text-xs text-slate-600 mb-2">Bạn có thể thực hiện ngay các hành động dưới đây:</p>
+      <div class="flex flex-wrap gap-2 pt-1">
+        <button onclick="openEventModal('${ev.id}')" class="px-3.5 py-2 bg-[#0B2341] hover:bg-blue-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="external-link" class="w-3.5 h-3.5 text-amber-400"></i> Xem & Đăng ký sự kiện
+        </button>
+        <button onclick="toggleSaveEvent('${ev.id}'); showToast('Đã lưu sự kiện vào danh sách yêu thích!', 'success');" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="bookmark" class="w-3.5 h-3.5 text-amber-600"></i> Lưu sự kiện
+        </button>
+      </div>
+    `;
+
+    const chips = [
+      { label: "🔄 Tư vấn mục tiêu khác từ đầu", phase: 0 },
+      { label: "📜 Tra cứu thêm khung Cert Hub A1-A2-A3", phase: 1, branch: "E_COMPLAINT" }
+    ];
+
+    appendBotMessage(html, chips);
+  }
+}
+
+// ====================================================
+// LUỒNG B: TÂN SINH VIÊN K60 TÌM CLB (6 PHASES)
+// ====================================================
+function processFlowB(p) {
+  if (p === 1) {
+    const html = `
+      <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-bold text-[10px] uppercase">Phase 1/6 • Xác Thực Khóa SV</span>
+      <p class="mt-2 font-semibold text-slate-900">Chào mừng bạn đến với ULIS! Bạn là Tân sinh viên K60 mới vào trường đúng không?</p>
+    `;
+    const chips = [
+      { label: "Đúng vậy, mình là Tân sinh viên K60!", phase: 2, saveKey: "role", saveVal: "K60" },
+      { label: "Mình là sinh viên khóa trên (K58-K59)", phase: 2, saveKey: "role", saveVal: "Khóa trên" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 2) {
+    const html = `
+      <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-bold text-[10px] uppercase">Phase 2/6 • Định Hướng Nhu Cầu</span>
+      <p class="mt-2 font-semibold text-slate-900">ULIS có hơn 50 CLB với 3 nhóm chuyên môn. Bạn muốn gia nhập CLB với kỳ vọng lớn nhất là gì?</p>
+    `;
+    const chips = [
+      { label: "Cải thiện khả năng nói ngoại ngữ & thực hành chuyên môn", phase: 3, saveKey: "interest", saveVal: "Ngoại ngữ" },
+      { label: "Thỏa mãn đam mê năng khiếu (Âm nhạc, Nhảy, Tranh biện UDC)", phase: 3, saveKey: "interest", saveVal: "Năng khiếu" },
+      { label: "Làm hoạt động tình nguyện vì cộng đồng & phong trào xã hội", phase: 3, saveKey: "interest", saveVal: "Tình nguyện" },
+      { label: "Học kỹ năng thực chiến (Truyền thông, thiết kế, sự kiện)", phase: 3, saveKey: "interest", saveVal: "Kỹ năng mềm" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 3) {
+    const html = `
+      <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-bold text-[10px] uppercase">Phase 3/6 • Mức Độ Tự Tin</span>
+      <p class="mt-2 font-semibold text-slate-900">Bạn tự đánh giá mức độ tự tin và kinh nghiệm ban đầu của mình thế nào?</p>
+    `;
+    const chips = [
+      { label: "Còn rụt rè, chưa có kinh nghiệm, muốn tìm môi trường cởi mở", phase: 4, saveKey: "level", saveVal: "Mới bắt đầu" },
+      { label: "Đã có nền tảng ổn, muốn vào CLB có tính chuyên môn & tổ chức cuộc thi", phase: 4, saveKey: "level", saveVal: "Nâng cao" },
+      { label: "Muốn giao lưu văn hóa đa quốc gia (Nhật, Trung, Hàn, Pháp)", phase: 4, saveKey: "level", saveVal: "Văn hóa" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 4) {
+    const html = `
+      <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-bold text-[10px] uppercase">Phase 4/6 • Quỹ Thời Gian</span>
+      <p class="mt-2 font-semibold text-slate-900">Năm nhất các môn đại cương khá nhiều bài tập. Bạn có thể dành bao nhiêu thời gian cho CLB mỗi tuần?</p>
+    `;
+    const chips = [
+      { label: "Dưới 3 giờ/tuần (Chỉ sinh hoạt 1 buổi cuối tuần)", phase: 5, saveKey: "timeCommit", saveVal: "Dưới 3h" },
+      { label: "Từ 4 - 6 giờ/tuần (Có thể tham gia ban chuyên môn chạy sự kiện)", phase: 5, saveKey: "timeCommit", saveVal: "4-6h" },
+      { label: "Nhiệt huyết hết mình, sẵn sàng cống hiến 7+ giờ/tuần", phase: 5, saveKey: "timeCommit", saveVal: "7h+" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 5) {
+    const html = `
+      <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded font-bold text-[10px] uppercase">Phase 5/6 • Vị Trí Ứng Tuyển</span>
+      <p class="mt-2 font-semibold text-slate-900">Để không bị quá tải trong kỳ 1, bạn muốn bắt đầu ở vai trò nào trong đợt tuyển quân này?</p>
+    `;
+    const chips = [
+      { label: "Ứng tuyển Ban Chuyên môn (Sinh hoạt nói tiếng Anh định kỳ)", phase: 6, saveKey: "rolePref", saveVal: "Ban Chuyên môn" },
+      { label: "Làm Cộng tác viên (CTV) theo từng sự kiện (Linh hoạt, rảnh thì làm)", phase: 6, saveKey: "rolePref", saveVal: "Cộng tác viên" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 6) {
+    const club = ULIS_DATA.clubs.find(c => c.id === "ec") || ULIS_DATA.clubs[0];
+
+    const html = `
+      <span class="px-2 py-0.5 bg-emerald-100 text-emerald-950 rounded font-bold text-[10px] uppercase">Phase 6/6 • Gợi Ý CLB Hoàn Hảo & Tuyển Quân</span>
+      <h4 class="font-extrabold text-slate-900 text-sm mt-2 mb-2">🎉 GỢI Ý DÀNH RIÊNG CHO TÂN SINH VIÊN K60:</h4>
+
+      <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2 mb-3 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-blue-950 text-sm">${club.name} (${club.acronym})</span>
+          <span class="px-2 py-0.5 bg-emerald-100 text-emerald-950 rounded text-[10px] font-bold">ĐANG MỞ ĐƠN</span>
+        </div>
+        <p class="text-slate-600 italic">"${club.slogan}"</p>
+        <p>• <strong>Quy mô:</strong> 240 thành viên • Trực thuộc HSV ULIS.</p>
+        <p>• <strong>Lịch tuyển quân:</strong> ${club.recruitmentPeriod}</p>
+        <p>• <strong>Đối tượng phù hợp:</strong> ${club.targetAudience}</p>
+      </div>
+
+      <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-950 mb-3 space-y-1">
+        <p class="font-bold">💡 Mẹo phỏng vấn CLB dành cho K60:</p>
+        <p>• Không cần quá tự ti về ngữ pháp, BCN đánh giá cao sự nhiệt tình và đúng giờ.</p>
+        <p>• Nhấn mạnh mong muốn học hỏi và gắn bó lâu dài.</p>
+      </div>
+
+      <div class="flex flex-wrap gap-2 pt-1">
+        <button onclick="openClubModal('${club.id}')" class="px-3.5 py-2 bg-[#0B2341] hover:bg-blue-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="users" class="w-3.5 h-3.5 text-amber-400"></i> Xem chi tiết CLB
+        </button>
+        <a href="${club.formLink}" target="_blank" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Điền Form Ứng Tuyển
+        </a>
+      </div>
+    `;
+
+    const chips = [
+      { label: "🔄 Khám phá thêm CLB nhóm Năng khiếu / Tình nguyện", phase: 0 },
+      { label: "📅 Xem các sự kiện CLB EC đang tổ chức", phase: 1, branch: "A_SCHOLARSHIP" }
+    ];
+
+    appendBotMessage(html, chips);
+  }
+}
+
+// ====================================================
+// LUỒNG C: GỠ ĐRL KHẨN CẤP (ĐRL < 65) (6 PHASES)
+// ====================================================
+function processFlowC(p) {
+  if (p === 1) {
+    const html = `
+      <span class="px-2 py-0.5 bg-red-100 text-red-950 rounded font-bold text-[10px] uppercase">Phase 1/6 • Khảo Sát Khóa Học</span>
+      <p class="mt-2 font-semibold text-slate-900">Chào bạn! Bạn đang học năm thứ mấy tại ULIS?</p>
+    `;
+    const chips = [
+      { label: "Năm 1 (Khóa K60)", phase: 2, saveKey: "year", saveVal: "K60" },
+      { label: "Năm 2 (Khóa K59)", phase: 2, saveKey: "year", saveVal: "K59" },
+      { label: "Năm 3 (Khóa K58)", phase: 2, saveKey: "year", saveVal: "K58" },
+      { label: "Năm 4 (Khóa K57)", phase: 2, saveKey: "year", saveVal: "K57" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 2) {
+    const html = `
+      <span class="px-2 py-0.5 bg-red-100 text-red-950 rounded font-bold text-[10px] uppercase">Phase 2/6 • Tình Trạng Điểm Rèn Luyện</span>
+      <p class="mt-2 font-semibold text-slate-900">Tình trạng điểm rèn luyện tạm tính hiện tại của bạn đang ở mức nào?</p>
+    `;
+    const chips = [
+      { label: "ĐRL dưới 65 điểm (Nguy cơ xếp loại Yếu, cần cứu gấp)", phase: 3, saveKey: "status", saveVal: "Dưới 65" },
+      { label: "ĐRL đang ở mức 65 - 75 điểm (Muốn gỡ lên Giỏi >= 80đ)", phase: 3, saveKey: "status", saveVal: "65-75" },
+      { label: "Bị mất điểm do quên nộp minh chứng hoặc quên quét QR", phase: 3, saveKey: "status", saveVal: "Quên QR" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 3) {
+    const html = `
+      <span class="px-2 py-0.5 bg-red-100 text-red-950 rounded font-bold text-[10px] uppercase">Phase 3/6 • Xác Định Lỗ Hổng Điểm</span>
+      <p class="mt-2 font-semibold text-slate-900">Bạn mở bảng chấm điểm rèn luyện, tiêu chí nào đang bị 0 điểm hoặc rất thấp?</p>
+    `;
+    const chips = [
+      { label: "Tiêu chí 1: Học tập & NCKH (0 điểm, thiếu Cert A1)", phase: 4, saveKey: "missingCrit", saveVal: "Tiêu chí 1" },
+      { label: "Tiêu chí 3: Tình nguyện vì cộng đồng (0 điểm, thiếu Cert A3)", phase: 4, saveKey: "missingCrit", saveVal: "Tiêu chí 3" },
+      { label: "Bị 0 điểm cả 2 tiêu chí trên (Cần bù gấp ít nhất 10 - 15 điểm)", phase: 4, saveKey: "missingCrit", saveVal: "Cả hai" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 4) {
+    const html = `
+      <span class="px-2 py-0.5 bg-red-100 text-red-950 rounded font-bold text-[10px] uppercase">Phase 4/6 • Thời Gian Cứu Điểm</span>
+      <p class="mt-2 font-semibold text-slate-900">Cổng xét duyệt rèn luyện sẽ khóa sổ vào cuối kỳ. Bạn có thể tham gia sự kiện vào thời gian nào dưới đây?</p>
+    `;
+    const chips = [
+      { label: "Ngay trong tháng 11/2026 này (Càng sớm càng an tâm)", phase: 5, saveKey: "urgency", saveVal: "Tháng 11" },
+      { label: "Đầu tháng 12/2026 trước khi bước vào đợt thi học kỳ", phase: 5, saveKey: "urgency", saveVal: "Tháng 12" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 5) {
+    const html = `
+      <span class="px-2 py-0.5 bg-red-100 text-red-950 rounded font-bold text-[10px] uppercase">Phase 5/6 • Gói Cứu Điểm Thần Tốc</span>
+      <p class="mt-2 font-semibold text-slate-900">Mình đã tính toán 2 gói cứu điểm thần tốc để bù ngay +12 điểm rèn luyện. Bạn chọn gói nào?</p>
+    `;
+    const chips = [
+      { label: "Gói A: 1 Hội thảo NCKH (+5đ A1) + 1 Sự kiện Tình nguyện (+4đ A3)", phase: 6, saveKey: "pack", saveVal: "Gói A" },
+      { label: "Gói B: 1 Tọa đàm Kỹ năng Zoom (+3đ A2) + Ngày hội Văn hóa (+5đ A2)", phase: 6, saveKey: "pack", saveVal: "Gói B" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 6) {
+    const html = `
+      <span class="px-2 py-0.5 bg-red-100 text-red-950 rounded font-bold text-[10px] uppercase">Phase 6/6 • Lộ Trình Cứu Điểm Hoàn Chỉnh</span>
+      <h4 class="font-extrabold text-red-900 text-sm mt-2 mb-2">🚨 KẾ HOẠCH GỠ ĐIỂM RÈN LUYỆN KHẨN CẤP (+12 ĐIỂM):</h4>
+
+      <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2 mb-3 text-xs">
+        <p class="font-bold text-slate-900">1. Sự kiện cứu Tiêu chí 1 (Học thuật - Cert A1):</p>
+        <p class="text-blue-900 font-semibold">• Hội thảo Phương pháp Viết Báo cáo NCKH Sinh viên 2026 (20/11 - Sunwah).</p>
+        <p class="font-bold text-slate-900 mt-2">2. Sự kiện cứu Tiêu chí 3 (Tình nguyện - Cert A3):</p>
+        <p class="text-emerald-900 font-semibold">• Chiến dịch Tiếp sức Mùa thi / Tình nguyện Ba Vì (27/11 - Vũ Đình Liên).</p>
+      </div>
+
+      <div class="p-3 bg-red-50 rounded-xl border border-red-200 text-xs text-red-950 mb-3 space-y-1">
+        <p class="font-bold">⚠️ QUY TẮC BẮT BUỘC ĐỂ KHÔNG BỊ HỦY MINH CHỨNG:</p>
+        <p>• Phải quét đủ 02 lần mã QR: QR Check-in lúc đến và QR Check-out lúc về.</p>
+        <p>• Điền đúng 100% Mã số sinh viên (MSV) và Email @vnu.edu.vn.</p>
+      </div>
+
+      <div class="p-2.5 bg-emerald-50 rounded-xl border border-emerald-100 text-xs text-emerald-950 mb-3">
+        <strong>Kết quả dự kiến:</strong> 58đ (Hiện tại) + 5đ (A1) + 4đ (A3) + 5đ (Chuyên cần) = <strong>72 Điểm (Xếp loại Khá an toàn)</strong>.
+      </div>
+
+      <div class="flex flex-wrap gap-2 pt-1">
+        <button onclick="openEventModal('ev-01')" class="px-3.5 py-2 bg-red-900 hover:bg-red-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-300"></i> Đăng ký Sự kiện 1 (A1)
+        </button>
+        <button onclick="openEventModal('ev-04')" class="px-3.5 py-2 bg-emerald-800 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="heart" class="w-3.5 h-3.5 text-amber-300"></i> Đăng ký Sự kiện 2 (A3)
+        </button>
+      </div>
+    `;
+
+    const chips = [
+      { label: "🔄 Bắt đầu tư vấn luồng khác", phase: 0 },
+      { label: "📊 Mở công cụ tính Smart Recommender", phase: 1, branch: "A_SCHOLARSHIP" }
+    ];
+
+    appendBotMessage(html, chips);
+  }
+}
+
+// ====================================================
+// LUỒNG D: NĂM 3-4 CHUẨN BỊ CV & SV5T (6 PHASES)
+// ====================================================
+function processFlowD(p) {
+  if (p === 1) {
+    const html = `
+      <span class="px-2 py-0.5 bg-purple-100 text-purple-950 rounded font-bold text-[10px] uppercase">Phase 1/6 • Khóa SV Cuối Khóa</span>
+      <p class="mt-2 font-semibold text-slate-900">Chào bạn! Bạn đang học năm thứ mấy tại ULIS?</p>
+    `;
+    const chips = [
+      { label: "Năm 3 (Khóa K58 - Giai đoạn tăng tốc)", phase: 2, saveKey: "year", saveVal: "K58" },
+      { label: "Năm 4 (Khóa K57 - Chuẩn bị tốt nghiệp)", phase: 2, saveKey: "year", saveVal: "K57" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 2) {
+    const html = `
+      <span class="px-2 py-0.5 bg-purple-100 text-purple-950 rounded font-bold text-[10px] uppercase">Phase 2/6 • Mục Tiêu Cuối Khóa</span>
+      <p class="mt-2 font-semibold text-slate-900">Ở giai đoạn quan trọng này, mục tiêu lớn nhất của bạn là gì?</p>
+    `;
+    const chips = [
+      { label: "Đạt danh hiệu 'Sinh viên 5 Tốt' cấp Trường & ĐHQGHN", phase: 3, saveKey: "goal", saveVal: "SV5T" },
+      { label: "Xây dựng CV đẹp với chứng chỉ ngoại khóa chuẩn hóa xin việc", phase: 3, saveKey: "goal", saveVal: "CV xin việc" },
+      { label: "Kiểm tra điều kiện chuẩn rèn luyện tốt nghiệp ra trường", phase: 3, saveKey: "goal", saveVal: "Tốt nghiệp" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 3) {
+    const html = `
+      <span class="px-2 py-0.5 bg-purple-100 text-purple-950 rounded font-bold text-[10px] uppercase">Phase 3/6 • Rà Soát Hồ Sơ</span>
+      <p class="mt-2 font-semibold text-slate-900">Hồ sơ của bạn hiện đang thiếu hụt hoặc chưa tự tin ở tiêu chí nào nhất?</p>
+    `;
+    const chips = [
+      { label: "Tiêu chí Hội nhập tốt (Thiếu chứng nhận sự kiện quốc tế)", phase: 4, saveKey: "gap", saveVal: "Hội nhập" },
+      { label: "Tiêu chí Học tập tốt (Cần có giải NCKH hoặc bài báo)", phase: 4, saveKey: "gap", saveVal: "NCKH" },
+      { label: "Tiêu chí Tình nguyện tốt (Cần tích lũy ngày công tình nguyện)", phase: 4, saveKey: "gap", saveVal: "Tình nguyện" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 4) {
+    const html = `
+      <span class="px-2 py-0.5 bg-purple-100 text-purple-950 rounded font-bold text-[10px] uppercase">Phase 4/6 • Định Hướng Nghề Nghiệp</span>
+      <p class="mt-2 font-semibold text-slate-900">Để chứng chỉ ngoại khóa đắt giá nhất trên CV, ngành nghề mục tiêu sau khi ra trường của bạn là gì?</p>
+    `;
+    const chips = [
+      { label: "Doanh nghiệp Đa quốc gia / Doanh nghiệp FDI (Nhật, Hàn, Âu Mỹ)", phase: 5, saveKey: "career", saveVal: "FDI" },
+      { label: "Giảng dạy / Sư phạm Ngoại ngữ / Trung tâm Giáo dục Quốc tế", phase: 5, saveKey: "career", saveVal: "Giáo dục" },
+      { label: "Biên phiên dịch / Ngoại giao / Cơ quan Nhà nước", phase: 5, saveKey: "career", saveVal: "Ngoại giao" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 5) {
+    const html = `
+      <span class="px-2 py-0.5 bg-purple-100 text-purple-950 rounded font-bold text-[10px] uppercase">Phase 5/6 • Chương Trình Cấp Cao</span>
+      <p class="mt-2 font-semibold text-slate-900">Hai chương trình hội nhập quốc tế đang mở đơn phù hợp nhất với hồ sơ ${chatbotState.answers.career}:</p>
+    `;
+    const chips = [
+      { label: "Tọa đàm: Kỹ năng Làm việc trong Môi trường Đa văn hóa (Cert A2)", phase: 6, saveKey: "prog", saveVal: "ev-05" },
+      { label: "Tình nguyện viên Quốc tế Ngày hội Ngoại giao ULIS (Cert A2 + Thư khen)", phase: 6, saveKey: "prog", saveVal: "ev-02" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 6) {
+    const html = `
+      <span class="px-2 py-0.5 bg-purple-100 text-purple-950 rounded font-bold text-[10px] uppercase">Phase 6/6 • Lộ Trình Hoàn Thiện Hồ Sơ SV5T</span>
+      <h4 class="font-extrabold text-slate-900 text-sm mt-2 mb-2">🏆 HỒ SƠ SINH VIÊN 5 TỐT & CV QUỐC TẾ:</h4>
+
+      <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2 mb-3 text-xs">
+        <p class="font-bold text-blue-950">Chương trình then chốt: Tọa đàm Kỹ năng Làm việc Đa văn hóa</p>
+        <p>• <strong>Diễn giả:</strong> Trưởng phòng Nhân sự Tập đoàn Đa quốc gia.</p>
+        <p>• <strong>Minh chứng nhận được:</strong> Giấy chứng nhận Tiêu chí Hội nhập tốt (Chuẩn Cert A2).</p>
+      </div>
+
+      <div class="p-3 bg-purple-50 rounded-xl border border-purple-100 text-xs text-purple-950 mb-3 space-y-1">
+        <p class="font-bold">📋 Checklist 5 Tiêu chí SV5T ĐHQGHN:</p>
+        <p>1. Đạo đức tốt: Điểm Rèn Luyện $\ge 85$ điểm.</p>
+        <p>2. Học tập tốt: Điểm GPA $\ge 3.4$ + Cert A1 NCKH.</p>
+        <p>3. Thể lực tốt: Đạt chuẩn Hội thao ULIS.</p>
+        <p>4. Tình nguyện tốt: Tham gia tối thiểu 1 chiến dịch Mùa hè xanh / Ba Vì.</p>
+        <p>5. Hội nhập tốt: Hoàn thành Cert A2 sự kiện trên.</p>
+      </div>
+
+      <div class="flex flex-wrap gap-2 pt-1">
+        <button onclick="openEventModal('ev-05')" class="px-3.5 py-2 bg-[#0B2341] hover:bg-blue-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-400"></i> Đăng ký Tọa đàm
+        </button>
+        <a href="#leaderboard" onclick="toggleChatbot()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="award" class="w-3.5 h-3.5 text-amber-600"></i> Xem Bảng Vàng SV5T
+        </a>
+      </div>
+    `;
+
+    const chips = [
+      { label: "🔄 Bắt đầu tư vấn luồng khác", phase: 0 }
+    ];
+
+    appendBotMessage(html, chips);
+  }
+}
+
+// ====================================================
+// LUỒNG E: KHIẾU NẠI & XỬ LÝ CERT LỖI (6 PHASES)
+// ====================================================
+function processFlowE(p) {
+  if (p === 1) {
+    const html = `
+      <span class="px-2 py-0.5 bg-amber-100 text-amber-950 rounded font-bold text-[10px] uppercase">Phase 1/6 • Nhận Diện Sự Cố</span>
+      <p class="mt-2 font-semibold text-slate-900">Chào bạn! Bạn đang gặp sự cố gì với hệ thống chứng nhận hoặc tài khoản ULIS Vibe?</p>
+    `;
+    const chips = [
+      { label: "Đã tham dự sự kiện nhưng chưa nhận được chứng nhận (Cert)", phase: 2, saveKey: "issue", saveVal: "Chưa nhận Cert" },
+      { label: "Không quét được mã QR Check-in / Check-out tại sự kiện", phase: 2, saveKey: "issue", saveVal: "Lỗi QR" },
+      { label: "Không đăng nhập được tài khoản VNU Mail (@vnu.edu.vn)", phase: 2, saveKey: "issue", saveVal: "Lỗi Login" },
+      { label: "Muốn gửi góp ý ẩn danh cải tiến nền tảng cho Nhóm 109", phase: 2, saveKey: "issue", saveVal: "Góp ý" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 2) {
+    if (chatbotState.answers.issue === "Góp ý") {
+      // Jump to feedback modal
+      const html = `
+        <p class="font-bold text-slate-900 mb-2">Cảm ơn bạn đã đồng hành cùng Đề án Nhóm 109!</p>
+        <p class="text-xs text-slate-600 mb-3">Mọi đóng góp đều hoàn toàn ẩn danh và không lưu thông tin cá nhân. Bạn hãy gửi ý kiến tại form bên dưới nhé:</p>
+        <a href="#feedback-section" onclick="toggleChatbot()" class="px-4 py-2 bg-[#0B2341] text-white rounded-xl text-xs font-bold inline-block">
+          Mở Biểu Mẫu Góp Ý Ẩn Danh →
+        </a>
+      `;
+      appendBotMessage(html, [{ label: "🔄 Quay lại menu chính", phase: 0 }]);
+      return;
+    }
+
+    const html = `
+      <span class="px-2 py-0.5 bg-amber-100 text-amber-950 rounded font-bold text-[10px] uppercase">Phase 2/6 • Xác Định Sự Kiện</span>
+      <p class="mt-2 font-semibold text-slate-900">Sự kiện bạn tham gia do đơn vị nào dưới đây chủ trì tổ chức?</p>
+    `;
+    const chips = [
+      { label: "Sự kiện cấp trường (Đoàn Trường / Hội Sinh viên ULIS)", phase: 3, saveKey: "organizer", saveVal: "Đoàn - Hội" },
+      { label: "Sự kiện của các CLB (EC, JPC, V-ULIS, Debate Club...)", phase: 3, saveKey: "organizer", saveVal: "CLB" },
+      { label: "Sự kiện chuyên môn của các Khoa đào tạo", phase: 3, saveKey: "organizer", saveVal: "Khoa" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 3) {
+    const html = `
+      <span class="px-2 py-0.5 bg-amber-100 text-amber-950 rounded font-bold text-[10px] uppercase">Phase 3/6 • Kiểm Tra Quét QR</span>
+      <p class="mt-2 font-semibold text-slate-900">Bạn hãy kiểm tra lại quy trình điểm danh hôm tham dự sự kiện nhé:</p>
+    `;
+    const chips = [
+      { label: "Mình đã quét cả 2 mã QR: Check-in đầu giờ và Check-out cuối giờ", phase: 4, saveKey: "qrStatus", saveVal: "Đủ 2 QR" },
+      { label: "Mình chỉ quét mã Check-in đầu giờ, quên quét Check-out", phase: 4, saveKey: "qrStatus", saveVal: "Thiếu Check-out" },
+      { label: "Máy hết pin / mạng lỗi không quét được mã nào", phase: 4, saveKey: "qrStatus", saveVal: "Không quét được" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 4) {
+    const html = `
+      <span class="px-2 py-0.5 bg-amber-100 text-amber-950 rounded font-bold text-[10px] uppercase">Phase 4/6 • Khớp Thông Tin Sinh Viên</span>
+      <p class="mt-2 font-semibold text-slate-900">Khi điền form khảo sát sau sự kiện, thông tin cá nhân của bạn có đảm bảo:</p>
+    `;
+    const chips = [
+      { label: "Đã điền đúng Mã số sinh viên (MSV 8 số) và Email VNU", phase: 5, saveKey: "idMatch", saveVal: "Đúng MSV" },
+      { label: "Nhớ mang máng có thể gõ nhầm 1 số trong MSV hoặc dùng Gmail riêng", phase: 5, saveKey: "idMatch", saveVal: "Nhầm MSV" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 5) {
+    const html = `
+      <span class="px-2 py-0.5 bg-amber-100 text-amber-950 rounded font-bold text-[10px] uppercase">Phase 5/6 • Kênh Xử Lý Phúc Khảo</span>
+      <p class="mt-2 font-semibold text-slate-900">Thông thường chứng nhận điện tử được cấp sau 3–5 ngày làm việc. Bạn muốn xử lý khiếu nại qua kênh nào?</p>
+    `;
+    const chips = [
+      { label: "Tạo Phiếu Tra Cứu Phúc Khảo Tức Thì qua Bot (Nhóm 109 hỗ trợ đối soát)", phase: 6, saveKey: "channel", saveVal: "Phiếu Phúc Khảo" },
+      { label: "Lấy email và số điện thoại liên hệ trực tiếp Ban Tổ chức sự kiện", phase: 6, saveKey: "channel", saveVal: "Liên hệ BTC" }
+    ];
+    appendBotMessage(html, chips);
+
+  } else if (p === 6) {
+    const randomTicket = "ULIS-CERT-2026-" + Math.floor(1000 + Math.random() * 9000);
+
+    const html = `
+      <span class="px-2 py-0.5 bg-emerald-100 text-emerald-950 rounded font-bold text-[10px] uppercase">Phase 6/6 • Tiếp Nhận Yêu Cầu Phúc Khảo</span>
+      <h4 class="font-extrabold text-slate-900 text-sm mt-2 mb-2">📩 ĐÃ TẠO PHIẾU ĐỐI SOÁT MINH CHỨNG THÀNH CÔNG!</h4>
+
+      <div class="p-3 bg-white rounded-xl border border-slate-200 space-y-2 mb-3 text-xs">
+        <p>• <strong>Mã phiếu tiếp nhận:</strong> <span class="font-black text-blue-900 text-sm">${randomTicket}</span></p>
+        <p>• <strong>Tình trạng xử lý:</strong> Đang chuyển dữ liệu log QR sang Ban Thư ký Đoàn - Hội.</p>
+        <p>• <strong>Thời gian phản hồi:</strong> Trong vòng 24 giờ qua VNU Mail (@vnu.edu.vn).</p>
+      </div>
+
+      <div class="p-3 bg-blue-50 rounded-xl border border-blue-100 text-xs text-blue-950 mb-3 space-y-1">
+        <p class="font-bold">📞 Đường dây nóng giải quyết sự cố gấp:</p>
+        <p>• Phòng Chính trị & Công tác HSSV: P.106 Nhà A1 (Hotline: 024.3754.7269).</p>
+        <p>• Email đối soát: <span class="underline">congtacsinhvien@ulis.vnu.edu.vn</span></p>
+      </div>
+
+      <div class="flex flex-wrap gap-2 pt-1">
+        <button onclick="openLoginModal()" class="px-3.5 py-2 bg-[#0B2341] hover:bg-blue-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="user" class="w-3.5 h-3.5 text-amber-400"></i> Đăng nhập VNU Mail kiểm tra
+        </button>
+      </div>
+    `;
+
+    const chips = [
+      { label: "🔄 Quay lại trang chủ / menu chính", phase: 0 }
+    ];
+
+    appendBotMessage(html, chips);
+  }
+}
+
+// ----------------------------------------------------
+// KEYWORD FALLBACK INTENT DETECTION
+// ----------------------------------------------------
+function handleChatbotInputSubmit(e) {
+  e.preventDefault();
+  const input = document.getElementById("chatbot-text-input");
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = "";
+  appendUserMessage(text);
+
+  const lower = text.toLowerCase();
+
+  // Intent matching
+  if (lower.includes("học bổng") || lower.includes("đrl") || lower.includes("điểm rèn luyện") || lower.includes("xuất sắc") || lower.includes("giỏi")) {
+    chatbotState.branch = "A_SCHOLARSHIP";
+    chatbotState.phase = 1;
+    setTimeout(() => processCurrentState(), 200);
+  } else if (lower.includes("clb") || lower.includes("câu lạc bộ") || lower.includes("k60") || lower.includes("tân sinh viên") || lower.includes("tuyển quân")) {
+    chatbotState.branch = "B_CLUB";
+    chatbotState.phase = 1;
+    setTimeout(() => processCurrentState(), 200);
+  } else if (lower.includes("cứu") || lower.includes("gỡ điểm") || lower.includes("cảnh báo") || lower.includes("yếu") || lower.includes("thiếu điểm")) {
+    chatbotState.branch = "C_RESCUE";
+    chatbotState.phase = 1;
+    setTimeout(() => processCurrentState(), 200);
+  } else if (lower.includes("sv5t") || lower.includes("sinh viên 5 tốt") || lower.includes("năm 3") || lower.includes("năm 4") || lower.includes("cv") || lower.includes("xin việc")) {
+    chatbotState.branch = "D_SENIOR";
+    chatbotState.phase = 1;
+    setTimeout(() => processCurrentState(), 200);
+  } else if (lower.includes("lỗi") || lower.includes("khiếu nại") || lower.includes("qr") || lower.includes("chưa nhận") || lower.includes("chứng nhận") || lower.includes("a1") || lower.includes("a2") || lower.includes("a3")) {
+    chatbotState.branch = "E_COMPLAINT";
+    chatbotState.phase = 1;
+    setTimeout(() => processCurrentState(), 200);
+  } else {
+    // General response
+    setTimeout(() => {
+      const html = `
+        <p class="font-bold text-slate-900 mb-1">Mình đã ghi nhận câu hỏi của bạn: "${text}".</p>
+        <p class="text-xs text-slate-600 mb-2">Để tư vấn chuẩn xác nhất qua phễu 6 Phase, bạn hãy chọn chủ đề phù hợp nhất dưới đây nhé:</p>
+      `;
+      const chips = [
+        { label: "🎯 A. Săn Học bổng & ĐRL Xuất sắc", branch: "A_SCHOLARSHIP", phase: 1 },
+        { label: "👥 B. Tân sinh viên K60 tìm CLB", branch: "B_CLUB", phase: 1 },
+        { label: "🚨 C. Gỡ Điểm Rèn Luyện khẩn cấp", branch: "C_RESCUE", phase: 1 },
+        { label: "🏆 D. Chuẩn bị CV & Sinh viên 5 Tốt", branch: "D_SENIOR", phase: 1 },
+        { label: "📜 E. Xử lý sự cố Cert A1-A2-A3", branch: "E_COMPLAINT", phase: 1 }
+      ];
+      appendBotMessage(html, chips);
+    }, 400);
+  }
+}
+window.handleChatbotInputSubmit = handleChatbotInputSubmit;
+
