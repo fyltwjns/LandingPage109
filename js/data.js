@@ -516,6 +516,7 @@ const ULIS_DATA = {
   events: [
     {
       id: "ev-01",
+      image: "./assets/events/ev-01.webp",
       title: "Hội thảo: Phương pháp Viết Báo Cáo Nghiên cứu Khoa học Sinh viên 2026",
       type: "event", // event | recruitment
       typeName: "Hội thảo Chuyên môn",
@@ -543,6 +544,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-02",
+      image: "./assets/events/ev-02.webp",
       title: "Đợt Tuyển Quân Mùa Đông Gen 9 – Đội Lễ Tân Ngoại Ngữ URT",
       type: "recruitment",
       typeName: "Tuyển quân CLB",
@@ -570,6 +572,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-03",
+      image: "./assets/events/ev-03.webp",
       title: "Cuộc thi Hùng biện Tiếng Anh English Challenge 2026 (Vòng Sơ loại)",
       type: "event",
       typeName: "Cuộc thi Học thuật",
@@ -597,6 +600,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-04",
+      image: "./assets/events/ev-04.webp",
       title: "Chiến dịch Tình nguyện 'Đông Ấm Vùng Cao 2026' – Tuyển Tình Nguyện Viên",
       type: "recruitment",
       typeName: "Tuyển quân Tình nguyện",
@@ -624,6 +628,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-05",
+      image: "./assets/events/ev-05.webp",
       title: "Ngày Hội Việc Làm & Thực Tập Quốc Tế ULIS Job Fair 2026",
       type: "event",
       typeName: "Ngày hội Kỹ năng & Hướng nghiệp",
@@ -651,6 +656,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-06",
+      image: "./assets/events/ev-06.webp",
       title: "Workshop: Tinh Gọn Kỹ Năng Thiết Kế & Xây Dựng Thương Hiệu Cá Nhân Trên LinkedIn",
       type: "event",
       typeName: "Workshop Kỹ năng",
@@ -678,6 +684,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-07",
+      image: "./assets/events/ev-07.webp",
       title: "Đêm Nhạc Acoustic Mùa Đông: 'Vũ Khúc Thanh Xuân' & Casting Ban Vocal/Band",
       type: "event",
       typeName: "Giao lưu Nghệ thuật & Casting",
@@ -705,6 +712,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-08",
+      image: "./assets/events/ev-08.webp",
       title: "Ngày Hội Hiến Máu Toàn Trường: 'Nắng Ngoại Ngữ 2026'",
       type: "event",
       typeName: "Hoạt động Nhân đạo",
@@ -732,6 +740,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-09",
+      image: "./assets/events/ev-09.webp",
       title: "Tọa đàm: Chiến Lược Chinh Phục Chứng Chỉ Quốc Tế HSK 6 & JLPT N1 Năm 2027",
       type: "event",
       typeName: "Tọa đàm Chuyên môn",
@@ -759,6 +768,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-10",
+      image: "./assets/events/ev-10.webp",
       title: "Tuyển Thành Viên Kỳ Mùa Xuân 2027 – CLB Bạn Đồng Hành Quốc Tế UBC",
       type: "recruitment",
       typeName: "Tuyển quân CLB",
@@ -786,6 +796,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-11",
+      image: "./assets/events/ev-11.webp",
       title: "Giải Bóng Đá Nam - Nữ Sinh Viên Thường Niên 'ULIS Cup 2027'",
       type: "event",
       typeName: "Giải Thể thao Toàn trường",
@@ -813,6 +824,7 @@ const ULIS_DATA = {
     },
     {
       id: "ev-12",
+      image: "./assets/events/ev-12.webp",
       title: "Lễ Ra Mắt Chính Thức Nền Tảng ULIS Vibe & Trải Nghiệm Check-in QR",
       type: "event",
       typeName: "Sự kiện Công nghệ Sinh viên",

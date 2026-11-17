@@ -1,30 +1,62 @@
-/* Custom Styles & Animation for ULIS Vibe */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+/* Impeccable Design System for ULIS Vibe */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
 
 :root {
-  --ulis-primary: #003399;
-  --ulis-primary-dark: #002266;
-  --ulis-primary-light: #1E4ED8;
-  --ulis-gold: #F59E0B;
-  --ulis-gold-light: #FEF3C7;
-  --ulis-accent: #0EA5E9;
-  --font-main: 'Plus Jakarta Sans', 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ulis-navy: #002B7F;
+  --ulis-blue: #003399;
+  --ulis-blue-light: #1E4ED8;
+  --ulis-amber: #D97706;
+  --ulis-amber-bg: #FEF3C7;
+  --font-sans: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Browser Surfaces & Base Typography */
+html {
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: var(--font-main);
+  font-family: var(--font-sans);
   background-color: #F8FAFC;
   color: #0F172A;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  caret-color: var(--ulis-blue);
+}
+
+/* Themed Text Selection */
+::selection {
+  background-color: #002B7F;
+  color: #FFFFFF;
+}
+
+::-moz-selection {
+  background-color: #002B7F;
+  color: #FFFFFF;
+}
+
+/* Accessible Focus Rings */
+:focus-visible {
+  outline: 2px solid #003399;
+  outline-offset: 2px;
+}
+
+/* Tabular Numerals for metrics, dates and data */
+.tabular-nums,
+[data-number],
+.metric-value {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #F1F5F9;
@@ -37,93 +69,79 @@ body {
   background: #94A3B8;
 }
 
-/* Glassmorphism Classes */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-.glass-nav {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-.glass-dark {
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes floatSlow {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes pulseSubtle {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.85; transform: scale(0.98); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-float {
-  animation: floatSlow 5s ease-in-out infinite;
-}
-
-/* Badges */
+/* Semantic Badges */
 .badge-a1 {
   background-color: #EFF6FF !important;
-  color: #1D4ED8 !important;
+  color: #1E40AF !important;
   border: 1px solid #BFDBFE !important;
 }
 .badge-a2 {
   background-color: #FFFBEB !important;
-  color: #B45309 !important;
+  color: #92400E !important;
   border: 1px solid #FDE68A !important;
 }
 .badge-a3 {
   background-color: #ECFDF5 !important;
-  color: #047857 !important;
+  color: #065F46 !important;
   border: 1px solid #A7F3D0 !important;
 }
 
-/* Smooth Tab Transition */
+/* Active Tabs */
 .tab-active {
-  background-color: #003399 !important;
+  background-color: #002B7F !important;
   color: #FFFFFF !important;
-  box-shadow: 0 4px 12px rgba(0, 51, 153, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 43, 127, 0.2);
 }
 
-/* Interactive Card Hover */
-.interactive-card {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.interactive-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.12), 0 4px 8px -4px rgba(15, 23, 42, 0.06);
-}
-
-/* Calendar Grid Custom Styles */
-.cal-day-active {
+/* Event Banner Framing (Strict 16:9 ratio revealing 100% of banner information) */
+.event-banner-container {
+  aspect-ratio: 16 / 9;
+  width: 100%;
   position: relative;
-  transition: all 0.2s ease;
+  overflow: hidden;
+  background-color: #0F172A;
 }
-.cal-day-active:hover {
-  background-color: #EEF2FF;
-  border-color: #6366F1;
+
+.event-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Navigation bar links: strictly single-line, prevent wrapping */
+header nav {
+  white-space: nowrap !important;
+  flex-wrap: nowrap !important;
+}
+
+header nav a {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Hide scrollbar for compact single-line horizontal bars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Card Transitions & Single Elevation */
+.interactive-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  border-radius: 16px;
+}
+
+.interactive-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08), 0 4px 8px -4px rgba(15, 23, 42, 0.04);
+  border-color: #CBD5E1;
 }
 
 /* Toast Notification */
@@ -139,24 +157,51 @@ body {
   pointer-events: auto;
 }
 
-/* Modal animation */
+/* Modal Backdrop */
 .modal-backdrop {
-  background-color: rgba(15, 23, 42, 0.6);
+  background-color: rgba(15, 23, 42, 0.65);
   backdrop-filter: blur(4px);
 }
 
-/* Print optimizations */
+/* Responsive and Smooth Motion Defaults */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Quick Filter Buttons */
+.quick-filter-btn {
+  padding: 0.25rem 0.625rem;
+  background-color: #F1F5F9;
+  color: #1E293B;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.75rem;
+  transition: all 0.15s ease;
+  border: 1px solid #E2E8F0;
+}
+.quick-filter-btn:hover {
+  background-color: #002B7F;
+  color: #FFFFFF;
+  border-color: #002B7F;
+}
+
+/* Print Optimization */
 @media print {
   .no-print {
     display: none !important;
   }
   body {
-    background-color: white !important;
-    color: black !important;
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
   }
   .interactive-card {
     box-shadow: none !important;
-    border: 1px solid #ccc !important;
+    border: 1px solid #D1D5DB !important;
     break-inside: avoid;
   }
 }

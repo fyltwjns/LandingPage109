@@ -229,58 +229,79 @@ function renderEvents() {
     const dateFormatted = formatDateVietnamese(ev.date);
 
     return `
-      <div data-event-id="${ev.id}" class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md interactive-card flex flex-col justify-between overflow-hidden relative">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <div class="flex flex-wrap gap-2">
-              <span class="px-2.5 py-1 text-xs font-bold rounded-lg ${certBadgeClass}">
-                ${ev.certType}: ${ev.certName.split("(")[1] ? ev.certName.split("(")[1].replace(")", "") : ev.certType}
-              </span>
-              <span class="px-2.5 py-1 text-xs font-medium rounded-lg ${ev.type === 'recruitment' ? 'bg-purple-100 text-purple-700' : 'bg-slate-100 text-slate-700'}">
-                ${ev.typeName}
-              </span>
-            </div>
-            <button onclick="toggleSaveEvent('${ev.id}')" title="${isSaved ? 'Bỏ lưu' : 'Lưu sự kiện'}" class="p-2 rounded-xl border ${isSaved ? 'bg-amber-50 border-amber-300 text-amber-600' : 'bg-slate-50 border-slate-200 text-slate-400 hover:text-slate-600'} transition">
-              <i data-lucide="bookmark" class="w-4 h-4 ${isSaved ? 'fill-current' : ''}"></i>
-            </button>
-          </div>
-
-          <h3 class="text-base font-bold text-slate-900 mb-2 line-clamp-2 hover:text-blue-700 cursor-pointer" onclick="openEventModal('${ev.id}')">
-            ${ev.title}
-          </h3>
-
-          <div class="space-y-1.5 text-xs text-slate-600 mb-4">
-            <div class="flex items-center gap-2">
-              <i data-lucide="building" class="w-3.5 h-3.5 text-slate-400 shrink-0"></i>
-              <span class="truncate font-medium text-slate-700">${ev.organizer}</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-600 shrink-0"></i>
-              <span class="font-semibold text-blue-900">${dateFormatted} • ${ev.time}</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-red-500 shrink-0"></i>
-              <span class="truncate">${ev.location}</span>
-            </div>
-          </div>
-
-          <p class="text-xs text-slate-500 line-clamp-2 mb-4 leading-relaxed">
-            ${ev.description}
-          </p>
+      <div data-event-id="${ev.id}" class="event-card-item group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md interactive-card flex flex-col justify-between overflow-hidden relative">
+        <!-- Event Banner Thumbnail (16:9 aspect ratio displaying 100% banner info without cropping) -->
+        <div class="event-banner-container aspect-video cursor-pointer" onclick="openEventModal('${ev.id}')">
+          <img src="./assets/events/${ev.id}.webp" alt="${ev.title}" class="event-banner-img" loading="lazy" onerror="this.onerror=null; this.src='./assets/events/${ev.id}.png';" />
+          <button onclick="event.stopPropagation(); toggleSaveEvent('${ev.id}')" title="${isSaved ? 'Bỏ lưu' : 'Lưu sự kiện'}" aria-label="${isSaved ? 'Bỏ lưu' : 'Lưu sự kiện'}" class="btn-save-${ev.id} absolute top-2.5 right-2.5 p-2 rounded-xl bg-slate-900/60 hover:bg-slate-900/90 backdrop-blur-md border border-white/20 ${isSaved ? 'text-amber-400' : 'text-white/80 hover:text-white'} transition shadow-xs">
+            <i data-lucide="bookmark" class="w-4 h-4 ${isSaved ? 'fill-current' : ''}"></i>
+          </button>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <span class="text-[11px] font-medium ${ev.status === 'closing_soon' ? 'text-amber-600' : 'text-emerald-600'} flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full ${ev.status === 'closing_soon' ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500'}"></span>
-            ${ev.status === 'closing_soon' ? 'Sắp hết hạn đơn' : 'Đang mở đăng ký'}
-          </span>
-          <div class="flex items-center gap-2">
-            <button onclick="openEventModal('${ev.id}')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-800 hover:bg-white rounded-lg transition">
-              Chi tiết
-            </button>
-            <a href="${ev.formUrl || '#'}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-blue-800 hover:bg-blue-900 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition shadow-sm">
-              Đăng ký <i data-lucide="external-link" class="w-3 h-3"></i>
-            </a>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <!-- Chi tiết phân loại chứng nhận & loại sự kiện (gọn gàng trên 1 dòng, không bị xuống dòng) -->
+            <div class="flex items-center justify-between gap-1.5 mb-3 flex-nowrap overflow-hidden text-nowrap">
+              <div class="flex items-center gap-1.5 shrink-0 overflow-hidden">
+                <span class="px-2 py-0.5 text-xs font-bold rounded-md whitespace-nowrap shrink-0 ${certBadgeClass}">
+                  ${ev.certType} • ${ev.certType === "A1" ? "Học thuật" : ev.certType === "A2" ? "Kỹ năng" : "Tình nguyện"}
+                </span>
+                <span class="px-2 py-0.5 text-xs font-semibold rounded-md whitespace-nowrap shrink-0 ${ev.type === 'recruitment' ? 'bg-purple-100 text-purple-900 border border-purple-200' : 'bg-slate-100 text-slate-800 border border-slate-200'}">
+                  ${ev.typeName}
+                </span>
+              </div>
+              <span class="text-[11px] font-semibold text-slate-600 shrink-0 flex items-center gap-1 tabular-nums bg-slate-100 px-2 py-0.5 rounded-md whitespace-nowrap" title="Số lượng suất tham gia còn lại">
+                <i data-lucide="users" class="w-3.5 h-3.5 text-blue-700"></i> Còn ${ev.spotsLeft}/${ev.totalSpots}
+              </span>
+            </div>
+
+            <h3 class="text-base font-bold text-slate-900 mb-2 line-clamp-2 hover:text-blue-900 cursor-pointer" onclick="openEventModal('${ev.id}')">
+              ${ev.title}
+            </h3>
+
+            <div class="space-y-1.5 text-xs text-slate-700 mb-3">
+              <div class="flex items-center gap-2">
+                <i data-lucide="building" class="w-3.5 h-3.5 text-blue-700 shrink-0"></i>
+                <span class="truncate font-medium text-slate-800">${ev.organizer}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-700 shrink-0"></i>
+                <span class="font-semibold text-blue-950 tabular-nums">${dateFormatted} • ${ev.time} (${ev.format})</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-600 shrink-0"></i>
+                <span class="truncate text-slate-700">${ev.location}</span>
+              </div>
+              <div class="flex items-center gap-2 text-slate-600">
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-700 shrink-0"></i>
+                <span>Hạn đăng ký: <strong class="text-slate-900 font-semibold tabular-nums">${formatDateVietnamese(ev.registrationDeadline.split(' ')[0])} (${ev.registrationDeadline.split(' ')[1] || ''})</strong></span>
+              </div>
+            </div>
+
+            <!-- Quyền lợi chứng nhận nổi bật -->
+            <div class="p-2.5 bg-blue-50/70 border border-blue-100 rounded-xl mb-3 text-[11px] text-blue-950 flex items-start gap-1.5">
+              <i data-lucide="award" class="w-3.5 h-3.5 text-blue-700 shrink-0 mt-0.5"></i>
+              <span class="line-clamp-1 font-medium">${ev.benefits[0]}</span>
+            </div>
+
+            <p class="text-xs text-slate-600 line-clamp-2 mb-4 leading-relaxed">
+              ${ev.description}
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+            <span class="text-[11px] font-semibold ${ev.status === 'closing_soon' ? 'text-amber-800' : 'text-emerald-800'} flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full ${ev.status === 'closing_soon' ? 'bg-amber-600 animate-pulse' : 'bg-emerald-600'}"></span>
+              ${ev.status === 'closing_soon' ? 'Sắp hết hạn' : 'Đang mở đơn'}
+            </span>
+            <div class="flex items-center gap-2">
+              <button onclick="openEventModal('${ev.id}')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-50 rounded-lg transition">
+                Chi tiết
+              </button>
+              <a href="${ev.formUrl || '#'}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-blue-950 hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-sm">
+                Đăng ký <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -470,28 +491,33 @@ function openEventModal(eventId) {
   const isSaved = state.savedEvents.includes(ev.id);
 
   modalContent.innerHTML = `
-    <div class="relative">
-      <div class="p-6 border-b border-slate-100 flex items-start justify-between gap-4">
+    <div class="relative overflow-hidden rounded-3xl flex flex-col max-h-[92vh]">
+      <!-- Modal Banner Image (16:9 full banner display) -->
+      <div class="event-banner-container aspect-video shrink-0">
+        <img src="./assets/events/${ev.id}.webp" alt="${ev.title}" class="event-banner-img" onerror="this.onerror=null; this.src='./assets/events/${ev.id}.png';" />
+        <button onclick="closeModal()" class="absolute top-4 right-4 p-2 text-white bg-slate-900/60 hover:bg-slate-900/80 rounded-xl backdrop-blur-md transition" aria-label="Đóng cửa sổ">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-6 border-b border-slate-100 flex items-start justify-between gap-4 shrink-0 bg-white">
         <div>
           <div class="flex flex-wrap items-center gap-2 mb-2">
             <span class="px-2.5 py-1 text-xs font-bold rounded-lg ${certBadgeClass}">
               ${ev.certType}: ${ev.certName}
             </span>
-            <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 text-slate-700">
+            <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-800">
               ${ev.typeName}
             </span>
-            <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-blue-50 text-blue-700">
+            <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-blue-50 text-blue-900">
               Nhóm: ${ev.categoryName}
             </span>
           </div>
           <h3 class="text-xl font-bold text-slate-900">${ev.title}</h3>
         </div>
-        <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
       </div>
 
-      <div class="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+      <div class="p-6 space-y-6 overflow-y-auto flex-1 bg-white">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-slate-50 rounded-xl text-sm text-slate-700 border border-slate-100">
           <div class="flex items-center gap-2">
             <i data-lucide="building" class="w-4 h-4 text-blue-600"></i>
@@ -549,7 +575,7 @@ function openEventModal(eventId) {
         </div>
       </div>
 
-      <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex flex-wrap items-center justify-between gap-3">
+      <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex flex-wrap items-center justify-between gap-3 shrink-0">
         <button onclick="toggleSaveEvent('${ev.id}'); openEventModal('${ev.id}');" class="px-4 py-2 border rounded-xl text-sm font-semibold transition flex items-center gap-2 ${isSaved ? 'bg-amber-100 border-amber-300 text-amber-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'}">
           <i data-lucide="bookmark" class="w-4 h-4 ${isSaved ? 'fill-current' : ''}"></i>
           ${isSaved ? 'Đã lưu trong mục quan tâm' : 'Lưu vào mục quan tâm'}
@@ -1024,54 +1050,70 @@ function renderCertContent(certKey) {
 
 function renderCertComparison(container) {
   container.innerHTML = `
-    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 animate-fade-in overflow-x-auto">
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 animate-fade-in overflow-x-auto">
       <div class="mb-6">
-        <h3 class="text-2xl font-extrabold text-slate-900 mb-1">Bảng So Sánh 3 Loại Chứng Nhận Ngoại Khóa ULIS</h3>
-        <p class="text-sm text-slate-500">Đối chiếu điều kiện, điểm rèn luyện và tầm quan trọng đối với hồ sơ sinh viên</p>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="px-2.5 py-0.5 text-[11px] font-bold bg-blue-100 text-blue-900 rounded-full uppercase">Ma Trận Đối Chiếu</span>
+          <span class="text-xs text-slate-500">Chuẩn hóa theo Quyết định ĐHQGHN</span>
+        </div>
+        <h3 class="text-2xl font-black text-slate-900 tracking-tight">Bảng So Sánh 3 Loại Chứng Nhận Ngoại Khóa ULIS</h3>
+        <p class="text-sm text-slate-600 mt-0.5">Đối chiếu điều kiện, khung điểm rèn luyện và giá trị pháp lý đối với hồ sơ sinh viên</p>
       </div>
 
-      <table class="w-full text-left border-collapse text-xs sm:text-sm">
-        <thead>
-          <tr class="border-b-2 border-slate-200 bg-slate-50">
-            <th class="p-3 font-bold text-slate-700">Tiêu chí</th>
-            <th class="p-3 font-bold text-blue-800 bg-blue-50/50">A1: Học thuật & NCKH</th>
-            <th class="p-3 font-bold text-amber-800 bg-amber-50/50">A2: Kỹ năng & Hướng nghiệp</th>
-            <th class="p-3 font-bold text-emerald-800 bg-emerald-50/50">A3: Tình nguyện & Xã hội</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-slate-100">
-          <tr>
-            <td class="p-3 font-bold text-slate-900">Bản chất hoạt động</td>
-            <td class="p-3 text-slate-700">Hội thảo khoa học, tọa đàm chuyên môn, thi học thuật ngôn ngữ, viết bài NCKH</td>
-            <td class="p-3 text-slate-700">Workshop kỹ năng mềm, ngày hội việc làm (Job Fair), giao lưu quốc tế, lễ tân</td>
-            <td class="p-3 text-slate-700">Hiến máu nhân đạo, Mùa hè xanh, Tiếp sức mùa thi, thể thao & văn nghệ</td>
-          </tr>
-          <tr>
-            <td class="p-3 font-bold text-slate-900">Khung điểm rèn luyện</td>
-            <td class="p-3 font-bold text-blue-700">5 – 15 điểm (Tiêu chí 1 & 2)</td>
-            <td class="p-3 font-bold text-amber-700">5 – 10 điểm (Tiêu chí 3)</td>
-            <td class="p-3 font-bold text-emerald-700">8 – 20 điểm (Tiêu chí 3 & 4)</td>
-          </tr>
-          <tr>
-            <td class="p-3 font-bold text-slate-900">Điều kiện xét Học bổng KKHT</td>
-            <td class="p-3 text-emerald-600 font-semibold">Bắt buộc ưu tiên</td>
-            <td class="p-3 text-slate-600">Bổ trợ hoàn thiện hồ sơ</td>
-            <td class="p-3 text-slate-600">Bổ trợ hoàn thiện hồ sơ</td>
-          </tr>
-          <tr>
-            <td class="p-3 font-bold text-slate-900">Điều kiện xét "Sinh viên 5 Tốt"</td>
-            <td class="p-3 text-slate-600">Đạt chuẩn "Học tập tốt"</td>
-            <td class="p-3 text-slate-600">Đạt chuẩn "Hội nhập tốt"</td>
-            <td class="p-3 text-red-600 font-bold">Bắt buộc ("Tình nguyện tốt")</td>
-          </tr>
-          <tr>
-            <td class="p-3 font-bold text-slate-900">Minh chứng hợp lệ</td>
-            <td class="p-3 text-slate-600">Giấy khen, bài NCKH, xác nhận Khoa / Phòng KHCN</td>
-            <td class="p-3 text-slate-600">E-Certificate QR, danh sách BTC Phòng CT&CT HSSV</td>
-            <td class="p-3 text-slate-600">Giấy chứng nhận Đoàn - Hội trường, thẻ hiến máu</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-2xs">
+        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+          <thead>
+            <tr class="bg-slate-100/90 text-slate-800 border-b-2 border-slate-200">
+              <th class="w-1/4 p-3.5 font-bold text-slate-700 border-r border-slate-200">Tiêu chí so sánh</th>
+              <th class="w-1/4 p-3.5 font-extrabold text-blue-950 bg-blue-50/80 border-r border-slate-200">
+                <span class="inline-flex items-center gap-1.5"><i data-lucide="book-open" class="w-4 h-4 text-blue-800"></i> A1: Học thuật & NCKH</span>
+              </th>
+              <th class="w-1/4 p-3.5 font-extrabold text-amber-950 bg-amber-50/80 border-r border-slate-200">
+                <span class="inline-flex items-center gap-1.5"><i data-lucide="compass" class="w-4 h-4 text-amber-700"></i> A2: Kỹ năng & Hướng nghiệp</span>
+              </th>
+              <th class="w-1/4 p-3.5 font-extrabold text-emerald-950 bg-emerald-50/80">
+                <span class="inline-flex items-center gap-1.5"><i data-lucide="hand-heart" class="w-4 h-4 text-emerald-700"></i> A3: Tình nguyện & Xã hội</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-slate-50/80 transition">
+              <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 bg-slate-50/40">Bản chất hoạt động</td>
+              <td class="p-3.5 text-slate-700 border-r border-slate-200 leading-relaxed">Hội thảo khoa học, tọa đàm chuyên môn, thi học thuật ngôn ngữ, nghiên cứu khoa học sinh viên</td>
+              <td class="p-3.5 text-slate-700 border-r border-slate-200 leading-relaxed">Workshop kỹ năng mềm, ngày hội việc làm (Job Fair), giao lưu văn hóa quốc tế, lễ tân khánh tiết</td>
+              <td class="p-3.5 text-slate-700 leading-relaxed">Hiến máu nhân đạo, Mùa hè xanh, Tiếp sức mùa thi, hoạt động cộng đồng, văn nghệ - thể thao</td>
+            </tr>
+            <tr class="hover:bg-slate-50/80 transition even:bg-slate-50/30">
+              <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 bg-slate-50/40">Khung điểm rèn luyện (ĐRL)</td>
+              <td class="p-3.5 font-bold text-blue-900 border-r border-slate-200 tabular-nums">5 – 15 điểm (Tiêu chí 1 & 2)</td>
+              <td class="p-3.5 font-bold text-amber-900 border-r border-slate-200 tabular-nums">5 – 10 điểm (Tiêu chí 3)</td>
+              <td class="p-3.5 font-bold text-emerald-900 tabular-nums">8 – 20 điểm (Tiêu chí 3 & 4)</td>
+            </tr>
+            <tr class="hover:bg-slate-50/80 transition">
+              <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 bg-slate-50/40">Xét Học bổng KKHT</td>
+              <td class="p-3.5 border-r border-slate-200">
+                <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 font-bold text-xs">Bắt buộc ưu tiên hàng đầu</span>
+              </td>
+              <td class="p-3.5 text-slate-600 border-r border-slate-200">Bổ trợ hoàn thiện hồ sơ</td>
+              <td class="p-3.5 text-slate-600">Bổ trợ hoàn thiện hồ sơ</td>
+            </tr>
+            <tr class="hover:bg-slate-50/80 transition even:bg-slate-50/30">
+              <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 bg-slate-50/40">Xét danh hiệu "Sinh viên 5 Tốt"</td>
+              <td class="p-3.5 text-slate-700 border-r border-slate-200">Đạt chuẩn tiêu chí <strong class="text-blue-950">"Học tập tốt"</strong></td>
+              <td class="p-3.5 text-slate-700 border-r border-slate-200">Đạt chuẩn tiêu chí <strong class="text-amber-950">"Hội nhập tốt"</strong></td>
+              <td class="p-3.5">
+                <span class="px-2 py-0.5 rounded bg-red-100 text-red-950 font-bold text-xs">Bắt buộc chuẩn "Tình nguyện tốt"</span>
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50/80 transition">
+              <td class="p-3.5 font-bold text-slate-900 border-r border-slate-200 bg-slate-50/40">Minh chứng hợp lệ</td>
+              <td class="p-3.5 text-slate-600 border-r border-slate-200 text-xs leading-relaxed">Giấy khen, kỷ yếu NCKH, xác nhận Khoa / Phòng KHCN</td>
+              <td class="p-3.5 text-slate-600 border-r border-slate-200 text-xs leading-relaxed">E-Certificate có mã QR xác thực, danh sách BTC Phòng CT&CT HSSV</td>
+              <td class="p-3.5 text-slate-600 text-xs leading-relaxed">Giấy chứng nhận Đoàn - Hội trường, thẻ xác nhận hiến máu</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   `;
   initLucide();
@@ -1176,21 +1218,24 @@ function initSurveySection() {
 
   toggleBtnCharts.addEventListener("click", () => {
     state.chartMode = "charts";
-    toggleBtnCharts.classList.add("bg-blue-800", "text-white");
+    toggleBtnCharts.classList.add("bg-blue-900", "text-white");
     toggleBtnCharts.classList.remove("bg-white", "text-slate-700");
-    toggleBtnOriginals.classList.remove("bg-blue-800", "text-white");
+    toggleBtnOriginals.classList.remove("bg-blue-900", "text-white");
     toggleBtnOriginals.classList.add("bg-white", "text-slate-700");
 
     containerCharts.classList.remove("hidden");
     containerOriginals.classList.add("hidden");
     renderInteractiveCharts();
+    if (window.Highcharts && window.Highcharts.charts) {
+      window.Highcharts.charts.forEach(c => c && c.reflow());
+    }
   });
 
   toggleBtnOriginals.addEventListener("click", () => {
     state.chartMode = "originals";
-    toggleBtnOriginals.classList.add("bg-blue-800", "text-white");
+    toggleBtnOriginals.classList.add("bg-blue-900", "text-white");
     toggleBtnOriginals.classList.remove("bg-white", "text-slate-700");
-    toggleBtnCharts.classList.remove("bg-blue-800", "text-white");
+    toggleBtnCharts.classList.remove("bg-blue-900", "text-white");
     toggleBtnCharts.classList.add("bg-white", "text-slate-700");
 
     containerCharts.classList.add("hidden");
@@ -1200,111 +1245,411 @@ function initSurveySection() {
   renderInteractiveCharts();
 }
 
+// 3D Chart Drag to Rotate Handler with Level Double-Click Reset
+function add3DRotation(chart) {
+  if (!chart || !chart.container) return;
+  const container = chart.container;
+  const isColumn = chart.options.chart.type === 'column';
+  // Angle tilted from below upwards 5° for columns (-5°), and 5° for circular discs (99.6% circle, no distortion)
+  const defaultAlpha = isColumn ? -5 : 5;
+  const defaultBeta = 0;
+  let isDragging = false;
+  let downX, downY, alpha, beta;
+
+  function onMouseDown(e) {
+    if (e.target.closest('.highcharts-legend') || e.target.closest('.highcharts-data-label')) return;
+    isDragging = true;
+    downX = e.clientX || (e.touches && e.touches[0].clientX);
+    downY = e.clientY || (e.touches && e.touches[0].clientY);
+    alpha = chart.options.chart.options3d.alpha;
+    beta = chart.options.chart.options3d.beta;
+    container.style.cursor = 'grabbing';
+  }
+
+  function onMouseMove(e) {
+    if (!isDragging) return;
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+    if (clientX === undefined || clientY === undefined) return;
+
+    const newAlpha = Math.min(75, Math.max(-20, alpha + (clientY - downY) * 0.3));
+    const newBeta = beta + (clientX - downX) * 0.3;
+    chart.update({
+      chart: {
+        options3d: {
+          alpha: newAlpha,
+          beta: newBeta
+        }
+      }
+    }, false, false, false);
+    chart.redraw(false);
+  }
+
+  function onMouseUp() {
+    if (isDragging) {
+      isDragging = false;
+      container.style.cursor = 'grab';
+    }
+  }
+
+  // Double click resets to perfectly level, requested 5° perspective
+  container.addEventListener('dblclick', () => {
+    chart.update({
+      chart: {
+        options3d: {
+          alpha: defaultAlpha,
+          beta: defaultBeta
+        }
+      }
+    });
+  });
+
+  container.addEventListener('mousedown', onMouseDown);
+  container.addEventListener('touchstart', onMouseDown, { passive: true });
+
+  window.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('touchmove', onMouseMove, { passive: true });
+
+  window.addEventListener('mouseup', onMouseUp);
+  window.addEventListener('touchend', onMouseUp);
+
+  container.style.cursor = 'grab';
+}
+
 function renderInteractiveCharts() {
-  if (!window.Chart) return;
+  if (!window.Highcharts) return;
 
-  const ctxMissed = document.getElementById("chart-missed-canvas");
-  if (ctxMissed && !ctxMissed.chartInstance) {
-    ctxMissed.chartInstance = new Chart(ctxMissed, {
-      type: "doughnut",
-      data: {
-        labels: [
-          "Thỉnh thoảng gặp phải (42.9%)",
-          "Thường xuyên xảy ra (28.6%)",
-          "Hiếm khi gặp phải (19.0%)",
-          "Chưa từng gặp do không có nhu cầu (5.7%)",
-          "Chưa từng xảy ra (3.8%)"
-        ],
-        datasets: [{
-          data: [42.9, 28.6, 19.0, 5.7, 3.8],
-          backgroundColor: ["#EF4444", "#F59E0B", "#10B981", "#3B82F6", "#64748B"]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: "bottom", labels: { font: { size: 11, family: "Plus Jakarta Sans" } } }
-        }
+  Highcharts.setOptions({
+    chart: {
+      style: {
+        fontFamily: "'Be Vietnam Pro', system-ui, sans-serif"
       }
+    },
+    credits: { enabled: false }
+  });
+
+  // 1. Chart 3D Missed Events (3D Donut - 5° tilt, pure geometric circle, no distortion)
+  const elMissed = document.getElementById("chart-missed-3d");
+  if (elMissed && !elMissed.chartInstance) {
+    elMissed.chartInstance = Highcharts.chart('chart-missed-3d', {
+      chart: {
+        type: 'pie',
+        backgroundColor: 'transparent',
+        spacing: [10, 10, 15, 10],
+        options3d: {
+          enabled: true,
+          alpha: 5,
+          beta: 0
+        }
+      },
+      title: { text: null },
+      tooltip: {
+        headerFormat: '<span style="font-size:11px;font-weight:bold">{point.key}</span><br>',
+        pointFormat: 'Tỷ lệ: <b>{point.y:.1f}%</b> ({point.count} SV)'
+      },
+      plotOptions: {
+        pie: {
+          innerSize: '55%',
+          depth: 18,
+          size: '78%',
+          center: ['50%', '48%'],
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            distance: 14,
+            connectorPadding: 4,
+            format: '<b>{point.name}</b><br><span style="color:#002B7F;font-weight:700">{point.y}%</span>',
+            style: { fontSize: '11px', textOutline: 'none' }
+          }
+        }
+      },
+      series: [{
+        name: 'Tỷ lệ',
+        data: [
+          { name: 'Thỉnh thoảng gặp phải', y: 42.9, count: 45, color: '#DC2626', sliced: true, selected: true },
+          { name: 'Thường xuyên xảy ra', y: 28.6, count: 30, color: '#D97706' },
+          { name: 'Hiếm khi gặp phải', y: 19.0, count: 20, color: '#059669' },
+          { name: 'Chưa từng gặp (không có nhu cầu)', y: 5.7, count: 6, color: '#2563EB' },
+          { name: 'Chưa từng xảy ra', y: 3.8, count: 4, color: '#64748B' }
+        ]
+      }]
     });
+    add3DRotation(elMissed.chartInstance);
   }
 
-  const ctxChannels = document.getElementById("chart-channels-canvas");
-  if (ctxChannels && !ctxChannels.chartInstance) {
-    ctxChannels.chartInstance = new Chart(ctxChannels, {
-      type: "pie",
-      data: {
-        labels: [
-          "Facebook Fanpage (43.8%)",
-          "Bạn bè, người quen (26.7%)",
-          "Group sinh viên (19.0%)",
-          "Thông báo chính thức (10.5%)"
-        ],
-        datasets: [{
-          data: [43.8, 26.7, 19.0, 10.5],
-          backgroundColor: ["#1877F2", "#F59E0B", "#10B981", "#6366F1"]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: "bottom", labels: { font: { size: 11, family: "Plus Jakarta Sans" } } }
+  // 2. Chart 3D Channels (3D Pie - 5° tilt, pure geometric circle)
+  const elChannels = document.getElementById("chart-channels-3d");
+  if (elChannels && !elChannels.chartInstance) {
+    elChannels.chartInstance = Highcharts.chart('chart-channels-3d', {
+      chart: {
+        type: 'pie',
+        backgroundColor: 'transparent',
+        spacing: [10, 10, 15, 10],
+        options3d: {
+          enabled: true,
+          alpha: 5,
+          beta: 0
         }
-      }
+      },
+      title: { text: null },
+      tooltip: {
+        headerFormat: '<span style="font-size:11px;font-weight:bold">{point.key}</span><br>',
+        pointFormat: 'Tỷ lệ: <b>{point.y:.1f}%</b> ({point.count} SV)'
+      },
+      plotOptions: {
+        pie: {
+          depth: 18,
+          size: '78%',
+          center: ['50%', '48%'],
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            distance: 14,
+            format: '<b>{point.name}</b><br><span style="color:#002B7F;font-weight:700">{point.y}%</span>',
+            style: { fontSize: '11px', textOutline: 'none' }
+          }
+        }
+      },
+      series: [{
+        name: 'Tỷ lệ',
+        data: [
+          { name: 'Facebook Fanpage', y: 43.8, count: 46, color: '#1877F2', sliced: true, selected: true },
+          { name: 'Bạn bè, người quen', y: 26.7, count: 28, color: '#F59E0B' },
+          { name: 'Group sinh viên', y: 19.0, count: 20, color: '#10B981' },
+          { name: 'Thông báo chính thức', y: 10.5, count: 11, color: '#6366F1' }
+        ]
+      }]
     });
+    add3DRotation(elChannels.chartInstance);
   }
 
-  const ctxDiff = document.getElementById("chart-difficulties-canvas");
-  if (ctxDiff && !ctxDiff.chartInstance) {
-    const sorted = [...ULIS_DATA.surveyStats.topDifficulties].sort((a, b) => b.percentage - a.percentage).slice(0, 6);
-    ctxDiff.chartInstance = new Chart(ctxDiff, {
-      type: "bar",
-      data: {
-        labels: sorted.map(d => d.issue),
-        datasets: [{
-          label: "Tỷ lệ sinh viên lựa chọn (%)",
-          data: sorted.map(d => d.percentage),
-          backgroundColor: "#3B82F6",
-          borderRadius: 6
-        }]
-      },
-      options: {
-        indexAxis: "y",
-        responsive: true,
-        plugins: {
-          legend: { display: false }
-        },
-        scales: {
-          x: { max: 80, ticks: { callback: v => v + "%" } }
+  // 3. Chart 3D Difficulties (3D Column - Tilted from below upwards 5°: alpha = -5, beta = 0)
+  const elDiff = document.getElementById("chart-difficulties-3d");
+  if (elDiff && !elDiff.chartInstance) {
+    elDiff.chartInstance = Highcharts.chart('chart-difficulties-3d', {
+      chart: {
+        type: 'column',
+        backgroundColor: 'transparent',
+        margin: [25, 20, 50, 45],
+        options3d: {
+          enabled: true,
+          alpha: -5,
+          beta: 0,
+          depth: 35,
+          viewDistance: 25
         }
-      }
+      },
+      title: { text: null },
+      xAxis: {
+        categories: [
+          'Chưa rõ CLB',
+          'Trùng lịch học',
+          'Trôi bài MXH',
+          'Thủ tục khó',
+          'Mơ hồ Cert',
+          'Nhiễu kênh tin'
+        ],
+        labels: {
+          style: { fontSize: '11px', color: '#1E293B', fontWeight: '600', whiteSpace: 'nowrap' },
+          autoRotation: false,
+          rotation: 0
+        }
+      },
+      yAxis: {
+        title: { text: 'Tỷ lệ sinh viên (%)' },
+        max: 75,
+        labels: { format: '{value}%' }
+      },
+      tooltip: {
+        headerFormat: '<span style="font-size:11px;font-weight:bold">{point.key}</span><br>',
+        pointFormat: 'Tỷ lệ sinh viên gặp khó khăn: <b>{point.y}%</b> ({point.count} SV)'
+      },
+      legend: { enabled: false },
+      plotOptions: {
+        column: {
+          depth: 35,
+          colorByPoint: true,
+          colors: ['#002B7F', '#1E4ED8', '#2563EB', '#D97706', '#059669', '#64748B'],
+          dataLabels: {
+            enabled: true,
+            format: '{point.y}%',
+            style: { fontSize: '11px', fontWeight: 'bold', color: '#0F172A', textOutline: 'none' }
+          }
+        }
+      },
+      series: [{
+        name: 'Tỷ lệ',
+        data: [
+          { y: 65.7, count: 69 },
+          { y: 62.9, count: 66 },
+          { y: 48.6, count: 51 },
+          { y: 35.2, count: 37 },
+          { y: 31.4, count: 33 },
+          { y: 28.6, count: 30 }
+        ]
+      }]
     });
+    add3DRotation(elDiff.chartInstance);
   }
 
-  const ctxReady = document.getElementById("chart-readiness-canvas");
-  if (ctxReady && !ctxReady.chartInstance) {
-    ctxReady.chartInstance = new Chart(ctxReady, {
-      type: "doughnut",
-      data: {
-        labels: [
-          "Sẵn sàng dùng nếu tiện lợi (34.3%)",
-          "Chưa chắc chắn, cần tìm hiểu (18.1%)",
-          "Cân nhắc tùy tính năng (16.2%)",
-          "Không có nhu cầu (16.2%)",
-          "Rất sẵn sàng dùng thường xuyên (15.2%)"
-        ],
-        datasets: [{
-          data: [34.3, 18.1, 16.2, 16.2, 15.2],
-          backgroundColor: ["#2563EB", "#10B981", "#F59E0B", "#94A3B8", "#EC4899"]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: "bottom", labels: { font: { size: 11, family: "Plus Jakarta Sans" } } }
+  // 4. Chart 3D Readiness (3D Donut - 5° tilt, pure geometric circle)
+  const elReady = document.getElementById("chart-readiness-3d");
+  if (elReady && !elReady.chartInstance) {
+    elReady.chartInstance = Highcharts.chart('chart-readiness-3d', {
+      chart: {
+        type: 'pie',
+        backgroundColor: 'transparent',
+        spacing: [10, 10, 15, 10],
+        options3d: {
+          enabled: true,
+          alpha: 5,
+          beta: 0
         }
-      }
+      },
+      title: { text: null },
+      tooltip: {
+        headerFormat: '<span style="font-size:11px;font-weight:bold">{point.key}</span><br>',
+        pointFormat: 'Tỷ lệ: <b>{point.y:.1f}%</b> ({point.count} SV)'
+      },
+      plotOptions: {
+        pie: {
+          innerSize: '55%',
+          depth: 18,
+          size: '78%',
+          center: ['50%', '48%'],
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            distance: 14,
+            format: '<b>{point.name}</b><br><span style="color:#002B7F;font-weight:700">{point.y}%</span>',
+            style: { fontSize: '11px', textOutline: 'none' }
+          }
+        }
+      },
+      series: [{
+        name: 'Tỷ lệ',
+        data: [
+          { name: 'Sẵn sàng dùng nếu tiện lợi', y: 34.3, count: 36, color: '#002B7F', sliced: true, selected: true },
+          { name: 'Chưa chắc chắn, cần tìm hiểu', y: 18.1, count: 19, color: '#059669' },
+          { name: 'Cân nhắc tùy tính năng', y: 16.2, count: 17, color: '#D97706' },
+          { name: 'Không có nhu cầu', y: 16.2, count: 17, color: '#94A3B8' },
+          { name: 'Rất sẵn sàng thường xuyên', y: 15.2, count: 16, color: '#10B981' }
+        ]
+      }]
     });
+    add3DRotation(elReady.chartInstance);
+  }
+
+  // 5. Chart 3D Cert Understanding (3D Pie - 5° tilt, pure geometric circle)
+  const elCert = document.getElementById("chart-cert-understanding-3d");
+  if (elCert && !elCert.chartInstance) {
+    elCert.chartInstance = Highcharts.chart('chart-cert-understanding-3d', {
+      chart: {
+        type: 'pie',
+        backgroundColor: 'transparent',
+        spacing: [10, 10, 15, 10],
+        options3d: {
+          enabled: true,
+          alpha: 5,
+          beta: 0
+        }
+      },
+      title: { text: null },
+      tooltip: {
+        headerFormat: '<span style="font-size:11px;font-weight:bold">{point.key}</span><br>',
+        pointFormat: 'Tỷ lệ: <b>{point.y:.1f}%</b> ({point.count} SV)'
+      },
+      plotOptions: {
+        pie: {
+          depth: 18,
+          size: '78%',
+          center: ['50%', '48%'],
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            distance: 14,
+            format: '<b>{point.name}</b><br><span style="color:#002B7F;font-weight:700">{point.y}%</span>',
+            style: { fontSize: '11px', textOutline: 'none' }
+          }
+        }
+      },
+      series: [{
+        name: 'Tỷ lệ',
+        data: [
+          { name: 'Đã hiểu rất rõ & có chiến lược', y: 17.1, count: 18, color: '#059669' },
+          { name: 'Hiểu cơ bản tiêu chí', y: 58.1, count: 61, color: '#002B7F', sliced: true, selected: true },
+          { name: 'Mơ hồ hoặc chưa rõ quy chế', y: 24.8, count: 26, color: '#DC2626' }
+        ]
+      }]
+    });
+    add3DRotation(elCert.chartInstance);
+  }
+
+  // 6. Chart 3D Recruitment Schedule (3D Column - Tilted from below upwards 5°: alpha = -5, beta = 0)
+  const elRecruit = document.getElementById("chart-recruitment-3d");
+  if (elRecruit && !elRecruit.chartInstance) {
+    elRecruit.chartInstance = Highcharts.chart('chart-recruitment-3d', {
+      chart: {
+        type: 'column',
+        backgroundColor: 'transparent',
+        margin: [25, 20, 50, 45],
+        options3d: {
+          enabled: true,
+          alpha: -5,
+          beta: 0,
+          depth: 35,
+          viewDistance: 25
+        }
+      },
+      title: { text: null },
+      xAxis: {
+        categories: [
+          'Chưa nắm được',
+          'Nắm 1 vài CLB',
+          'Nắm rất rõ'
+        ],
+        labels: {
+          style: { fontSize: '11px', color: '#1E293B', fontWeight: '600', whiteSpace: 'nowrap' },
+          autoRotation: false,
+          rotation: 0
+        }
+      },
+      yAxis: {
+        title: { text: 'Tỷ lệ sinh viên (%)' },
+        max: 60,
+        labels: { format: '{value}%' }
+      },
+      tooltip: {
+        headerFormat: '<span style="font-size:11px;font-weight:bold">{point.key}</span><br>',
+        pointFormat: 'Tỷ lệ: <b>{point.y}%</b> ({point.count} SV)'
+      },
+      legend: { enabled: false },
+      plotOptions: {
+        column: {
+          depth: 35,
+          colorByPoint: true,
+          colors: ['#DC2626', '#D97706', '#059669'],
+          dataLabels: {
+            enabled: true,
+            format: '{point.y}%',
+            style: { fontSize: '11px', fontWeight: 'bold', color: '#0F172A', textOutline: 'none' }
+          }
+        }
+      },
+      series: [{
+        name: 'Tỷ lệ',
+        data: [
+          { y: 50.5, count: 53 },
+          { y: 35.2, count: 37 },
+          { y: 14.3, count: 15 }
+        ]
+      }]
+    });
+    add3DRotation(elRecruit.chartInstance);
   }
 }
 
@@ -1438,6 +1783,30 @@ function showFeedbackSuccessModal(feedback) {
 // 7. KẾ HOẠCH TRIỂN KHAI, TRUYỀN THÔNG & NHÓM 109
 // ==========================================
 function initRoadmapAndTeam() {
+  const btnTimeline = document.getElementById("btn-view-roadmap-timeline");
+  const btnTable = document.getElementById("btn-view-roadmap-table");
+  const viewTimeline = document.getElementById("roadmap-timeline-view");
+  const viewTable = document.getElementById("roadmap-table-view");
+
+  if (btnTimeline && btnTable && viewTimeline && viewTable) {
+    btnTimeline.addEventListener("click", () => {
+      btnTimeline.classList.add("bg-white", "text-blue-950", "shadow-2xs", "font-bold");
+      btnTimeline.classList.remove("text-slate-600");
+      btnTable.classList.remove("bg-white", "text-blue-950", "shadow-2xs", "font-bold");
+      btnTable.classList.add("text-slate-600");
+      viewTimeline.classList.remove("hidden");
+      viewTable.classList.add("hidden");
+    });
+
+    btnTable.addEventListener("click", () => {
+      btnTable.classList.add("bg-white", "text-blue-950", "shadow-2xs", "font-bold");
+      btnTable.classList.remove("text-slate-600");
+      btnTimeline.classList.remove("bg-white", "text-blue-950", "shadow-2xs", "font-bold");
+      btnTimeline.classList.add("text-slate-600");
+      viewTable.classList.remove("hidden");
+      viewTimeline.classList.add("hidden");
+    });
+  }
   initLucide();
 }
 
