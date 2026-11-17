@@ -349,7 +349,7 @@ function renderScene01(f) {
   ctx.fillText("Nhóm thực hiện: Nhóm 109", leftX + 540, 685);
   ctx.restore();
 
-  // Right Side: Grand University Seal Medallion (Y = 460)
+  // Right Side: Grand University Logo Artwork (Y = 460) - Pure Logo Without Background Disc
   ctx.save();
   const sealX = 1480;
   const sealY = 460;
@@ -358,23 +358,12 @@ function renderScene01(f) {
   ctx.translate(sealX, sealY + floatY);
   ctx.scale(spring(p), spring(p));
 
-  // Layered Ambient Glow
-  ctx.shadowColor = "rgba(10, 37, 64, 0.10)";
-  ctx.shadowBlur = 50;
-  ctx.shadowOffsetY = 18;
-
-  ctx.fillStyle = "#FFFFFF";
-  ctx.beginPath();
-  ctx.arc(0, 0, 150, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.shadowColor = "transparent";
-  ctx.strokeStyle = "rgba(226, 232, 240, 0.85)";
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
   if (assets.logo.complete) {
-    ctx.drawImage(assets.logo, -110, -110, 220, 220);
+    ctx.shadowColor = "rgba(10, 37, 64, 0.14)";
+    ctx.shadowBlur = 45;
+    ctx.shadowOffsetY = 16;
+    const logoSize = 250;
+    ctx.drawImage(assets.logo, -logoSize / 2, -logoSize / 2, logoSize, logoSize);
   }
   ctx.restore();
 
@@ -1043,25 +1032,17 @@ function renderScene06(f) {
 
   const centerX = 960;
 
-  // University Crest Medallion (Y = 190)
+  // University Crest Logo (Y = 190) - Pure Logo Without Background Disc
   ctx.save();
   ctx.translate(centerX, 190);
   ctx.scale(spring(p), spring(p));
-  ctx.shadowColor = "rgba(10, 37, 64, 0.12)";
-  ctx.shadowBlur = 45;
-  ctx.shadowOffsetY = 15;
-  ctx.fillStyle = "#FFFFFF";
-  ctx.beginPath();
-  ctx.arc(0, 0, 90, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.shadowColor = "transparent";
-  ctx.strokeStyle = "rgba(226, 232, 240, 0.85)";
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
 
   if (assets.logo.complete) {
-    ctx.drawImage(assets.logo, -65, -65, 130, 130);
+    ctx.shadowColor = "rgba(10, 37, 64, 0.14)";
+    ctx.shadowBlur = 35;
+    ctx.shadowOffsetY = 12;
+    const logoSize = 140;
+    ctx.drawImage(assets.logo, -logoSize / 2, -logoSize / 2, logoSize, logoSize);
   }
   ctx.restore();
 

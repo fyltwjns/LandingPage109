@@ -93,21 +93,16 @@ const SceneIntro: React.FC = () => {
           Đề án Bài tập nhóm Giữa kỳ • Học phần FLF1007 • Nhóm 109
         </p>
       </div>
-      <div
+      <img
+        src="../assets/ulis-logo.png"
+        alt="ULIS Logo"
         style={{
           width: "220px",
           height: "220px",
-          borderRadius: "50%",
-          background: "#FFFFFF",
-          boxShadow: "0 25px 50px rgba(10, 37, 64, 0.08)",
-          border: "1.5px solid rgba(226, 232, 240, 0.8)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          objectFit: "contain",
+          filter: "drop-shadow(0 20px 40px rgba(10, 37, 64, 0.14))",
         }}
-      >
-        <img src="../assets/ulis-logo.png" alt="ULIS Logo" style={{ width: "160px", height: "160px", objectFit: "contain" }} />
-      </div>
+      />
     </AbsoluteFill>
   );
 };
@@ -354,22 +349,17 @@ const SceneOutro: React.FC = () => {
         padding: "0 220px",
       }}
     >
-      <div
+      <img
+        src="../assets/ulis-logo.png"
+        alt="ULIS Logo"
         style={{
-          width: "150px",
-          height: "150px",
-          borderRadius: "50%",
-          background: "#FFFFFF",
-          boxShadow: "0 20px 45px rgba(10, 37, 64, 0.08)",
-          border: "1px solid rgba(226, 232, 240, 0.8)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          width: "140px",
+          height: "140px",
+          objectFit: "contain",
           marginBottom: "36px",
+          filter: "drop-shadow(0 15px 35px rgba(10, 37, 64, 0.14))",
         }}
-      >
-        <img src="../assets/ulis-logo.png" alt="ULIS Logo" style={{ width: "110px", height: "110px", objectFit: "contain" }} />
-      </div>
+      />
       <h1
         style={{
           fontSize: "96px",
