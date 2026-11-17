@@ -165,6 +165,12 @@ class RefinedAudioEngine {
 
   toggleMute() {
     this.isMuted = !this.isMuted;
+    if (!this.isMuted) {
+      this.init();
+      if (this.ctx && this.ctx.state === "suspended") {
+        this.ctx.resume().catch(() => {});
+      }
+    }
     return this.isMuted;
   }
 }
@@ -1461,12 +1467,20 @@ function updateUI() {
   }
 }
 
+const studioUrlParams = new URLSearchParams(window.location.search);
+const isEmbedded = window.self !== window.top || studioUrlParams.get("embedded") === "1" || document.body.classList.contains("is-embedded");
+const autoPlay = isEmbedded || studioUrlParams.get("autoplay") === "1";
+
 function play() {
   if (isPlaying) return;
   isPlaying = true;
-  bigPlayBtn.classList.add("hidden");
-  btnPlay.innerHTML = SVG_PAUSE;
-  audio.start();
+  if (bigPlayBtn) bigPlayBtn.classList.add("hidden");
+  if (btnPlay) btnPlay.innerHTML = SVG_PAUSE;
+  try {
+    if (!audio.isMuted) audio.start();
+  } catch (e) {
+    console.log("Audio autoplay notice:", e);
+  }
   lastTimestamp = performance.now();
   loop();
 }
@@ -1474,8 +1488,8 @@ function play() {
 function pause() {
   if (!isPlaying) return;
   isPlaying = false;
-  bigPlayBtn.classList.remove("hidden");
-  btnPlay.innerHTML = SVG_PLAY;
+  if (bigPlayBtn) bigPlayBtn.classList.remove("hidden");
+  if (btnPlay) btnPlay.innerHTML = SVG_PLAY;
   audio.stop();
   if (animationReqId) cancelAnimationFrame(animationReqId);
 }
@@ -1486,14 +1500,27 @@ function loop(timestamp = performance.now()) {
   currentFrame++;
   if (currentFrame >= TOTAL_FRAMES) {
     currentFrame = 0;
-    pause();
-    renderFrame(0);
-    updateUI();
-    return;
+    if (isEmbedded || autoPlay) {
+      renderFrame(0);
+      updateUI();
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: "SCENE_CHANGE", scene: 0, frame: 0 }, "*");
+      }
+    } else {
+      pause();
+      renderFrame(0);
+      updateUI();
+      return;
+    }
   }
 
-  if ([420, 900, 1500, 1980, 2400].includes(currentFrame)) {
-    audio.playWhoosh();
+  const sceneBreakpoints = [0, 420, 900, 1500, 1980, 2400];
+  const currentSceneIdx = sceneBreakpoints.indexOf(currentFrame);
+  if (currentSceneIdx !== -1) {
+    try { if (!audio.isMuted) audio.playWhoosh(); } catch(e) {}
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "SCENE_CHANGE", scene: currentSceneIdx, frame: currentFrame }, "*");
+    }
   }
 
   renderFrame(currentFrame);
@@ -1505,24 +1532,37 @@ function jumpToFrame(f) {
   currentFrame = Math.max(0, Math.min(f, TOTAL_FRAMES - 1));
   renderFrame(currentFrame);
   updateUI();
-  audio.playWhoosh();
+  try { if (!audio.isMuted) audio.playWhoosh(); } catch(e) {}
 }
 
 // Event Listeners
-canvas.style.cursor = "pointer";
-canvas.addEventListener("click", () => isPlaying ? pause() : play());
-bigPlayBtn.addEventListener("click", play);
-btnPlay.addEventListener("click", () => isPlaying ? pause() : play());
-btnRestart.addEventListener("click", () => {
-  pause();
-  jumpToFrame(0);
-  play();
+canvas.style.cursor = isEmbedded ? "pointer" : "default";
+canvas.addEventListener("click", () => {
+  if (isEmbedded) {
+    const isMuted = audio.toggleMute();
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "AUDIO_STATE", isMuted }, "*");
+    }
+  } else {
+    isPlaying ? pause() : play();
+  }
 });
+if (bigPlayBtn) bigPlayBtn.addEventListener("click", play);
+if (btnPlay) btnPlay.addEventListener("click", () => isPlaying ? pause() : play());
+if (btnRestart) {
+  btnRestart.addEventListener("click", () => {
+    pause();
+    jumpToFrame(0);
+    play();
+  });
+}
 
-scrubber.addEventListener("input", (e) => {
-  pause();
-  jumpToFrame(parseInt(e.target.value));
-});
+if (scrubber) {
+  scrubber.addEventListener("input", (e) => {
+    pause();
+    jumpToFrame(parseInt(e.target.value));
+  });
+}
 
 // Fullscreen
 btnFullscreen.addEventListener("click", () => {
@@ -1582,79 +1622,101 @@ window.addEventListener("keydown", (e) => {
 // ==========================================
 // 6. MP4 EXPORT ENGINE (WEBCODECS / MEDIARECORDER)
 // ==========================================
-btnExport.addEventListener("click", async () => {
-  pause();
-  exportOverlay.classList.remove("hidden");
-  exportProgressBar.style.width = "0%";
-  exportProgressText.textContent = "Khởi tạo công cụ xuất video 1080p 60fps...";
+if (btnExport && exportOverlay) {
+  btnExport.addEventListener("click", async () => {
+    pause();
+    exportOverlay.classList.remove("hidden");
+    exportProgressBar.style.width = "0%";
+    exportProgressText.textContent = "Khởi tạo công cụ xuất video 1080p 60fps...";
 
-  try {
-    const stream = canvas.captureStream(60);
+    try {
+      const stream = canvas.captureStream(60);
 
-    if (audio.destNode) {
-      const audioTracks = audio.destNode.stream.getAudioTracks();
-      if (audioTracks.length > 0) {
-        stream.addTrack(audioTracks[0]);
+      if (audio.destNode) {
+        const audioTracks = audio.destNode.stream.getAudioTracks();
+        if (audioTracks.length > 0) {
+          stream.addTrack(audioTracks[0]);
+        }
       }
-    }
 
-    const mimeType = MediaRecorder.isTypeSupported("video/mp4;codecs=avc1") ? "video/mp4;codecs=avc1" :
-                     MediaRecorder.isTypeSupported("video/mp4") ? "video/mp4" :
-                     MediaRecorder.isTypeSupported("video/webm;codecs=vp9") ? "video/webm;codecs=vp9" :
-                     "video/webm";
+      const mimeType = MediaRecorder.isTypeSupported("video/mp4;codecs=avc1") ? "video/mp4;codecs=avc1" :
+                       MediaRecorder.isTypeSupported("video/mp4") ? "video/mp4" :
+                       MediaRecorder.isTypeSupported("video/webm;codecs=vp9") ? "video/webm;codecs=vp9" :
+                       "video/webm";
 
-    const mediaRecorder = new MediaRecorder(stream, {
-      mimeType: mimeType,
-      videoBitsPerSecond: 10_000_000,
-    });
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType: mimeType,
+        videoBitsPerSecond: 10_000_000,
+      });
 
-    const recordedChunks = [];
-    mediaRecorder.ondataavailable = (e) => {
-      if (e.data.size > 0) recordedChunks.push(e.data);
-    };
+      const recordedChunks = [];
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) recordedChunks.push(e.data);
+      };
 
-    mediaRecorder.onstop = () => {
-      const extension = mimeType.includes("mp4") ? "mp4" : "webm";
-      const blob = new Blob(recordedChunks, { type: mimeType });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `ULIS_VIBE_Gioi_Thieu_De_An.${extension}`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      mediaRecorder.onstop = () => {
+        const extension = mimeType.includes("mp4") ? "mp4" : "webm";
+        const blob = new Blob(recordedChunks, { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `ULIS_VIBE_Gioi_Thieu_De_An.${extension}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
 
+        exportOverlay.classList.add("hidden");
+        audio.stop();
+        jumpToFrame(0);
+        alert("Đã kết xuất và tải thành công video 1080p 60fps chuẩn Gradient Minimalism!");
+      };
+
+      mediaRecorder.start();
+      audio.start();
+
+      let exportFrame = 0;
+      const exportInterval = setInterval(() => {
+        renderFrame(exportFrame);
+        exportFrame++;
+        const percent = Math.floor((exportFrame / TOTAL_FRAMES) * 100);
+        exportProgressBar.style.width = `${percent}%`;
+        exportProgressText.textContent = `${percent}% (${exportFrame} / ${TOTAL_FRAMES} frames)`;
+
+        if (exportFrame >= TOTAL_FRAMES) {
+          clearInterval(exportInterval);
+          mediaRecorder.stop();
+        }
+      }, 1000 / 60);
+
+    } catch (err) {
+      console.error("Export error:", err);
+      alert("Trình duyệt không hỗ trợ MediaRecorder trực tiếp.");
       exportOverlay.classList.add("hidden");
-      audio.stop();
-      jumpToFrame(0);
-      alert("Đã kết xuất và tải thành công video 1080p 60fps chuẩn Gradient Minimalism!");
-    };
-
-    mediaRecorder.start();
-    audio.start();
-
-    let exportFrame = 0;
-    const exportInterval = setInterval(() => {
-      renderFrame(exportFrame);
-      exportFrame++;
-      const percent = Math.floor((exportFrame / TOTAL_FRAMES) * 100);
-      exportProgressBar.style.width = `${percent}%`;
-      exportProgressText.textContent = `${percent}% (${exportFrame} / ${TOTAL_FRAMES} frames)`;
-
-      if (exportFrame >= TOTAL_FRAMES) {
-        clearInterval(exportInterval);
-        mediaRecorder.stop();
-      }
-    }, 1000 / 60);
-
-  } catch (err) {
-    console.error("Export error:", err);
-    alert("Trình duyệt không hỗ trợ MediaRecorder trực tiếp.");
-    exportOverlay.classList.add("hidden");
-  }
-});
+    }
+  });
+}
 
 // Initial Render
 renderFrame(0);
 updateUI();
+
+// Auto-play for Embedded Mode
+if (autoPlay) {
+  audio.isMuted = true;
+  play();
+}
+
+// Window Message Dispatcher (Jump frame & Audio toggle from parent Landing Page)
+window.addEventListener("message", (e) => {
+  if (!e.data) return;
+  if (e.data.type === "JUMP_FRAME") {
+    jumpToFrame(e.data.frame);
+    if (!isPlaying) play();
+  } else if (e.data.type === "TOGGLE_AUDIO") {
+    const isMuted = audio.toggleMute();
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "AUDIO_STATE", isMuted }, "*");
+    }
+  }
+});
