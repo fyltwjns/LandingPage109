@@ -491,16 +491,16 @@ function openEventModal(eventId) {
   const isSaved = state.savedEvents.includes(ev.id);
 
   modalContent.innerHTML = `
-    <div class="relative overflow-hidden rounded-3xl flex flex-col max-h-[88vh] h-full">
+    <div class="relative overflow-hidden rounded-3xl flex flex-col bg-white">
       <!-- Modal Banner Image (16:9 full banner display) -->
-      <div class="event-banner-container aspect-video shrink-0">
-        <img src="./assets/events/${ev.id}.webp" alt="${ev.title}" class="event-banner-img" onerror="this.onerror=null; this.src='./assets/events/${ev.id}.png';" />
-        <button onclick="closeModal()" class="absolute top-4 right-4 p-2 text-white bg-slate-900/60 hover:bg-slate-900/80 rounded-xl backdrop-blur-md transition" aria-label="Đóng cửa sổ">
+      <div class="event-banner-container aspect-video w-full relative">
+        <img src="./assets/events/${ev.id}.webp" alt="${ev.title}" class="event-banner-img w-full h-full object-cover" onerror="this.onerror=null; this.src='./assets/events/${ev.id}.png';" />
+        <button onclick="closeModal()" class="absolute top-4 right-4 p-2.5 text-white bg-slate-900/60 hover:bg-slate-900/90 rounded-xl backdrop-blur-md transition shadow-md" aria-label="Đóng cửa sổ">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div class="p-6 border-b border-slate-100 flex items-start justify-between gap-4 shrink-0 bg-white">
+      <div class="p-6 border-b border-slate-100 bg-white">
         <div>
           <div class="flex flex-wrap items-center gap-2 mb-2">
             <span class="px-2.5 py-1 text-xs font-bold rounded-lg ${certBadgeClass}">
@@ -513,11 +513,11 @@ function openEventModal(eventId) {
               Nhóm: ${ev.categoryName}
             </span>
           </div>
-          <h3 class="text-xl font-bold text-slate-900">${ev.title}</h3>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">${ev.title}</h3>
         </div>
       </div>
 
-      <div class="p-6 space-y-6 overflow-y-auto flex-1 min-h-0 bg-white">
+      <div class="p-6 space-y-6 bg-white">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-slate-50 rounded-xl text-sm text-slate-700 border border-slate-100">
           <div class="flex items-center gap-2">
             <i data-lucide="building" class="w-4 h-4 text-blue-600"></i>
@@ -575,18 +575,19 @@ function openEventModal(eventId) {
         </div>
       </div>
 
-      <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex flex-wrap items-center justify-between gap-3 shrink-0">
-        <button onclick="toggleSaveEvent('${ev.id}'); openEventModal('${ev.id}');" class="px-4 py-2 border rounded-xl text-sm font-semibold transition flex items-center gap-2 ${isSaved ? 'bg-amber-100 border-amber-300 text-amber-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'}">
+      <!-- Pinned Footer (Fully expanded, natural flow) -->
+      <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-3xl flex flex-wrap items-center justify-between gap-3">
+        <button onclick="toggleSaveEvent('${ev.id}'); openEventModal('${ev.id}');" class="px-4 py-2.5 border rounded-xl text-sm font-semibold transition flex items-center gap-2 ${isSaved ? 'bg-amber-100 border-amber-300 text-amber-800' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'}">
           <i data-lucide="bookmark" class="w-4 h-4 ${isSaved ? 'fill-current' : ''}"></i>
           ${isSaved ? 'Đã lưu trong mục quan tâm' : 'Lưu vào mục quan tâm'}
         </button>
 
         <div class="flex items-center gap-3">
-          <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900">
+          <button onclick="closeModal()" class="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-200/60 transition">
             Đóng
           </button>
-          <a href="${ev.formUrl || '#'}" target="_blank" rel="noopener noreferrer" class="px-6 py-2 bg-blue-800 hover:bg-blue-900 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition shadow-md">
-            Mở đơn đăng ký chính thức <i data-lucide="external-link" class="w-4 h-4"></i>
+          <a href="${ev.formUrl || '#'}" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 bg-blue-950 hover:bg-blue-900 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition shadow-sm">
+            Mở đơn đăng ký chính thức <i data-lucide="external-link" class="w-4 h-4 text-amber-400"></i>
           </a>
         </div>
       </div>
@@ -606,9 +607,9 @@ function openSavedEventsModal() {
   const savedList = ULIS_DATA.events.filter(e => state.savedEvents.includes(e.id));
 
   modalContent.innerHTML = `
-    <div class="flex flex-col h-full max-h-[86vh] overflow-hidden">
+    <div class="relative overflow-hidden rounded-3xl flex flex-col bg-white">
       <!-- Header -->
-      <div class="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between shrink-0 bg-white">
+      <div class="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between bg-white">
         <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
           <i data-lucide="bookmark" class="w-5 h-5 text-amber-500 fill-current"></i>
           Danh sách sự kiện đã lưu (${savedList.length})
@@ -619,7 +620,7 @@ function openSavedEventsModal() {
       </div>
 
       <!-- Body -->
-      <div class="p-5 sm:p-6 space-y-4 overflow-y-auto flex-1 min-h-0 bg-white">
+      <div class="p-5 sm:p-6 space-y-4 max-h-[65vh] overflow-y-auto bg-white">
         ${savedList.length === 0 ? `
           <div class="text-center py-12">
             <i data-lucide="bookmark-x" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
@@ -646,7 +647,7 @@ function openSavedEventsModal() {
       </div>
 
       <!-- Footer -->
-      <div class="p-4 border-t border-slate-100 bg-slate-50 rounded-b-3xl text-right shrink-0">
+      <div class="p-4 border-t border-slate-100 bg-slate-50 rounded-b-3xl text-right">
         <button onclick="closeModal()" class="px-5 py-2 bg-blue-950 text-white rounded-xl text-xs font-bold hover:bg-blue-900 transition">
           Xong
         </button>
@@ -859,14 +860,14 @@ function openClubModal(clubId) {
                      "bg-emerald-100 text-emerald-800 border-emerald-200";
 
   modalContent.innerHTML = `
-    <div class="flex flex-col h-full max-h-[86vh] overflow-hidden">
-      <!-- Pinned Header -->
-      <div class="p-5 sm:p-6 border-b border-slate-100 flex items-start justify-between gap-4 shrink-0 bg-white">
+    <div class="relative overflow-hidden rounded-3xl flex flex-col bg-white">
+      <!-- Header -->
+      <div class="p-6 border-b border-slate-100 flex items-start justify-between gap-4 bg-white">
         <div>
           <span class="px-2.5 py-1 text-xs font-bold rounded-lg border ${badgeColor} inline-block mb-2">
             ${club.categoryName} • ${club.acronym}
           </span>
-          <h3 class="text-xl font-bold text-slate-900">${club.name}</h3>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900">${club.name}</h3>
           <p class="text-xs text-blue-800 font-medium italic mt-1">"${club.slogan}"</p>
         </div>
         <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition shrink-0" aria-label="Đóng">
@@ -874,8 +875,8 @@ function openClubModal(clubId) {
         </button>
       </div>
 
-      <!-- Scrollable Body with min-h-0 -->
-      <div class="p-5 sm:p-6 space-y-6 overflow-y-auto flex-1 min-h-0 bg-white">
+      <!-- Body (Fully expanded, no crushed body) -->
+      <div class="p-6 space-y-6 bg-white">
         <div>
           <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Giới thiệu tổng quan</h4>
           <p class="text-sm text-slate-700 leading-relaxed">${club.description}</p>
@@ -924,12 +925,12 @@ function openClubModal(clubId) {
         </div>
       </div>
 
-      <!-- Pinned Footer (Always visible, never clipped) -->
-      <div class="p-4 sm:p-5 border-t border-slate-100 bg-slate-50 rounded-b-3xl flex items-center justify-between shrink-0">
-        <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-200/60 transition">
+      <!-- Footer (At natural bottom of modal) -->
+      <div class="p-5 border-t border-slate-100 bg-slate-50 rounded-b-3xl flex items-center justify-between">
+        <button onclick="closeModal()" class="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-200/60 transition">
           Đóng
         </button>
-        <a href="${club.formLink}" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-blue-950 hover:bg-blue-900 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition shadow-sm">
+        <a href="${club.formLink}" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 bg-blue-950 hover:bg-blue-900 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition shadow-sm">
           Nộp đơn gia nhập CLB <i data-lucide="external-link" class="w-4 h-4 text-amber-400"></i>
         </a>
       </div>
