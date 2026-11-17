@@ -186,9 +186,243 @@ function spring(t, damp = 6.2, freq = 8.5) {
   return 1 - Math.exp(-damp * t) * Math.cos(freq * t);
 }
 
+// Deterministic Ambient Dust / Micro-particles (36 points)
+const AMBIENT_PARTICLES = Array.from({ length: 36 }, (_, i) => ({
+  x: ((i * 137.5) % 1800) + 60,
+  y: ((i * 223.7) % 960) + 60,
+  size: 1.8 + (i % 3) * 1.4,
+  speed: 0.25 + (i % 4) * 0.12,
+  phase: i * 0.45,
+  color: i % 2 === 0 ? "56, 189, 248" : "99, 102, 241"
+}));
+
+// Floating Confetti / Prismatic Shards for Scene 6 Finale (32 pieces)
+const FINALE_CONFETTI = Array.from({ length: 32 }, (_, i) => ({
+  x: ((i * 179.3) % 1720) + 100,
+  y: ((i * 283.1) % 900) + 90,
+  size: 6 + (i % 4) * 4,
+  rotSpeed: 0.015 + (i % 5) * 0.01,
+  floatSpeed: 0.35 + (i % 3) * 0.2,
+  phase: i * 0.7,
+  color: ["#0284C7", "#38BDF8", "#F59E0B", "#10B981", "#6366F1"][i % 5]
+}));
+
 // ==========================================
-// 3. SILKY GRADIENT MESH BACKDROP (Full Screen Luminous Ambiance)
+// 3. MASTER VISUAL EFFECTS SUITE (Apple / Linear Grade)
 // ==========================================
+
+// Architectural Micro-Grid with dynamic wave ripples & floating dust
+function drawKineticGrid(f) {
+  const w = 1920;
+  const h = 1080;
+  const step = 80;
+
+  ctx.save();
+  // Dot matrix with wave ripples
+  for (let x = 60; x < w; x += step) {
+    for (let y = 60; y < h; y += step) {
+      const dist = Math.hypot(x - 960, y - 540);
+      const wave = Math.sin(dist * 0.008 - f * 0.045);
+      const alpha = 0.032 + 0.024 * wave;
+      ctx.fillStyle = `rgba(15, 23, 42, ${alpha})`;
+      ctx.fillRect(x - 1, y - 1, 2, 2);
+    }
+  }
+
+  // Precision Technical Crosshairs at 4 corners
+  const crosshairs = [
+    [100, 100], [1820, 100], [100, 980], [1820, 980]
+  ];
+  ctx.strokeStyle = "rgba(2, 132, 199, 0.28)";
+  ctx.lineWidth = 1.5;
+  crosshairs.forEach(([cx, cy]) => {
+    ctx.beginPath();
+    ctx.moveTo(cx - 10, cy); ctx.lineTo(cx + 10, cy);
+    ctx.moveTo(cx, cy - 10); ctx.lineTo(cx, cy + 10);
+    ctx.stroke();
+  });
+
+  // Floating Micro-Dust Particles
+  AMBIENT_PARTICLES.forEach(p => {
+    const py = (p.y - f * p.speed + 1080 * 10) % 1080;
+    const px = p.x + Math.sin(f * 0.02 + p.phase) * 16;
+    const pAlpha = 0.16 + 0.12 * Math.sin(f * 0.04 + p.phase);
+    ctx.fillStyle = `rgba(${p.color}, ${pAlpha})`;
+    ctx.beginPath();
+    ctx.arc(px, py, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  ctx.restore();
+}
+
+// Specular Glass Sheen Sweep Card (Signature Apple / Linear Aesthetic)
+function drawCardWithSpecular(x, y, w, h, radius, f, options = {}) {
+  const {
+    fill = "#FFFFFF",
+    stroke = "rgba(226, 232, 240, 0.85)",
+    lineWidth = 1.5,
+    shadowBlur = 35,
+    shadowOffsetY = 12,
+    shadowColor = "rgba(10, 37, 64, 0.07)",
+    sheenSpeed = 160,
+    sheenDelay = 0
+  } = options;
+
+  ctx.save();
+  // 1. Base Card Fill & Ambient Shadow
+  ctx.shadowColor = shadowColor;
+  ctx.shadowBlur = shadowBlur;
+  ctx.shadowOffsetY = shadowOffsetY;
+  ctx.fillStyle = fill;
+  ctx.beginPath();
+  ctx.roundRect(x, y, w, h, radius);
+  ctx.fill();
+
+  // 2. Crisp Editorial Border
+  ctx.shadowColor = "transparent";
+  ctx.strokeStyle = stroke;
+  ctx.lineWidth = lineWidth;
+  ctx.stroke();
+
+  // 3. Specular Light Shimmer Sweep
+  const loopFrame = (f + sheenDelay) % sheenSpeed;
+  if (loopFrame < 60) {
+    const sweepProgress = loopFrame / 60;
+    const sweepX = x - w * 0.4 + (w * 1.8) * sweepProgress;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, h, radius);
+    ctx.clip();
+
+    const sheenGrad = ctx.createLinearGradient(sweepX - 90, y, sweepX + 90, y + h);
+    sheenGrad.addColorStop(0, "rgba(255, 255, 255, 0)");
+    sheenGrad.addColorStop(0.5, "rgba(255, 255, 255, 0.42)");
+    sheenGrad.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+    ctx.fillStyle = sheenGrad;
+    ctx.fillRect(x, y, w, h);
+    ctx.restore();
+  }
+
+  ctx.restore();
+}
+
+// Anamorphic Horizontal Optical Lens Flare
+function drawAnamorphicFlare(cx, cy, width, alpha = 0.5) {
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+
+  const flareGrad = ctx.createLinearGradient(cx - width / 2, cy, cx + width / 2, cy);
+  flareGrad.addColorStop(0, "rgba(2, 132, 199, 0)");
+  flareGrad.addColorStop(0.25, `rgba(56, 189, 248, ${alpha * 0.35})`);
+  flareGrad.addColorStop(0.5, `rgba(255, 255, 255, ${alpha})`);
+  flareGrad.addColorStop(0.75, `rgba(56, 189, 248, ${alpha * 0.35})`);
+  flareGrad.addColorStop(1, "rgba(2, 132, 199, 0)");
+
+  ctx.fillStyle = flareGrad;
+  ctx.fillRect(cx - width / 2, cy - 2, width, 4);
+
+  // Core Halo
+  const halo = ctx.createRadialGradient(cx, cy, 0, cx, cy, 32);
+  halo.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.95})`);
+  halo.addColorStop(0.4, `rgba(56, 189, 248, ${alpha * 0.45})`);
+  halo.addColorStop(1, "rgba(2, 132, 199, 0)");
+  ctx.fillStyle = halo;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 32, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
+}
+
+// Futuristic Laser Scanner for QR Codes
+function drawAnimatedLaserScanner(x, y, w, h, f) {
+  const scanCycle = (Math.sin(f * 0.08) * 0.5 + 0.5);
+  const laserY = y + 10 + scanCycle * (h - 20);
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.roundRect(x, y, w, h, 20);
+  ctx.clip();
+
+  // Translucent Scanner Field
+  const fieldGrad = ctx.createLinearGradient(x, laserY - 32, x, laserY);
+  fieldGrad.addColorStop(0, "rgba(16, 185, 129, 0)");
+  fieldGrad.addColorStop(1, "rgba(16, 185, 129, 0.22)");
+  ctx.fillStyle = fieldGrad;
+  ctx.fillRect(x, laserY - 32, w, 32);
+
+  // Intense Horizontal Laser Beam
+  const laserGrad = ctx.createLinearGradient(x, laserY, x + w, laserY);
+  laserGrad.addColorStop(0, "rgba(16, 185, 129, 0)");
+  laserGrad.addColorStop(0.2, "rgba(16, 185, 129, 0.85)");
+  laserGrad.addColorStop(0.5, "rgba(255, 255, 255, 1.0)");
+  laserGrad.addColorStop(0.8, "rgba(16, 185, 129, 0.85)");
+  laserGrad.addColorStop(1, "rgba(16, 185, 129, 0)");
+
+  ctx.fillStyle = laserGrad;
+  ctx.shadowColor = "#10B981";
+  ctx.shadowBlur = 12;
+  ctx.fillRect(x, laserY - 1.5, w, 3);
+
+  ctx.restore();
+}
+
+// High-Tech Radial Donut Progress Dial (with luminous spark & particles)
+function drawRadialProgressDonut(cx, cy, radius, percent, f, p) {
+  const strokeW = 14;
+  const currentVal = percent * easeOutCubic(p);
+  const startAngle = -Math.PI / 2;
+  const endAngle = startAngle + (currentVal / 100) * Math.PI * 2;
+
+  ctx.save();
+  // Background Track
+  ctx.strokeStyle = "rgba(241, 245, 249, 1)";
+  ctx.lineWidth = strokeW;
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Arc Gauge with Gradient
+  const grad = ctx.createLinearGradient(cx - radius, cy - radius, cx + radius, cy + radius);
+  grad.addColorStop(0, "#002B7F");
+  grad.addColorStop(0.6, "#0284C7");
+  grad.addColorStop(1, "#EF4444");
+
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = strokeW;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, startAngle, endAngle);
+  ctx.stroke();
+
+  // Glowing Head Bead
+  if (currentVal > 1) {
+    const headX = cx + Math.cos(endAngle) * radius;
+    const headY = cy + Math.sin(endAngle) * radius;
+    ctx.fillStyle = "#FFFFFF";
+    ctx.shadowColor = "#EF4444";
+    ctx.shadowBlur = 16;
+    ctx.beginPath();
+    ctx.arc(headX, headY, strokeW * 0.52, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Pulse Wave from tip
+    const pulseR = (f * 0.7) % 18;
+    const pulseAlpha = Math.max(0, 1 - pulseR / 18);
+    ctx.strokeStyle = `rgba(239, 68, 68, ${pulseAlpha})`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(headX, headY, strokeW * 0.52 + pulseR, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+// Silky Gradient Mesh Backdrop with Fluid Auroras
 function drawGradientMesh(frame) {
   const w = 1920;
   const h = 1080;
@@ -244,11 +478,23 @@ function drawGradientMesh(frame) {
 }
 
 // ==========================================
-// 4. SCENE ORCHESTRATION WITH FLUID STAGGERED MOTION
+// 4. SCENE ORCHESTRATION WITH CINEMATIC CAMERA DOLLY
 // ==========================================
 function renderFrame(frame) {
   ctx.clearRect(0, 0, 1920, 1080);
+
+  // Subtle Organic Cinematic Camera Push-in (1.00 to 1.015 zoom drift)
+  const cameraZoom = 1.0 + Math.sin(frame * 0.003) * 0.012;
+  const cameraPanX = Math.cos(frame * 0.002) * 5;
+  const cameraPanY = Math.sin(frame * 0.0025) * 4;
+
+  ctx.save();
+  ctx.translate(960, 540);
+  ctx.scale(cameraZoom, cameraZoom);
+  ctx.translate(-960 + cameraPanX, -540 + cameraPanY);
+
   drawGradientMesh(frame);
+  drawKineticGrid(frame);
 
   if (frame < 420) {
     currentSceneTag.textContent = "01 • Bối cảnh đề án";
@@ -269,11 +515,13 @@ function renderFrame(frame) {
     currentSceneTag.textContent = "06 • Tổng kết & Kêu gọi";
     renderScene06(frame - 2400);
   }
+
+  ctx.restore();
 }
 
 // ------------------------------------------
 // SCENE 1: Academic Editorial Intro (0:00 - 0:07)
-// Bold, Commanding, Balanced Layout
+// Bold, Commanding, Balanced Layout with Specular Light Sweeps
 // ------------------------------------------
 function renderScene01(f) {
   const p = Math.min(f / 45, 1.0);
@@ -285,16 +533,32 @@ function renderScene01(f) {
 
   const leftX = 160;
 
-  // Top Category Pill Tag (Y = 220)
+  // Top Category Pill Tag (Y = 200) - Kinetic Entrance with Light Glint
   const pillProgress = Math.min(f / 30, 1.0);
   ctx.save();
-  ctx.fillStyle = "rgba(239, 246, 255, 0.9)";
-  ctx.strokeStyle = "rgba(191, 219, 254, 0.8)";
+  ctx.fillStyle = "rgba(239, 246, 255, 0.95)";
+  ctx.strokeStyle = "rgba(191, 219, 254, 0.85)";
   ctx.lineWidth = 1.5;
+  ctx.shadowColor = "rgba(10, 37, 64, 0.05)";
+  ctx.shadowBlur = 15;
   ctx.beginPath();
   ctx.roundRect(leftX, 200, 920, 48, 24);
   ctx.fill();
   ctx.stroke();
+
+  // Subtle sweep across pill
+  const pillSweepX = leftX + (f * 18) % 1200;
+  ctx.save();
+  ctx.beginPath();
+  ctx.roundRect(leftX, 200, 920, 48, 24);
+  ctx.clip();
+  const pillSheen = ctx.createLinearGradient(pillSweepX - 60, 200, pillSweepX + 60, 248);
+  pillSheen.addColorStop(0, "rgba(255, 255, 255, 0)");
+  pillSheen.addColorStop(0.5, "rgba(255, 255, 255, 0.6)");
+  pillSheen.addColorStop(1, "rgba(255, 255, 255, 0)");
+  ctx.fillStyle = pillSheen;
+  ctx.fillRect(leftX, 200, 920, 48);
+  ctx.restore();
 
   ctx.fillStyle = "#002B7F";
   ctx.font = "bold 20px 'Be Vietnam Pro'";
@@ -302,12 +566,20 @@ function renderScene01(f) {
   ctx.fillText("TRƯỜNG ĐẠI HỌC NGOẠI NGỮ – ĐHQGHN  •  BỘ MÔN CNTT & TRUYỀN THÔNG", leftX + 28, 231);
   ctx.restore();
 
-  // Grand Display Title: ULIS VIBE (Y = 410) - Solid High-Contrast Dark Blue (No AI Gradient Mask)
+  // Grand Display Title: ULIS VIBE (Y = 410)
   const titleOffset = (1 - easeOutCubic(p)) * 30;
   ctx.fillStyle = "#002B7F";
   ctx.font = "900 126px 'Be Vietnam Pro'";
   ctx.letterSpacing = "-2px";
   ctx.fillText("ULIS VIBE", leftX, 390 + titleOffset);
+
+  // Optical Light Flare streak passing through Title
+  if (f < 120) {
+    const flareProgress = f / 120;
+    const flareX = leftX + flareProgress * 700;
+    const flareAlpha = Math.sin(flareProgress * Math.PI) * 0.7;
+    drawAnamorphicFlare(flareX, 360, 280, flareAlpha);
+  }
 
   // Thesis Subtitle (Y = 480)
   ctx.fillStyle = "#1E293B";
@@ -320,49 +592,55 @@ function renderScene01(f) {
   ctx.fillText("Nền tảng số hóa tập trung giải quyết triệt để vấn đề phân tán thông tin,", leftX, 540 + titleOffset * 0.5);
   ctx.fillText("đồng bộ hóa lịch tuyển quân và khung minh chứng Cert A1 - A2 - A3.", leftX, 576 + titleOffset * 0.5);
 
-  // Academic Badges Row (Y = 660)
-  ctx.save();
-  // Badge 1: Course Info
-  ctx.fillStyle = "#FFFFFF";
-  ctx.strokeStyle = "rgba(226, 232, 240, 0.9)";
-  ctx.lineWidth = 1.5;
-  ctx.shadowColor = "rgba(10, 37, 64, 0.05)";
-  ctx.shadowBlur = 20;
-  ctx.shadowOffsetY = 6;
-  ctx.beginPath();
-  ctx.roundRect(leftX, 650, 480, 56, 16);
-  ctx.fill();
-  ctx.stroke();
-
+  // Academic Badges Row (Y = 650) - Rendered with Specular Glass Sheen
+  drawCardWithSpecular(leftX, 650, 480, 56, 16, f, { sheenSpeed: 160, sheenDelay: 0 });
   ctx.fillStyle = "#0A2540";
   ctx.font = "bold 20px 'Be Vietnam Pro'";
   ctx.fillText("Đề án Giữa kỳ • Học phần FLF1007", leftX + 30, 685);
 
-  // Badge 2: Team 109
+  // Badge 2: Team 109 with animated pulsing beacon
+  drawCardWithSpecular(leftX + 510, 650, 380, 56, 16, f, { sheenSpeed: 160, sheenDelay: 40 });
+  // Pulsing Amber Beacon
+  const beaconR = 5 + Math.sin(f * 0.12) * 1.5;
+  ctx.fillStyle = "#D97706";
   ctx.beginPath();
-  ctx.roundRect(leftX + 510, 650, 380, 56, 16);
+  ctx.arc(leftX + 538, 678, beaconR, 0, Math.PI * 2);
   ctx.fill();
-  ctx.stroke();
 
   ctx.fillStyle = "#D97706";
   ctx.font = "bold 20px 'Be Vietnam Pro'";
-  ctx.fillText("Nhóm thực hiện: Nhóm 109", leftX + 540, 685);
-  ctx.restore();
+  ctx.fillText("Nhóm thực hiện: Nhóm 109", leftX + 555, 685);
 
-  // Right Side: Grand University Logo Artwork (Y = 460) - Pure Logo Without Background Disc
+  // Right Side: Grand University Logo Artwork with Precision Corner Brackets
   ctx.save();
   const sealX = 1480;
   const sealY = 460;
-  const floatY = Math.sin(f * 0.04) * 8;
+  const floatY = Math.sin(f * 0.035) * 8;
+  const floatX = Math.cos(f * 0.025) * 4;
 
-  ctx.translate(sealX, sealY + floatY);
+  ctx.translate(sealX + floatX, sealY + floatY);
   ctx.scale(spring(p), spring(p));
+
+  const logoSize = 250;
+  const bracketGap = 160;
+
+  // Technical Framing Corner Brackets
+  ctx.strokeStyle = "rgba(2, 132, 199, 0.4)";
+  ctx.lineWidth = 2;
+  const bLen = 22;
+  // Top Left
+  ctx.beginPath(); ctx.moveTo(-bracketGap, -bracketGap + bLen); ctx.lineTo(-bracketGap, -bracketGap); ctx.lineTo(-bracketGap + bLen, -bracketGap); ctx.stroke();
+  // Top Right
+  ctx.beginPath(); ctx.moveTo(bracketGap, -bracketGap + bLen); ctx.lineTo(bracketGap, -bracketGap); ctx.lineTo(bracketGap - bLen, -bracketGap); ctx.stroke();
+  // Bottom Left
+  ctx.beginPath(); ctx.moveTo(-bracketGap, bracketGap - bLen); ctx.lineTo(-bracketGap, bracketGap); ctx.lineTo(-bracketGap + bLen, bracketGap); ctx.stroke();
+  // Bottom Right
+  ctx.beginPath(); ctx.moveTo(bracketGap, bracketGap - bLen); ctx.lineTo(bracketGap, bracketGap); ctx.lineTo(bracketGap - bLen, bracketGap); ctx.stroke();
 
   if (assets.logo.complete) {
     ctx.shadowColor = "rgba(10, 37, 64, 0.14)";
     ctx.shadowBlur = 45;
     ctx.shadowOffsetY = 16;
-    const logoSize = 250;
     ctx.drawImage(assets.logo, -logoSize / 2, -logoSize / 2, logoSize, logoSize);
   }
   ctx.restore();
@@ -372,7 +650,7 @@ function renderScene01(f) {
 
 // ------------------------------------------
 // SCENE 2: Khảo sát thực tế 105 sinh viên (0:07 - 0:15)
-// Balanced, High-Contrast 2-Card Layout (Zero Overlap!)
+// Holographic Radial Gauge & Realtime Odometer Counters
 // ------------------------------------------
 function renderScene02(f) {
   const p = Math.min(f / 45, 1.0);
@@ -400,28 +678,13 @@ function renderScene02(f) {
 
   const heroProgress = easeOutCubic(p);
 
-  // ----------------------------------------------------
-  // CARD 1 (LEFT): Hero 71.5% - Full Height (Y = 270 to 860)
-  // Dimensions: 760px width x 590px height
-  // ----------------------------------------------------
+  // CARD 1 (LEFT): Hero 71.5% with Holographic Donut Gauge
   const card1X = leftX;
   const card1Y = 270;
   const card1W = 760;
   const card1H = 590;
 
-  ctx.save();
-  ctx.fillStyle = "#FFFFFF";
-  ctx.shadowColor = "rgba(10, 37, 64, 0.08)";
-  ctx.shadowBlur = 40;
-  ctx.shadowOffsetY = 14;
-  ctx.beginPath();
-  ctx.roundRect(card1X, card1Y, card1W, card1H, 28);
-  ctx.fill();
-
-  ctx.shadowColor = "transparent";
-  ctx.strokeStyle = "rgba(226, 232, 240, 0.85)";
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
+  drawCardWithSpecular(card1X, card1Y, card1W, card1H, 28, f, { sheenDelay: 0 });
 
   // Left Color Accent Bar
   ctx.fillStyle = "#EF4444";
@@ -429,7 +692,6 @@ function renderScene02(f) {
   ctx.roundRect(card1X, card1Y, 8, card1H, [28, 0, 0, 28]);
   ctx.fill();
 
-  // Internal Card Content
   const c1TextX = card1X + 50;
 
   // Tag
@@ -441,15 +703,18 @@ function renderScene02(f) {
   ctx.font = "bold 15px 'Be Vietnam Pro'";
   ctx.fillText("TỶ LỆ BÁO ĐỘNG", c1TextX + 42, card1Y + 68);
 
-  // Huge Stat Number
+  // Stat Counter (Rolling Odometer)
   const heroVal = (71.5 * heroProgress).toFixed(1);
   const heroGrad = ctx.createLinearGradient(c1TextX, card1Y + 120, c1TextX + 320, card1Y + 240);
   heroGrad.addColorStop(0, "#002B7F");
   heroGrad.addColorStop(1, "#EF4444");
   ctx.fillStyle = heroGrad;
-  ctx.font = "900 120px 'Be Vietnam Pro'";
+  ctx.font = "900 112px 'Be Vietnam Pro'";
   ctx.letterSpacing = "-3px";
-  ctx.fillText(`${heroVal}%`, c1TextX, card1Y + 210);
+  ctx.fillText(`${heroVal}%`, c1TextX, card1Y + 205);
+
+  // High-Tech Radial Progress Donut Gauge on Right of Card 1
+  drawRadialProgressDonut(card1X + card1W - 130, card1Y + 155, 62, 71.5, f, p);
 
   // Metric Heading
   ctx.fillStyle = "#0F172A";
@@ -478,37 +743,20 @@ function renderScene02(f) {
   ctx.fillStyle = "#64748B";
   ctx.font = "500 17px 'Be Vietnam Pro'";
   ctx.fillText("Mất cơ hội xét học bổng và điểm rèn luyện ngoại khóa.", c1TextX + 24, card1Y + 520);
-  ctx.restore();
 
-  // ----------------------------------------------------
-  // CARD 2 (RIGHT): 82.9% & 91.4% - Full Height (Y = 270 to 860)
-  // Dimensions: 800px width x 590px height
-  // ----------------------------------------------------
+  // CARD 2 (RIGHT): 82.9% & 91.4% with Active Laser Bars
   const card2X = card1X + card1W + 40;
   const card2Y = 270;
   const card2W = 800;
   const card2H = 590;
 
-  ctx.save();
-  ctx.fillStyle = "#FFFFFF";
-  ctx.shadowColor = "rgba(10, 37, 64, 0.08)";
-  ctx.shadowBlur = 40;
-  ctx.shadowOffsetY = 14;
-  ctx.beginPath();
-  ctx.roundRect(card2X, card2Y, card2W, card2H, 28);
-  ctx.fill();
-
-  ctx.shadowColor = "transparent";
-  ctx.strokeStyle = "rgba(226, 232, 240, 0.85)";
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
+  drawCardWithSpecular(card2X, card2Y, card2W, card2H, 28, f, { sheenDelay: 50 });
 
   const c2TextX = card2X + 50;
   const pBarW = card2W - 100;
 
-  // BLOCK 1: 82.9% (Y = card2Y + 45 to +260)
+  // BLOCK 1: 82.9%
   const val1 = (82.9 * heroProgress).toFixed(1);
-
   ctx.fillStyle = "#D97706";
   ctx.font = "900 68px 'Be Vietnam Pro'";
   ctx.fillText(`${val1}%`, c2TextX, card2Y + 95);
@@ -521,21 +769,33 @@ function renderScene02(f) {
   ctx.font = "400 20px 'Be Vietnam Pro'";
   ctx.fillText("Mơ hồ giữa các quy định minh chứng điểm rèn luyện.", c2TextX, card2Y + 185);
 
-  // Progress Bar 1 (Distinct Y offset = card2Y + 215, height 10px)
+  // Progress Bar 1 with Laser Pulse Bead
   ctx.fillStyle = "rgba(241, 245, 249, 1)";
   ctx.beginPath();
   ctx.roundRect(c2TextX, card2Y + 215, pBarW, 10, 5);
   ctx.fill();
 
+  const bar1Filled = pBarW * (82.9 / 100) * heroProgress;
   const pGrad1 = ctx.createLinearGradient(c2TextX, 0, c2TextX + pBarW, 0);
   pGrad1.addColorStop(0, "#002B7F");
   pGrad1.addColorStop(1, "#D97706");
   ctx.fillStyle = pGrad1;
   ctx.beginPath();
-  ctx.roundRect(c2TextX, card2Y + 215, pBarW * (82.9 / 100) * heroProgress, 10, 5);
+  ctx.roundRect(c2TextX, card2Y + 215, bar1Filled, 10, 5);
   ctx.fill();
 
-  // Subtle Horizontal Divider (Y = card2Y + 285)
+  // Glowing laser cursor at tip
+  if (bar1Filled > 5) {
+    ctx.fillStyle = "#FFFFFF";
+    ctx.shadowColor = "#D97706";
+    ctx.shadowBlur = 12;
+    ctx.beginPath();
+    ctx.arc(c2TextX + bar1Filled, card2Y + 220, 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowColor = "transparent";
+  }
+
+  // Divider
   ctx.strokeStyle = "rgba(226, 232, 240, 0.7)";
   ctx.lineWidth = 1;
   ctx.beginPath();
@@ -543,9 +803,8 @@ function renderScene02(f) {
   ctx.lineTo(c2TextX + pBarW, card2Y + 285);
   ctx.stroke();
 
-  // BLOCK 2: 91.4% (Y = card2Y + 340 to +540)
+  // BLOCK 2: 91.4%
   const val2 = (91.4 * heroProgress).toFixed(1);
-
   ctx.fillStyle = "#059669";
   ctx.font = "900 68px 'Be Vietnam Pro'";
   ctx.fillText(`${val2}%`, c2TextX, card2Y + 375);
@@ -558,28 +817,36 @@ function renderScene02(f) {
   ctx.font = "400 20px 'Be Vietnam Pro'";
   ctx.fillText("Mong muốn một giải pháp chính thống, đồng bộ cho ULIS.", c2TextX, card2Y + 465);
 
-  // Progress Bar 2 (Distinct Y offset = card2Y + 495, height 10px)
+  // Progress Bar 2 with Laser Pulse Bead
   ctx.fillStyle = "rgba(241, 245, 249, 1)";
   ctx.beginPath();
   ctx.roundRect(c2TextX, card2Y + 495, pBarW, 10, 5);
   ctx.fill();
 
+  const bar2Filled = pBarW * (91.4 / 100) * heroProgress;
   const pGrad2 = ctx.createLinearGradient(c2TextX, 0, c2TextX + pBarW, 0);
   pGrad2.addColorStop(0, "#002B7F");
   pGrad2.addColorStop(1, "#059669");
   ctx.fillStyle = pGrad2;
   ctx.beginPath();
-  ctx.roundRect(c2TextX, card2Y + 495, pBarW * (91.4 / 100) * heroProgress, 10, 5);
+  ctx.roundRect(c2TextX, card2Y + 495, bar2Filled, 10, 5);
   ctx.fill();
 
-  ctx.restore();
+  if (bar2Filled > 5) {
+    ctx.fillStyle = "#FFFFFF";
+    ctx.shadowColor = "#059669";
+    ctx.shadowBlur = 12;
+    ctx.beginPath();
+    ctx.arc(c2TextX + bar2Filled, card2Y + 500, 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowColor = "transparent";
+  }
 
   ctx.restore();
 }
 
 // ------------------------------------------
-// SCENE 3: Event Hub & QR Check-in (0:15 - 0:25)
-// Spacious 3-Spec Cards + Hero Card with ZERO Overlap
+// SCENE 3: Event Hub & Cyber Laser QR Scanner (0:15 - 0:25)
 // ------------------------------------------
 function renderScene03(f) {
   const p = Math.min(f / 45, 1.0);
@@ -604,8 +871,7 @@ function renderScene03(f) {
   ctx.font = "500 22px 'Be Vietnam Pro'";
   ctx.fillText("Cổng tổng hợp sự kiện khoa học, hội thảo học thuật và tuyển quân CLB", leftX, 218);
 
-  // LEFT COLUMN: 3 Distinct Feature Cards (Y = 270 to 860)
-  // Dimensions: 680px width, 180px height each, 25px gap
+  // LEFT COLUMN: 3 Feature Cards with Specular Sheen
   const features = [
     { num: "01", title: "Lọc chuẩn hóa theo Cert A1, A2, A3", desc: "Đồng bộ mục đích rèn luyện và chuẩn đầu ra ngoại khóa cho từng khóa sinh viên." },
     { num: "02", title: "Suất tham gia thời gian thực (Realtime)", desc: "Tránh quá tải nộp đơn, minh bạch số lượng chỗ ngồi còn lại cho từng sự kiện." },
@@ -620,20 +886,9 @@ function renderScene03(f) {
     ctx.save();
     ctx.translate(leftX + cardOffset, cardY);
 
-    ctx.fillStyle = "#FFFFFF";
-    ctx.shadowColor = "rgba(10, 37, 64, 0.06)";
-    ctx.shadowBlur = 30;
-    ctx.shadowOffsetY = 10;
-    ctx.beginPath();
-    ctx.roundRect(0, 0, 680, 180, 24);
-    ctx.fill();
+    drawCardWithSpecular(0, 0, 680, 180, 24, f, { sheenDelay: idx * 45 });
 
-    ctx.shadowColor = "transparent";
-    ctx.strokeStyle = "rgba(226, 232, 240, 0.85)";
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    // Number Badge
+    // Number Badge with pulse
     ctx.fillStyle = "rgba(239, 246, 255, 1)";
     ctx.beginPath();
     ctx.roundRect(30, 30, 56, 44, 12);
@@ -658,26 +913,13 @@ function renderScene03(f) {
     ctx.restore();
   });
 
-  // RIGHT COLUMN: Hero Event Poster Card (Y = 270 to 860)
-  // Dimensions: 880px width x 590px height
+  // RIGHT COLUMN: Hero Event Poster Card
   const heroCardX = leftX + 680 + 40;
   const heroCardY = 270;
   const heroCardW = 880;
   const heroCardH = 590;
 
-  ctx.save();
-  ctx.fillStyle = "#FFFFFF";
-  ctx.shadowColor = "rgba(10, 37, 64, 0.12)";
-  ctx.shadowBlur = 45;
-  ctx.shadowOffsetY = 16;
-  ctx.beginPath();
-  ctx.roundRect(heroCardX, heroCardY, heroCardW, heroCardH, 28);
-  ctx.fill();
-
-  ctx.shadowColor = "transparent";
-  ctx.strokeStyle = "rgba(226, 232, 240, 0.9)";
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
+  drawCardWithSpecular(heroCardX, heroCardY, heroCardW, heroCardH, 28, f, { sheenDelay: 70 });
 
   // Banner image (Height 340px)
   if (assets.ev01.complete) {
@@ -703,23 +945,33 @@ function renderScene03(f) {
   ctx.font = "600 20px 'Be Vietnam Pro'";
   ctx.fillText("Cert A1 • Học thuật & NCKH  •  Hội trường Sunwah (20/11 - 08:30)", cX, cY + 40);
 
-  // Realtime Seat Progress Bar (Height 8px, Width 580px)
+  // Realtime Seat Progress Bar with Shimmer Pulse
   const sBarW = 580;
   ctx.fillStyle = "rgba(241, 245, 249, 1)";
   ctx.beginPath();
   ctx.roundRect(cX, cY + 75, sBarW, 8, 4);
   ctx.fill();
 
+  const filledW = sBarW * 0.55 * easeOutCubic(p);
   ctx.fillStyle = "#002B7F";
   ctx.beginPath();
-  ctx.roundRect(cX, cY + 75, sBarW * 0.55 * easeOutCubic(p), 8, 4);
+  ctx.roundRect(cX, cY + 75, filledW, 8, 4);
   ctx.fill();
+
+  // Moving shimmer pulse along progress bar
+  if (filledW > 10) {
+    const shimmerPos = (f * 5) % filledW;
+    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+    ctx.beginPath();
+    ctx.arc(cX + shimmerPos, cY + 79, 3, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
   ctx.fillStyle = "#64748B";
   ctx.font = "500 17px 'Be Vietnam Pro'";
   ctx.fillText("Còn 45/100 suất đăng ký chính thức", cX, cY + 115);
 
-  // Clean QR Verification Chip (Completely separated on right, 120x120px)
+  // High-Tech Cyber Laser QR Code Scanner
   const qrX = heroCardX + heroCardW - 170;
   const qrY = heroCardY + 400;
 
@@ -731,9 +983,12 @@ function renderScene03(f) {
   ctx.fill();
   ctx.stroke();
 
-  // Green Pulsing Sonar Ring
-  const pulseRadius = 38 + ((f * 1.5) % 25);
-  const pulseAlpha = Math.max(0, 1 - (pulseRadius - 38) / 25);
+  // Animated Laser Scanner Beam sweeping up and down QR box
+  drawAnimatedLaserScanner(qrX, qrY, 130, 130, f);
+
+  // Pulsing Sonar Waves
+  const pulseRadius = 38 + ((f * 1.6) % 26);
+  const pulseAlpha = Math.max(0, 1 - (pulseRadius - 38) / 26);
   ctx.strokeStyle = `rgba(16, 185, 129, ${pulseAlpha})`;
   ctx.lineWidth = 2;
   ctx.beginPath();
@@ -750,13 +1005,10 @@ function renderScene03(f) {
   ctx.fillText("📱", qrX + 65, qrY + 65);
 
   ctx.restore();
-
-  ctx.restore();
 }
 
 // ------------------------------------------
-// SCENE 4: Club Directory (0:25 - 0:33)
-// Balanced Bento: 30+ Hero Card + 3 Spacious Rows
+// SCENE 4: Club Directory with Kinetic Energy Pulses (0:25 - 0:33)
 // ------------------------------------------
 function renderScene04(f) {
   const p = Math.min(f / 45, 1.0);
@@ -781,27 +1033,27 @@ function renderScene04(f) {
   ctx.font = "500 22px 'Be Vietnam Pro'";
   ctx.fillText("Khắc phục hoàn toàn tình trạng thông tin tuyển thành viên bị trôi và phân tán", leftX, 218);
 
-  // LEFT COLUMN: Bento Hero Card 30+ (Y = 270 to 860)
-  // Dimensions: 560px width x 590px height
+  // LEFT COLUMN: Bento Hero Card 30+ with Concentric Radar Rings
   const heroProgress = easeOutCubic(p);
   const leftW = 560;
   const leftH = 590;
 
-  ctx.save();
-  ctx.fillStyle = "#FFFFFF";
-  ctx.shadowColor = "rgba(10, 37, 64, 0.08)";
-  ctx.shadowBlur = 40;
-  ctx.shadowOffsetY = 14;
-  ctx.beginPath();
-  ctx.roundRect(leftX, 270, leftW, leftH, 28);
-  ctx.fill();
-
-  ctx.shadowColor = "transparent";
-  ctx.strokeStyle = "rgba(226, 232, 240, 0.85)";
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
+  drawCardWithSpecular(leftX, 270, leftW, leftH, 28, f, { sheenDelay: 0 });
 
   const cX = leftX + 50;
+
+  // Concentric Radar Orbit Rings behind 30+
+  ctx.save();
+  for (let r = 1; r <= 3; r++) {
+    const ringRadius = 70 * r + ((f * 0.5) % 35);
+    const ringAlpha = Math.max(0, 0.12 - (ringRadius - 70) * 0.0006);
+    ctx.strokeStyle = `rgba(2, 132, 199, ${ringAlpha})`;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(leftX + leftW / 2, 400, ringRadius, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  ctx.restore();
 
   // Big 30+ Number
   const numVal = Math.floor(30 * heroProgress);
@@ -836,10 +1088,8 @@ function renderScene04(f) {
   ctx.fillStyle = "#64748B";
   ctx.font = "500 17px 'Be Vietnam Pro'";
   ctx.fillText("Giúp tân sinh viên không bỏ lỡ đợt tuyển đầu năm.", cX + 24, 690);
-  ctx.restore();
 
-  // RIGHT COLUMN: 3 Spacious Identity Rows (Y = 270 to 860)
-  // Dimensions: 1000px width, 180px height each, 25px gap
+  // RIGHT COLUMN: 3 Rows with Kinetic Traveling Energy Pulses
   const rightX = leftX + leftW + 40;
   const rows = [
     { title: "Khối Học thuật & NCKH", desc: "K-ULIS (Hàn Quốc), SRC Nghiên cứu trẻ, E4C Tiếng Anh, CLB Tiếng Trung...", badge: "Cert A1", color: "#0284C7" },
@@ -855,24 +1105,23 @@ function renderScene04(f) {
     ctx.save();
     ctx.translate(rightX + rowOffset, rowY);
 
-    ctx.fillStyle = "#FFFFFF";
-    ctx.shadowColor = "rgba(10, 37, 64, 0.06)";
-    ctx.shadowBlur = 30;
-    ctx.shadowOffsetY = 10;
-    ctx.beginPath();
-    ctx.roundRect(0, 0, 1000, 180, 24);
-    ctx.fill();
-
-    ctx.shadowColor = "transparent";
-    ctx.strokeStyle = "rgba(226, 232, 240, 0.85)";
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
+    drawCardWithSpecular(0, 0, 1000, 180, 24, f, { sheenDelay: idx * 40 });
 
     // Left Color Accent Bar
     ctx.fillStyle = r.color;
     ctx.beginPath();
     ctx.roundRect(0, 0, 8, 180, [24, 0, 0, 24]);
     ctx.fill();
+
+    // Kinetic Energy Pulse Bead Traveling along accent bar
+    const pulseTravelY = (f * 3.5 + idx * 60) % 180;
+    ctx.fillStyle = "#FFFFFF";
+    ctx.shadowColor = r.color;
+    ctx.shadowBlur = 10;
+    ctx.beginPath();
+    ctx.arc(4, pulseTravelY, 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowColor = "transparent";
 
     // Title
     ctx.fillStyle = "#0A2540";
@@ -884,14 +1133,21 @@ function renderScene04(f) {
     ctx.font = "400 20px 'Be Vietnam Pro'";
     ctx.fillText(r.desc, 45, 115);
 
-    // Pill Badge
+    // Pill Badge with live blinking dot
     ctx.fillStyle = "#F1F5F9";
     ctx.strokeStyle = "rgba(226, 232, 240, 0.9)";
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.roundRect(830, 40, 130, 44, 22);
+    ctx.roundRect(810, 40, 150, 44, 22);
     ctx.fill();
     ctx.stroke();
+
+    // Live green blinking dot
+    const blinkAlpha = 0.4 + Math.sin(f * 0.15) * 0.6;
+    ctx.fillStyle = `rgba(16, 185, 129, ${blinkAlpha})`;
+    ctx.beginPath();
+    ctx.arc(830, 62, 5, 0, Math.PI * 2);
+    ctx.fill();
 
     ctx.fillStyle = "#002B7F";
     ctx.font = "bold 16px 'Be Vietnam Pro'";
@@ -905,8 +1161,7 @@ function renderScene04(f) {
 }
 
 // ------------------------------------------
-// SCENE 5: Cert Hub — Clear Tiered Spectrum (0:33 - 0:40)
-// Spacious 3 Tier Cards with ZERO Overlap
+// SCENE 5: Cert Hub with Prismatic Holographic Foils (0:33 - 0:40)
 // ------------------------------------------
 function renderScene05(f) {
   const p = Math.min(f / 45, 1.0);
@@ -931,29 +1186,31 @@ function renderScene05(f) {
   ctx.font = "500 22px 'Be Vietnam Pro'";
   ctx.fillText("Cẩm nang minh bạch hóa quy định điểm rèn luyện cho sinh viên các khóa", leftX, 218);
 
-  // 3 Stately Horizontal Tier Cards (Y = 270 to 860)
-  // Dimensions: 1600px width x 180px height each, 25px gap
+  // 3 Stately Horizontal Tier Cards with Metallic Foil Glints
   const tiers = [
     {
       code: "CERT A1",
       label: "Học Thuật & Nghiên Cứu Khoa Học",
       examples: "Hội thảo nghiên cứu khoa học các cấp, tọa đàm học thuật ngoại ngữ, báo cáo chuyên đề khoa học.",
       points: "+5 đến +10 ĐRL",
-      color: "#002B7F"
+      colorStart: "#002B7F",
+      colorEnd: "#0284C7"
     },
     {
       code: "CERT A2",
       label: "Kỹ Năng & Hoạt Động Đoàn - Hội",
       examples: "Ban tổ chức sự kiện, tuyển quân CLB, tập huấn kỹ năng mềm, hội thao sinh viên, lễ tân khánh tiết.",
       points: "+3 đến +8 ĐRL",
-      color: "#0284C7"
+      colorStart: "#D97706",
+      colorEnd: "#F59E0B"
     },
     {
       code: "CERT A3",
       label: "Tình Nguyện & Hoạt Động Vì Cộng Đồng",
       examples: "Hiến máu nhân đạo toàn trường, chiến dịch Mùa hè xanh, Tiếp sức mùa thi, công tác thiện nguyện xã hội.",
       points: "+5 đến +15 ĐRL",
-      color: "#10B981"
+      colorStart: "#059669",
+      colorEnd: "#10B981"
     }
   ];
 
@@ -965,25 +1222,33 @@ function renderScene05(f) {
     ctx.save();
     ctx.translate(leftX + cardOffset, cardY);
 
-    // White Card
-    ctx.fillStyle = "#FFFFFF";
-    ctx.shadowColor = "rgba(10, 37, 64, 0.07)";
-    ctx.shadowBlur = 35;
-    ctx.shadowOffsetY = 12;
-    ctx.beginPath();
-    ctx.roundRect(0, 0, 1600, 180, 24);
-    ctx.fill();
+    drawCardWithSpecular(0, 0, 1600, 180, 24, f, { sheenDelay: idx * 45 });
 
-    ctx.shadowColor = "transparent";
-    ctx.strokeStyle = "rgba(226, 232, 240, 0.85)";
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    // Code Pill Badge (Left)
-    ctx.fillStyle = t.color;
+    // Metallic Foil Code Badge (Left)
+    const foilGrad = ctx.createLinearGradient(40, 45, 180, 97);
+    foilGrad.addColorStop(0, t.colorStart);
+    foilGrad.addColorStop(1, t.colorEnd);
+    ctx.fillStyle = foilGrad;
+    ctx.shadowColor = t.colorStart;
+    ctx.shadowBlur = 18;
     ctx.beginPath();
     ctx.roundRect(40, 45, 140, 52, 16);
     ctx.fill();
+    ctx.shadowColor = "transparent";
+
+    // Prismatic Sheen Sweep across badge
+    const badgeSheenX = 40 + ((f * 3 + idx * 40) % 240);
+    ctx.save();
+    ctx.beginPath();
+    ctx.roundRect(40, 45, 140, 52, 16);
+    ctx.clip();
+    const bSheen = ctx.createLinearGradient(badgeSheenX - 30, 45, badgeSheenX + 30, 97);
+    bSheen.addColorStop(0, "rgba(255, 255, 255, 0)");
+    bSheen.addColorStop(0.5, "rgba(255, 255, 255, 0.5)");
+    bSheen.addColorStop(1, "rgba(255, 255, 255, 0)");
+    ctx.fillStyle = bSheen;
+    ctx.fillRect(40, 45, 140, 52);
+    ctx.restore();
 
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "bold 22px 'Be Vietnam Pro'";
@@ -1000,19 +1265,19 @@ function renderScene05(f) {
     ctx.font = "400 20px 'Be Vietnam Pro'";
     ctx.fillText(t.examples, 210, 130);
 
-    // Points Tag (Right)
+    // Points Tag (Right) with Animated Green Checkmark
     ctx.fillStyle = "#F8FAFC";
     ctx.strokeStyle = "rgba(226, 232, 240, 0.9)";
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.roundRect(1360, 60, 200, 56, 28);
+    ctx.roundRect(1340, 60, 220, 56, 28);
     ctx.fill();
     ctx.stroke();
 
-    ctx.fillStyle = t.color;
+    ctx.fillStyle = t.colorStart;
     ctx.font = "bold 20px 'Be Vietnam Pro'";
     ctx.textAlign = "center";
-    ctx.fillText(t.points, 1460, 96);
+    ctx.fillText(`✓ ${t.points}`, 1450, 96);
 
     ctx.restore();
   });
@@ -1021,8 +1286,7 @@ function renderScene05(f) {
 }
 
 // ------------------------------------------
-// SCENE 6: Outro — Decisive Academic Conclusion (0:40 - 0:45)
-// Commandingly Proportioned Keynote Finale
+// SCENE 6: Outro — Finale with Lens Flare & Prismatic Confetti (0:40 - 0:45)
 // ------------------------------------------
 function renderScene06(f) {
   const p = Math.min(f / 45, 1.0);
@@ -1032,71 +1296,124 @@ function renderScene06(f) {
 
   const centerX = 960;
 
-  // University Crest Logo (Y = 190) - Pure Logo Without Background Disc
+  // Floating Prismatic Shards / Confetti in Finale
+  FINALE_CONFETTI.forEach(c => {
+    const py = (c.y - f * c.floatSpeed + 900 * 10) % 900 + 40;
+    const px = c.x + Math.sin(f * 0.03 + c.phase) * 20;
+    const rot = f * c.rotSpeed + c.phase;
+
+    ctx.save();
+    ctx.translate(px, py);
+    ctx.rotate(rot);
+    ctx.fillStyle = c.color;
+    ctx.globalAlpha = 0.22 + 0.16 * Math.sin(f * 0.05 + c.phase);
+    ctx.fillRect(-c.size / 2, -c.size / 2, c.size, c.size * 0.6);
+    ctx.restore();
+  });
+
+  // University Crest Logo (Y = 180)
   ctx.save();
-  ctx.translate(centerX, 190);
+  ctx.translate(centerX, 180);
   ctx.scale(spring(p), spring(p));
 
   if (assets.logo.complete) {
-    ctx.shadowColor = "rgba(10, 37, 64, 0.14)";
-    ctx.shadowBlur = 35;
-    ctx.shadowOffsetY = 12;
+    ctx.shadowColor = "rgba(10, 37, 64, 0.16)";
+    ctx.shadowBlur = 40;
+    ctx.shadowOffsetY = 14;
     const logoSize = 140;
     ctx.drawImage(assets.logo, -logoSize / 2, -logoSize / 2, logoSize, logoSize);
   }
   ctx.restore();
 
-  // Grand Title (Y = 360)
-  const titleY = 360 - (1 - easeOutCubic(p)) * 20;
-  // Grand Title: ULIS VIBE (Solid High Contrast Dark Blue)
+  // Grand Title (Y = 350)
+  const titleY = 350 - (1 - easeOutCubic(p)) * 20;
   ctx.fillStyle = "#002B7F";
   ctx.font = "900 114px 'Be Vietnam Pro'";
   ctx.letterSpacing = "-2px";
   ctx.fillText("ULIS VIBE", centerX, titleY);
 
-  // Slogan (Y = 430)
+  // Cinematic Anamorphic Lens Flare passing across Grand Title
+  const flareX = centerX - 400 + ((f * 8) % 800);
+  drawAnamorphicFlare(flareX, titleY - 25, 340, 0.55);
+
+  // Slogan (Y = 420)
   ctx.fillStyle = "#002B7F";
   ctx.font = "bold 36px 'Be Vietnam Pro'";
   ctx.fillText("MỘT ĐIỂM CHẠM — VẠN CƠ HỘI NGOẠI KHÓA", centerX, titleY + 68);
 
-  // Academic Presentation Card (Y = 540)
-  ctx.save();
+  // Academic Presentation Card (Y = 520) with Perimeter Laser Trace
   const cWidth = 1180;
   const cHeight = 175;
-  ctx.fillStyle = "#FFFFFF";
-  ctx.strokeStyle = "rgba(226, 232, 240, 0.9)";
-  ctx.lineWidth = 1.5;
-  ctx.shadowColor = "rgba(10, 37, 64, 0.08)";
-  ctx.shadowBlur = 40;
-  ctx.shadowOffsetY = 14;
+  const cX = centerX - cWidth / 2;
+  const cY = 520;
+
+  drawCardWithSpecular(cX, cY, cWidth, cHeight, 24, f, { sheenDelay: 0 });
+
+  // Perimeter Laser Point Tracing the Academic Card
+  const perimeter = 2 * (cWidth + cHeight);
+  const laserDist = (f * 7) % perimeter;
+  let lpX = cX, lpY = cY;
+  if (laserDist < cWidth) {
+    lpX = cX + laserDist; lpY = cY;
+  } else if (laserDist < cWidth + cHeight) {
+    lpX = cX + cWidth; lpY = cY + (laserDist - cWidth);
+  } else if (laserDist < 2 * cWidth + cHeight) {
+    lpX = cX + cWidth - (laserDist - (cWidth + cHeight)); lpY = cY + cHeight;
+  } else {
+    lpX = cX; lpY = cY + cHeight - (laserDist - (2 * cWidth + cHeight));
+  }
+  ctx.fillStyle = "#38BDF8";
+  ctx.shadowColor = "#0284C7";
+  ctx.shadowBlur = 14;
   ctx.beginPath();
-  ctx.roundRect(centerX - cWidth / 2, 530, cWidth, cHeight, 24);
+  ctx.arc(lpX, lpY, 4, 0, Math.PI * 2);
   ctx.fill();
-  ctx.stroke();
+  ctx.shadowColor = "transparent";
 
   ctx.fillStyle = "#0A2540";
   ctx.font = "bold 26px 'Be Vietnam Pro'";
-  ctx.fillText("ĐỀ ÁN BÀI TẬP NHÓM GIỮA KỲ • HỌC PHẦN FLF1007", centerX, 580);
+  ctx.fillText("ĐỀ ÁN BÀI TẬP NHÓM GIỮA KỲ • HỌC PHẦN FLF1007", centerX, 570);
 
   ctx.fillStyle = "#475569";
   ctx.font = "500 22px 'Be Vietnam Pro'";
-  ctx.fillText("Bộ môn Công nghệ Thông tin & Truyền thông — Trường ĐH Ngoại ngữ, ĐHQGHN", centerX, 622);
+  ctx.fillText("Bộ môn Công nghệ Thông tin & Truyền thông — Trường ĐH Ngoại ngữ, ĐHQGHN", centerX, 612);
 
   ctx.fillStyle = "#64748B";
   ctx.font = "400 19px 'Be Vietnam Pro'";
-  ctx.fillText("Nhóm 109: Đoàn Thị Phương Thảo (Trưởng nhóm) • Đạt • Uyên • Linh • Trang", centerX, 660);
-  ctx.restore();
+  ctx.fillText("Nhóm 109: Đoàn Thị Phương Thảo (Trưởng nhóm) • Đạt • Uyên • Linh • Trang", centerX, 650);
 
-  // CTA Pill Button (Y = 780)
+  // CTA Pill Button (Y = 770) with Multi-Tier Pulsing Energy Aura
   ctx.save();
-  ctx.translate(centerX, 780);
+  ctx.translate(centerX, 770);
+
+  // Pulsing Ambient Aura
+  const pulseR = 8 + Math.sin(f * 0.1) * 6;
+  ctx.fillStyle = "rgba(2, 132, 199, 0.18)";
+  ctx.beginPath();
+  ctx.roundRect(-280 - pulseR, -32 - pulseR, 560 + pulseR * 2, 64 + pulseR * 2, 36);
+  ctx.fill();
+
   ctx.fillStyle = "#002B7F";
-  ctx.shadowColor = "rgba(0, 43, 127, 0.25)";
-  ctx.shadowBlur = 30;
-  ctx.shadowOffsetY = 10;
+  ctx.shadowColor = "rgba(0, 43, 127, 0.35)";
+  ctx.shadowBlur = 32;
+  ctx.shadowOffsetY = 12;
   ctx.beginPath();
   ctx.roundRect(-280, -32, 560, 64, 32);
   ctx.fill();
+
+  // CTA Sheen Sweep
+  const ctaSheenX = -280 + ((f * 6) % 700);
+  ctx.save();
+  ctx.beginPath();
+  ctx.roundRect(-280, -32, 560, 64, 32);
+  ctx.clip();
+  const ctaSheenGrad = ctx.createLinearGradient(ctaSheenX - 50, -32, ctaSheenX + 50, 32);
+  ctaSheenGrad.addColorStop(0, "rgba(255, 255, 255, 0)");
+  ctaSheenGrad.addColorStop(0.5, "rgba(255, 255, 255, 0.45)");
+  ctaSheenGrad.addColorStop(1, "rgba(255, 255, 255, 0)");
+  ctx.fillStyle = ctaSheenGrad;
+  ctx.fillRect(-280, -32, 560, 64);
+  ctx.restore();
 
   ctx.fillStyle = "#FFFFFF";
   ctx.font = "bold 21px 'Be Vietnam Pro'";
