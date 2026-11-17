@@ -1239,7 +1239,9 @@ function initCertRecommender() {
 // 4. BỐI CẢNH & KHẢO SÁT 105 SINH VIÊN ULIS
 // ==========================================
 function initSurveySection() {
-  renderInteractiveCharts();
+  if (document.getElementById("chart-missed-3d")) {
+    renderInteractiveCharts();
+  }
 }
 
 // 3D Chart Drag to Rotate Handler with Level Double-Click Reset
