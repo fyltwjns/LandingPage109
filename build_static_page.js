@@ -683,7 +683,7 @@ const templateHtml = `<!DOCTYPE html>
           <div class="w-full relative aspect-video overflow-hidden">
             <iframe 
               id="video-intro-iframe"
-              src="./video/index.html?embedded=1&autoplay=1" 
+              src="./video/index.html?embedded=1&autoplay=1&v=20261117_wix" 
               title="ULIS Vibe Dynamic Showcase Video" 
               class="w-full h-full border-0 block" 
               allow="autoplay; fullscreen; accelerometer; gyroscope" 

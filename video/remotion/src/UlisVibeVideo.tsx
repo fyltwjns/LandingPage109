@@ -385,16 +385,16 @@ const SceneOutro: React.FC = () => {
       <div
         style={{
           display: "inline-block",
-          padding: "16px 44px",
+          padding: "16px 48px",
           borderRadius: "999px",
           background: "#002B7F",
           color: "#FFFFFF",
-          fontSize: "19px",
+          fontSize: "18px",
           fontWeight: 700,
           boxShadow: "0 10px 25px rgba(0, 43, 127, 0.2)",
         }}
       >
-        TRẢI NGHIỆM TẠI HTTP://LOCALHOST:5500
+        TRẢI NGHIỆM TẠI SONFF69.WIXSTUDIO.COM/LANDINGPAGE109
       </div>
     </AbsoluteFill>
   );

@@ -1396,7 +1396,7 @@ function renderScene06(f) {
   const pulseR = 8 + Math.sin(f * 0.1) * 6;
   ctx.fillStyle = "rgba(2, 132, 199, 0.18)";
   ctx.beginPath();
-  ctx.roundRect(-280 - pulseR, -32 - pulseR, 560 + pulseR * 2, 64 + pulseR * 2, 36);
+  ctx.roundRect(-340 - pulseR, -34 - pulseR, 680 + pulseR * 2, 68 + pulseR * 2, 38);
   ctx.fill();
 
   ctx.fillStyle = "#002B7F";
@@ -1404,27 +1404,27 @@ function renderScene06(f) {
   ctx.shadowBlur = 32;
   ctx.shadowOffsetY = 12;
   ctx.beginPath();
-  ctx.roundRect(-280, -32, 560, 64, 32);
+  ctx.roundRect(-340, -34, 680, 68, 34);
   ctx.fill();
 
   // CTA Sheen Sweep
-  const ctaSheenX = -280 + ((f * 6) % 700);
+  const ctaSheenX = -340 + ((f * 6) % 800);
   ctx.save();
   ctx.beginPath();
-  ctx.roundRect(-280, -32, 560, 64, 32);
+  ctx.roundRect(-340, -34, 680, 68, 34);
   ctx.clip();
-  const ctaSheenGrad = ctx.createLinearGradient(ctaSheenX - 50, -32, ctaSheenX + 50, 32);
+  const ctaSheenGrad = ctx.createLinearGradient(ctaSheenX - 60, -34, ctaSheenX + 60, 34);
   ctaSheenGrad.addColorStop(0, "rgba(255, 255, 255, 0)");
   ctaSheenGrad.addColorStop(0.5, "rgba(255, 255, 255, 0.45)");
   ctaSheenGrad.addColorStop(1, "rgba(255, 255, 255, 0)");
   ctx.fillStyle = ctaSheenGrad;
-  ctx.fillRect(-280, -32, 560, 64);
+  ctx.fillRect(-340, -34, 680, 68);
   ctx.restore();
 
   ctx.fillStyle = "#FFFFFF";
-  ctx.font = "bold 21px 'Be Vietnam Pro'";
+  ctx.font = "bold 19px 'Be Vietnam Pro'";
   ctx.letterSpacing = "0.5px";
-  ctx.fillText("TRẢI NGHIỆM TẠI HTTP://LOCALHOST:5500", 0, 8);
+  ctx.fillText("TRẢI NGHIỆM TẠI SONFF69.WIXSTUDIO.COM/LANDINGPAGE109", 0, 7);
   ctx.restore();
 
   ctx.restore();
@@ -1537,7 +1537,19 @@ function jumpToFrame(f) {
 
 // Event Listeners
 canvas.style.cursor = isEmbedded ? "pointer" : "default";
-canvas.addEventListener("click", () => {
+canvas.addEventListener("click", (e) => {
+  if (currentFrame >= 2400) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = 1920 / rect.width;
+    const scaleY = 1080 / rect.height;
+    const clickX = (e.clientX - rect.left) * scaleX;
+    const clickY = (e.clientY - rect.top) * scaleY;
+    if (clickX >= 960 - 340 && clickX <= 960 + 340 && clickY >= 770 - 34 && clickY <= 770 + 34) {
+      window.open("https://sonff69.wixstudio.com/landingpage109", "_blank");
+      return;
+    }
+  }
+
   if (isEmbedded) {
     const isMuted = audio.toggleMute();
     if (window.parent && window.parent !== window) {
