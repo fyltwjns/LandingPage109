@@ -491,7 +491,7 @@ function openEventModal(eventId) {
   const isSaved = state.savedEvents.includes(ev.id);
 
   modalContent.innerHTML = `
-    <div class="relative overflow-hidden rounded-3xl flex flex-col max-h-[92vh]">
+    <div class="relative overflow-hidden rounded-3xl flex flex-col max-h-[88vh] h-full">
       <!-- Modal Banner Image (16:9 full banner display) -->
       <div class="event-banner-container aspect-video shrink-0">
         <img src="./assets/events/${ev.id}.webp" alt="${ev.title}" class="event-banner-img" onerror="this.onerror=null; this.src='./assets/events/${ev.id}.png';" />
@@ -517,7 +517,7 @@ function openEventModal(eventId) {
         </div>
       </div>
 
-      <div class="p-6 space-y-6 overflow-y-auto flex-1 bg-white">
+      <div class="p-6 space-y-6 overflow-y-auto flex-1 min-h-0 bg-white">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-slate-50 rounded-xl text-sm text-slate-700 border border-slate-100">
           <div class="flex items-center gap-2">
             <i data-lucide="building" class="w-4 h-4 text-blue-600"></i>
@@ -606,18 +606,20 @@ function openSavedEventsModal() {
   const savedList = ULIS_DATA.events.filter(e => state.savedEvents.includes(e.id));
 
   modalContent.innerHTML = `
-    <div class="relative">
-      <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+    <div class="flex flex-col h-full max-h-[86vh] overflow-hidden">
+      <!-- Header -->
+      <div class="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between shrink-0 bg-white">
         <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
           <i data-lucide="bookmark" class="w-5 h-5 text-amber-500 fill-current"></i>
           Danh sách sự kiện đã lưu (${savedList.length})
         </h3>
-        <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition">
+        <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition shrink-0" aria-label="Đóng">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div class="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
+      <!-- Body -->
+      <div class="p-5 sm:p-6 space-y-4 overflow-y-auto flex-1 min-h-0 bg-white">
         ${savedList.length === 0 ? `
           <div class="text-center py-12">
             <i data-lucide="bookmark-x" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
@@ -643,8 +645,9 @@ function openSavedEventsModal() {
         `).join("")}
       </div>
 
-      <div class="p-4 border-t border-slate-100 bg-slate-50 rounded-b-2xl text-right">
-        <button onclick="closeModal()" class="px-4 py-2 bg-blue-800 text-white rounded-xl text-xs font-bold hover:bg-blue-900">
+      <!-- Footer -->
+      <div class="p-4 border-t border-slate-100 bg-slate-50 rounded-b-3xl text-right shrink-0">
+        <button onclick="closeModal()" class="px-5 py-2 bg-blue-950 text-white rounded-xl text-xs font-bold hover:bg-blue-900 transition">
           Xong
         </button>
       </div>
@@ -856,8 +859,9 @@ function openClubModal(clubId) {
                      "bg-emerald-100 text-emerald-800 border-emerald-200";
 
   modalContent.innerHTML = `
-    <div class="relative">
-      <div class="p-6 border-b border-slate-100 flex items-start justify-between gap-4">
+    <div class="flex flex-col h-full max-h-[86vh] overflow-hidden">
+      <!-- Pinned Header -->
+      <div class="p-5 sm:p-6 border-b border-slate-100 flex items-start justify-between gap-4 shrink-0 bg-white">
         <div>
           <span class="px-2.5 py-1 text-xs font-bold rounded-lg border ${badgeColor} inline-block mb-2">
             ${club.categoryName} • ${club.acronym}
@@ -865,12 +869,13 @@ function openClubModal(clubId) {
           <h3 class="text-xl font-bold text-slate-900">${club.name}</h3>
           <p class="text-xs text-blue-800 font-medium italic mt-1">"${club.slogan}"</p>
         </div>
-        <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition">
+        <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition shrink-0" aria-label="Đóng">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div class="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+      <!-- Scrollable Body with min-h-0 -->
+      <div class="p-5 sm:p-6 space-y-6 overflow-y-auto flex-1 min-h-0 bg-white">
         <div>
           <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Giới thiệu tổng quan</h4>
           <p class="text-sm text-slate-700 leading-relaxed">${club.description}</p>
@@ -919,12 +924,13 @@ function openClubModal(clubId) {
         </div>
       </div>
 
-      <div class="p-6 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex items-center justify-between">
-        <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900">
+      <!-- Pinned Footer (Always visible, never clipped) -->
+      <div class="p-4 sm:p-5 border-t border-slate-100 bg-slate-50 rounded-b-3xl flex items-center justify-between shrink-0">
+        <button onclick="closeModal()" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-900 rounded-xl hover:bg-slate-200/60 transition">
           Đóng
         </button>
-        <a href="${club.formLink}" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 bg-blue-800 hover:bg-blue-900 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition shadow-md">
-          Nộp đơn gia nhập CLB <i data-lucide="external-link" class="w-4 h-4"></i>
+        <a href="${club.formLink}" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 bg-blue-950 hover:bg-blue-900 text-white rounded-xl text-sm font-bold flex items-center gap-2 transition shadow-sm">
+          Nộp đơn gia nhập CLB <i data-lucide="external-link" class="w-4 h-4 text-amber-400"></i>
         </a>
       </div>
     </div>

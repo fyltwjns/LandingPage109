@@ -1562,7 +1562,7 @@ ${teamHtml}
   <!-- MODAL CHUNG (EVENT & CLUB DETAIL & FEEDBACK POPUP) -->
   <!-- ==================================================== -->
   <div id="app-modal" class="fixed inset-0 z-50 hidden items-start sm:items-center justify-center p-3 sm:p-6 overflow-y-auto modal-backdrop animate-fade-in" onclick="if (event.target === this) closeModal()">
-    <div id="modal-content" class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden border border-slate-200 animate-fade-in my-auto max-h-[94vh] flex flex-col">
+    <div id="modal-content" class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden border border-slate-200 animate-fade-in my-auto max-h-[88vh] flex flex-col">
     </div>
   </div>
 
