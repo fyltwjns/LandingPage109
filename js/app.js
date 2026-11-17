@@ -1239,39 +1239,6 @@ function initCertRecommender() {
 // 4. BỐI CẢNH & KHẢO SÁT 105 SINH VIÊN ULIS
 // ==========================================
 function initSurveySection() {
-  const toggleBtnCharts = document.getElementById("btn-survey-charts");
-  const toggleBtnOriginals = document.getElementById("btn-survey-originals");
-  const containerCharts = document.getElementById("survey-charts-container");
-  const containerOriginals = document.getElementById("survey-originals-container");
-
-  if (!toggleBtnCharts || !toggleBtnOriginals || !containerCharts || !containerOriginals) return;
-
-  toggleBtnCharts.addEventListener("click", () => {
-    state.chartMode = "charts";
-    toggleBtnCharts.classList.add("bg-blue-900", "text-white");
-    toggleBtnCharts.classList.remove("bg-white", "text-slate-700");
-    toggleBtnOriginals.classList.remove("bg-blue-900", "text-white");
-    toggleBtnOriginals.classList.add("bg-white", "text-slate-700");
-
-    containerCharts.classList.remove("hidden");
-    containerOriginals.classList.add("hidden");
-    renderInteractiveCharts();
-    if (window.Highcharts && window.Highcharts.charts) {
-      window.Highcharts.charts.forEach(c => c && c.reflow());
-    }
-  });
-
-  toggleBtnOriginals.addEventListener("click", () => {
-    state.chartMode = "originals";
-    toggleBtnOriginals.classList.add("bg-blue-900", "text-white");
-    toggleBtnOriginals.classList.remove("bg-white", "text-slate-700");
-    toggleBtnCharts.classList.remove("bg-blue-900", "text-white");
-    toggleBtnCharts.classList.add("bg-white", "text-slate-700");
-
-    containerCharts.classList.add("hidden");
-    containerOriginals.classList.remove("hidden");
-  });
-
   renderInteractiveCharts();
 }
 

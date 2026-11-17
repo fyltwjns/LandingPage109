@@ -629,21 +629,9 @@ const templateHtml = `<!DOCTYPE html>
     <!-- ==================================================== -->
     <!-- KHU VỰC 1: ĐẦU TRANG (HERO SECTION) -->
     <!-- ==================================================== -->
-    <section id="hero" class="relative pt-12 pb-20 overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-slate-50">
+    <section id="hero" class="relative pt-12 pb-14 overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-slate-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-4xl mx-auto">
-          
-          <!-- Badges & Video CTA -->
-          <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 border border-blue-200 text-blue-950 rounded-full text-xs font-bold shadow-2xs">
-              <span class="w-2 h-2 rounded-full bg-blue-800"></span>
-              <span>Đề xuất Dự án Đổi Mới Sáng Tạo Học Kỳ I (2026-2027) • Nhóm 109</span>
-            </div>
-            <a href="#video-intro" class="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-900 hover:bg-blue-800 text-white rounded-full text-xs font-bold shadow-sm transition hover:scale-105 active:scale-95">
-              <span class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
-              <span>🎬 Xem Video Giới Thiệu Đề Án (1080p 60fps)</span>
-            </a>
-          </div>
 
           <!-- Main Heading (Solid Color, No AI Gradient Text) -->
           <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-blue-950 tracking-tight leading-tight mb-6">
@@ -656,7 +644,7 @@ const templateHtml = `<!DOCTYPE html>
           </p>
 
           <!-- 3 Core Navigation CTA Buttons (Yêu cầu Khu vực 1 của File Word) -->
-          <div class="flex flex-wrap items-center justify-center gap-4 mb-14">
+          <div class="flex flex-wrap items-center justify-center gap-4">
             <a href="#event-hub" class="px-6 py-3.5 bg-blue-950 hover:bg-blue-900 text-white rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-sm hover:-translate-y-0.5">
               <i data-lucide="calendar" class="w-5 h-5 text-amber-400"></i>
               <span>Khám phá Event Hub</span>
@@ -676,30 +664,6 @@ const templateHtml = `<!DOCTYPE html>
             </a>
           </div>
 
-          <!-- Quick Highlight Metrics from Word Survey (Khảo sát 105 SV) -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-white rounded-3xl border border-slate-200 shadow-sm max-w-4xl mx-auto text-left">
-            <div class="p-3 border-r border-slate-100 last:border-none">
-              <div class="text-2xl sm:text-3xl font-black text-red-600 mb-1 tabular-nums">71,5%</div>
-              <div class="text-xs font-bold text-slate-900">Từng bỏ lỡ sự kiện</div>
-              <p class="text-[11px] text-slate-600 mt-0.5">Do kênh thông tin phân tán</p>
-            </div>
-            <div class="p-3 border-r border-slate-100 last:border-none">
-              <div class="text-2xl sm:text-3xl font-black text-blue-950 mb-1 tabular-nums">64,8%</div>
-              <div class="text-xs font-bold text-slate-900">Chưa nắm lịch tuyển CLB</div>
-              <p class="text-[11px] text-slate-600 mt-0.5">Thiếu lịch chung toàn trường</p>
-            </div>
-            <div class="p-3 border-r border-slate-100 last:border-none">
-              <div class="text-2xl sm:text-3xl font-black text-amber-700 mb-1 tabular-nums">24,8%</div>
-              <div class="text-xs font-bold text-slate-900">Mơ hồ về Cert A1-A2-A3</div>
-              <p class="text-[11px] text-slate-600 mt-0.5">Quy định chưa trực quan</p>
-            </div>
-            <div class="p-3">
-              <div class="text-2xl sm:text-3xl font-black text-emerald-700 mb-1 tabular-nums">65,7%</div>
-              <div class="text-xs font-bold text-slate-900">Sẵn sàng sử dụng</div>
-              <p class="text-[11px] text-slate-600 mt-0.5">Nền tảng ULIS Vibe tinh gọn</p>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
@@ -707,28 +671,13 @@ const templateHtml = `<!DOCTYPE html>
     <!-- ==================================================== -->
     <!-- SECTION INTRO: VIDEO GIỚI THIỆU ĐỀ ÁN (1080P 60FPS) -->
     <!-- ==================================================== -->
-    <section id="video-intro" class="py-16 sm:py-20 bg-slate-50 border-b border-slate-200 relative overflow-hidden">
+    <section id="video-intro" class="py-8 sm:py-12 bg-slate-50 border-b border-slate-200 relative overflow-hidden">
       <!-- Background subtle decorative ambient glow -->
       <div class="absolute inset-0 pointer-events-none opacity-40">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-gradient-to-b from-blue-100/50 via-sky-50/30 to-transparent blur-3xl"></div>
       </div>
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <!-- Section Header -->
-        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-blue-100 border border-blue-200/80 rounded-full text-blue-950 text-xs font-bold mb-4 shadow-2xs">
-            <span class="w-2 h-2 rounded-full bg-blue-700 animate-pulse"></span>
-            <span>VIDEO GIỚI THIỆU ĐỀ ÁN • 45 GIÂY NẮM TRỌN HỆ SINH THÁI</span>
-          </div>
-          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Khám phá nền tảng ULIS Vibe qua Video Đồ Họa Động
-          </h2>
-          <p class="text-sm sm:text-base text-slate-600 mt-3.5 leading-relaxed">
-            Trải nghiệm trực quan hóa 6 phân cảnh trọng tâm của đề án: Từ dữ liệu khảo sát thực tế 105 sinh viên, mô hình Event Hub tập trung, danh bạ 30+ câu lạc bộ đến hệ thống chuẩn hóa chứng nhận A1–A2–A3.
-          </p>
-        </div>
-
         <!-- Video Showcase Frame (Pure 16:9 Motion Display) -->
         <div class="rounded-3xl border border-slate-200 shadow-2xl overflow-hidden max-w-5xl mx-auto bg-slate-950">
           <div class="w-full relative aspect-video overflow-hidden">
@@ -742,7 +691,6 @@ const templateHtml = `<!DOCTYPE html>
             </iframe>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -760,16 +708,6 @@ const templateHtml = `<!DOCTYPE html>
             <p class="text-sm text-slate-600 mt-2 max-w-2xl">
               Để xây dựng giải pháp thực tế, Nhóm 109 đã tiến hành khảo sát ngẫu nhiên <strong>105 sinh viên trường Đại học Ngoại ngữ</strong> về mức độ tiếp cận thông tin, khó khăn gặp phải và nhu cầu sử dụng nền tảng tập trung.
             </p>
-          </div>
-
-          <!-- Switcher: Live 3D Charts vs Original Images -->
-          <div class="flex items-center p-1 bg-slate-100 rounded-2xl border border-slate-200 shrink-0">
-            <button id="btn-survey-charts" class="px-4 py-2 rounded-xl text-xs font-bold bg-blue-900 text-white transition flex items-center gap-1.5 shadow-2xs">
-              <i data-lucide="box" class="w-4 h-4"></i> Biểu đồ 3D tương tác
-            </button>
-            <button id="btn-survey-originals" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-900 transition flex items-center gap-1.5">
-              <i data-lucide="image" class="w-4 h-4"></i> Ảnh báo cáo gốc
-            </button>
           </div>
         </div>
 
