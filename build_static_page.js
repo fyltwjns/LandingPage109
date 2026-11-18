@@ -553,54 +553,43 @@ const templateHtml = `<!DOCTYPE html>
       <div class="flex items-center justify-between h-20 gap-3">
         
         <!-- Logo & Brand (Chuẩn cổng sự kiện) -->
-        <a href="#hero" class="flex items-center gap-3 group shrink-0">
-          <img src="./assets/ulis-logo.png" alt="ULIS Logo" class="w-12 h-12 object-contain group-hover:scale-105 transition-transform" />
-          <div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-xl sm:text-2xl font-black tracking-tight text-[#0B2341] group-hover:text-blue-900 transition">ULIS VIBE</span>
-              <span class="px-2 py-0.5 text-[10px] font-extrabold bg-blue-100 text-blue-900 rounded-full uppercase tracking-wider">CỔNG SỰ KIỆN</span>
-            </div>
-            <p class="text-[11px] text-slate-500 font-semibold tracking-tight hidden lg:block">Cổng Thông Tin Hoạt Động & Tra Cứu Cert A1-A2-A3</p>
+        <a href="#hero" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+          <img src="./assets/ulis-logo.png" alt="ULIS Logo" class="w-10 h-10 sm:w-11 sm:h-11 object-contain group-hover:scale-105 transition-transform" />
+          <div class="flex items-center gap-1.5">
+            <span class="text-xl sm:text-2xl font-black tracking-tight text-[#0B2341] group-hover:text-blue-900 transition">ULIS VIBE</span>
+            <span class="px-2 py-0.5 text-[10px] font-extrabold bg-blue-100 text-blue-900 rounded-full uppercase tracking-wider">CỔNG SỰ KIỆN</span>
           </div>
         </a>
 
-        <!-- Quick Header Search Bar (Mô phỏng youth.is.vnu) -->
-        <div class="hidden xl:flex items-center relative w-72 2xl:w-80">
+        <!-- Quick Header Search Bar (Chỉ hiển thị trên màn hình siêu rộng 2xl) -->
+        <div class="hidden 2xl:flex items-center relative w-64">
           <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
           <input type="text" id="header-search-input" placeholder="Tìm sự kiện, CLB, chứng chỉ..." class="w-full pl-9 pr-3.5 py-2 bg-slate-100 hover:bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:bg-white transition" />
         </div>
 
-        <!-- Desktop Navigation Links (Single-line, Full coverage) -->
-        <nav class="hidden lg:flex items-center gap-1 xl:gap-1.5 font-semibold text-xs xl:text-sm text-slate-700 whitespace-nowrap shrink-0">
-          <a href="#hero" class="px-2.5 py-1.5 rounded-xl hover:text-blue-950 hover:bg-slate-100 transition whitespace-nowrap">Trang chủ</a>
-          <a href="#event-hub" class="px-2.5 py-1.5 rounded-xl text-blue-950 hover:bg-blue-50 transition flex items-center gap-1 font-bold whitespace-nowrap">
-            <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-800"></i> Sự kiện
-          </a>
-          <a href="#club-directory" class="px-2.5 py-1.5 rounded-xl text-slate-700 hover:text-blue-950 hover:bg-slate-100 transition flex items-center gap-1 whitespace-nowrap">
-            <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> CLB & Đội nhóm
-          </a>
-          <a href="#leaderboard" class="px-2.5 py-1.5 rounded-xl text-slate-700 hover:text-amber-950 hover:bg-amber-50 transition flex items-center gap-1 whitespace-nowrap">
-            <i data-lucide="award" class="w-3.5 h-3.5 text-amber-600"></i> Vinh danh
-          </a>
-          <a href="#cert-hub" class="px-2.5 py-1.5 rounded-xl text-slate-700 hover:text-blue-950 hover:bg-slate-100 transition flex items-center gap-1 whitespace-nowrap">
-            <i data-lucide="file-check-2" class="w-3.5 h-3.5 text-indigo-700"></i> Cert Hub
-          </a>
-          <a href="#news" class="px-2.5 py-1.5 rounded-xl hover:text-blue-950 hover:bg-slate-100 transition whitespace-nowrap">Tin tức</a>
-          <a href="#gallery" class="px-2.5 py-1.5 rounded-xl hover:text-blue-950 hover:bg-slate-100 transition whitespace-nowrap">Khoảnh khắc</a>
+        <!-- Desktop Navigation Links (Single-line, Clean editorial text) -->
+        <nav class="hidden lg:flex items-center gap-1 xl:gap-2 font-semibold text-xs xl:text-sm text-slate-700 whitespace-nowrap shrink-0">
+          <a href="#hero" class="px-2 xl:px-2.5 py-1.5 rounded-xl hover:text-blue-950 hover:bg-slate-100 transition whitespace-nowrap">Trang chủ</a>
+          <a href="#event-hub" class="px-2 xl:px-2.5 py-1.5 rounded-xl text-blue-950 font-bold hover:bg-blue-50 transition whitespace-nowrap">Sự kiện</a>
+          <a href="#club-directory" class="px-2 xl:px-2.5 py-1.5 rounded-xl hover:text-blue-950 hover:bg-slate-100 transition whitespace-nowrap">Câu lạc bộ</a>
+          <a href="#leaderboard" class="px-2 xl:px-2.5 py-1.5 rounded-xl hover:text-amber-950 hover:bg-amber-50 transition whitespace-nowrap">Vinh danh</a>
+          <a href="#cert-hub" class="px-2 xl:px-2.5 py-1.5 rounded-xl hover:text-blue-950 hover:bg-slate-100 transition whitespace-nowrap">Cert Hub</a>
+          <a href="#news" class="px-2 xl:px-2.5 py-1.5 rounded-xl hover:text-blue-950 hover:bg-slate-100 transition whitespace-nowrap">Tin tức</a>
+          <a href="#gallery" class="px-2 xl:px-2.5 py-1.5 rounded-xl hover:text-blue-950 hover:bg-slate-100 transition whitespace-nowrap">Khoảnh khắc</a>
         </nav>
 
         <!-- Right Action Buttons (Bookmark & VNU Mail Login) -->
         <div class="hidden sm:flex items-center gap-2 shrink-0">
           <!-- Saved Events Button -->
-          <button id="btn-view-saved" class="relative p-2.5 rounded-xl border border-slate-200 text-slate-700 hover:text-blue-950 hover:bg-slate-100 transition shrink-0" title="Sự kiện đã lưu">
+          <button id="btn-view-saved" class="relative p-2 xl:p-2.5 rounded-xl border border-slate-200 text-slate-700 hover:text-blue-950 hover:bg-slate-100 transition shrink-0 cursor-pointer" title="Sự kiện đã lưu">
             <i data-lucide="bookmark" class="w-4 h-4 xl:w-5 xl:h-5"></i>
             <span id="saved-events-badge" class="hidden absolute -top-1.5 -right-1.5 w-4 h-4 bg-amber-500 text-amber-950 font-bold text-[10px] rounded-full flex items-center justify-center border-2 border-white shadow-xs">0</span>
           </button>
 
           <!-- VNU Mail SSO Login Button (Mô phỏng youth.is.vnu) -->
-          <button onclick="openLoginModal()" class="px-3.5 py-2 bg-[#0B2341] hover:bg-blue-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-sm whitespace-nowrap shrink-0">
+          <button onclick="openLoginModal()" class="px-3 xl:px-3.5 py-2 bg-[#0B2341] hover:bg-blue-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap shrink-0 cursor-pointer">
             <i data-lucide="user" class="w-3.5 h-3.5 text-amber-400"></i>
-            <span>Đăng nhập VNU Mail</span>
+            <span>Đăng nhập<span class="hidden xl:inline"> VNU Mail</span></span>
           </button>
         </div>
 
