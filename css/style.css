@@ -243,14 +243,14 @@ header nav a {
 /* ========================================== */
 #chatbot-window {
   position: fixed !important;
-  bottom: 5.5rem !important;
+  bottom: 6rem !important;
   right: 1.5rem !important;
   z-index: 50 !important;
 }
 
 @media (max-width: 640px) {
   #chatbot-window {
-    bottom: 5rem !important;
+    bottom: 5.5rem !important;
     right: 1rem !important;
   }
 }

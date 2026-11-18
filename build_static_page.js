@@ -1937,24 +1937,17 @@ ${teamHtml}
   <!-- CHATBOT AI ASSISTANT (6-PHASE GUIDED CONVERSATION) -->
   <!-- ==================================================== -->
   <div id="vibe-chatbot-wrapper" class="relative z-50">
-    <!-- Floating Trigger Button -->
+    <!-- Floating Circular Trigger Button -->
     <button 
       id="btn-chatbot-toggle" 
       onclick="toggleChatbot()" 
-      class="fixed bottom-6 right-6 z-50 p-3 sm:px-4 sm:py-3 bg-[#0B2341] hover:bg-blue-900 text-white rounded-full shadow-2xl border-2 border-amber-400/80 flex items-center gap-2.5 transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer"
-      title="Mở Trợ lý ảo AI ULIS Vibe (Tư vấn 6 Phase)"
+      class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#0B2341] hover:bg-blue-900 text-white shadow-2xl border-2 border-amber-400 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group cursor-pointer"
+      title="Hỏi Trợ lý AI ULIS Vibe"
       aria-label="Mở Trợ lý ảo AI ULIS Vibe">
-      <div class="relative w-8 h-8 rounded-full bg-blue-900 flex items-center justify-center text-amber-400 group-hover:rotate-12 transition-transform">
-        <i data-lucide="bot" class="w-5 h-5"></i>
-        <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0B2341] animate-ping"></span>
-        <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#0B2341]"></span>
-      </div>
-      <div class="hidden sm:flex flex-col text-left">
-        <span class="text-xs font-black tracking-tight text-white flex items-center gap-1">
-          Hỏi Trợ Lý AI
-          <span class="px-1.5 py-0.2 bg-amber-400 text-amber-950 text-[9px] font-extrabold rounded-full">6 PHASES</span>
-        </span>
-        <span class="text-[10px] text-blue-200 font-medium">Tư vấn CLB, ĐRL & Học bổng</span>
+      <div class="relative flex items-center justify-center">
+        <i data-lucide="bot" class="w-7 h-7 sm:w-8 sm:h-8 text-amber-400 group-hover:rotate-12 transition-transform"></i>
+        <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#0B2341] animate-ping"></span>
+        <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#0B2341]"></span>
       </div>
     </button>
 
