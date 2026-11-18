@@ -416,6 +416,8 @@ const teamTableHtml = D.teamMembers.map(member => `
 `).join("\n");
 
 // 8. Generate Original Survey Images Grid HTML
+const glowCtaHtml = fs.readFileSync('./components/u211-glow-cta.html', 'utf8');
+
 const originalImagesHtml = `<!-- Mode 2: Original Extracted Images from Group 109 Word Document -->
         <div id="survey-originals-container" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8">
           
@@ -1815,6 +1817,20 @@ ${teamHtml}
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION CTA: GLOW-BORDER SIGN-UP CTA (#211) -->
+    <!-- ==================================================== -->
+    <section id="cta-signup" class="py-16 sm:py-20 bg-slate-50 border-t border-slate-200 relative overflow-hidden flex flex-col items-center justify-center">
+      <!-- Ambient subtle background glow -->
+      <div class="absolute inset-0 pointer-events-none opacity-40 flex items-center justify-center">
+        <div class="w-[600px] h-[350px] bg-gradient-to-tr from-blue-100/50 via-indigo-50/40 to-sky-100/50 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+${glowCtaHtml}
       </div>
     </section>
   </main>
