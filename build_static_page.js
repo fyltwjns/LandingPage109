@@ -1937,17 +1937,17 @@ ${teamHtml}
   <!-- CHATBOT AI ASSISTANT (6-PHASE GUIDED CONVERSATION) -->
   <!-- ==================================================== -->
   <div id="vibe-chatbot-wrapper" class="relative z-50">
-    <!-- Floating Circular Trigger Button -->
+    <!-- Floating Circular Trigger Button (White Background) -->
     <button 
       id="btn-chatbot-toggle" 
       onclick="toggleChatbot()" 
-      class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#0B2341] hover:bg-blue-900 text-white shadow-2xl border-2 border-amber-400 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group cursor-pointer"
+      class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white hover:bg-slate-50 text-[#0B2341] shadow-2xl border-2 border-slate-200 hover:border-blue-900/30 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 group cursor-pointer"
       title="Hỏi Trợ lý AI ULIS Vibe"
       aria-label="Mở Trợ lý ảo AI ULIS Vibe">
       <div class="relative flex items-center justify-center">
-        <i data-lucide="bot" class="w-7 h-7 sm:w-8 sm:h-8 text-amber-400 group-hover:rotate-12 transition-transform"></i>
-        <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#0B2341] animate-ping"></span>
-        <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#0B2341]"></span>
+        <i data-lucide="bot" class="w-7 h-7 sm:w-8 sm:h-8 text-[#0B2341] group-hover:rotate-12 transition-transform"></i>
+        <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white animate-ping"></span>
+        <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white"></span>
       </div>
     </button>
 
