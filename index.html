@@ -160,37 +160,66 @@
 
   <main>
     <!-- ==================================================== -->
-    <!-- KHU VỰC 1: ĐẦU TRANG (HERO SECTION) -->
+    <!-- KHU VỰC 1: ĐẦU TRANG (HERO SECTION REDESIGN) -->
     <!-- ==================================================== -->
-    <section id="hero" class="relative pt-12 pb-14 overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-slate-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="hero" class="relative pt-12 pb-16 overflow-hidden bg-gradient-to-b from-blue-50/70 via-white to-slate-50">
+      <!-- Ambient decorative glow -->
+      <div class="absolute inset-0 pointer-events-none opacity-40">
+        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-blue-200/50 via-sky-100/30 to-transparent rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-4xl mx-auto">
 
+          <!-- Academic Status Eyebrow Badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-blue-200/90 text-blue-950 text-xs font-bold mb-6 shadow-2xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>ĐHQGHN • Trường Đại học Ngoại ngữ • Cổng Ngoại Khóa Số</span>
+            <span class="text-slate-300">|</span>
+            <span class="text-blue-800 font-semibold">Học kỳ I 2026-2027</span>
+          </div>
+
           <!-- Main Heading (Solid Color, No AI Gradient Text) -->
-          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-blue-950 tracking-tight leading-tight mb-6">
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-[#0B2341] tracking-tight leading-tight mb-5">
             Không còn bỏ lỡ sự kiện & cơ hội với ULIS Vibe
           </h1>
 
           <!-- Value Proposition / Subtitle -->
-          <p class="text-base sm:text-xl text-slate-700 font-normal leading-relaxed mb-10 max-w-3xl mx-auto">
-            Nền tảng tập trung duy nhất đồng bộ hóa <strong>Lịch sự kiện toàn trường</strong>, <strong>Hệ thống tuyển quân Câu lạc bộ</strong> và <strong>Tra cứu chuẩn hóa chứng nhận A1, A2, A3</strong> dành riêng cho sinh viên Đại học Ngoại ngữ - ĐHQGHN.
+          <p class="text-base sm:text-xl text-slate-700 font-normal leading-relaxed mb-8 max-w-3xl mx-auto">
+            Nền tảng tập trung duy nhất đồng bộ hóa <strong>Lịch sự kiện toàn trường</strong>, <strong>Hệ thống tuyển quân 50+ CLB</strong> và <strong>Tra cứu chuẩn hóa chứng nhận A1, A2, A3</strong> dành riêng cho sinh viên Đại học Ngoại ngữ - ĐHQGHN.
           </p>
+
+          <!-- Realtime Academic Highlights Bar -->
+          <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mb-10 text-xs font-semibold text-slate-700">
+            <div class="flex items-center gap-2 px-3.5 py-2 bg-white rounded-xl border border-slate-200/90 shadow-2xs hover:border-blue-300 transition">
+              <i data-lucide="calendar" class="w-4 h-4 text-blue-800"></i>
+              <span><strong>12</strong> Sự kiện mở đơn</span>
+            </div>
+            <div class="flex items-center gap-2 px-3.5 py-2 bg-white rounded-xl border border-slate-200/90 shadow-2xs hover:border-emerald-300 transition">
+              <i data-lucide="users" class="w-4 h-4 text-emerald-700"></i>
+              <span><strong>50+</strong> CLB tuyển thành viên</span>
+            </div>
+            <div class="flex items-center gap-2 px-3.5 py-2 bg-white rounded-xl border border-slate-200/90 shadow-2xs hover:border-amber-300 transition">
+              <i data-lucide="award" class="w-4 h-4 text-amber-600"></i>
+              <span><strong>100%</strong> Chuẩn Cert A1 • A2 • A3</span>
+            </div>
+          </div>
 
           <!-- 3 Core Navigation CTA Buttons (Yêu cầu Khu vực 1 của File Word) -->
           <div class="flex flex-wrap items-center justify-center gap-4">
-            <a href="#event-hub" class="px-6 py-3.5 bg-blue-950 hover:bg-blue-900 text-white rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-sm hover:-translate-y-0.5">
+            <a href="#event-hub" class="px-6 py-3.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-sm hover:-translate-y-0.5 active:scale-95">
               <i data-lucide="calendar" class="w-5 h-5 text-amber-400"></i>
               <span>Khám phá Event Hub</span>
               <i data-lucide="chevron-right" class="w-4 h-4 opacity-70"></i>
             </a>
 
-            <a href="#club-directory" class="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-2xs hover:shadow-xs hover:-translate-y-0.5">
+            <a href="#club-directory" class="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-2xs hover:shadow-xs hover:-translate-y-0.5 active:scale-95">
               <i data-lucide="users" class="w-5 h-5 text-emerald-700"></i>
               <span>Duyệt Club Directory</span>
               <span class="px-2 py-0.5 text-[10px] bg-emerald-100 text-emerald-950 rounded font-bold">3 Nhóm</span>
             </a>
 
-            <a href="#cert-hub" class="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-2xs hover:shadow-xs hover:-translate-y-0.5">
+            <a href="#cert-hub" class="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-2xs hover:shadow-xs hover:-translate-y-0.5 active:scale-95">
               <i data-lucide="award" class="w-5 h-5 text-amber-600"></i>
               <span>Tra cứu Cert Hub</span>
               <span class="px-2 py-0.5 text-[10px] bg-amber-100 text-amber-950 rounded font-bold">A1 • A2 • A3</span>
@@ -323,33 +352,33 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           
           <!-- Hạng 2: Bạc -->
-          <div class="order-2 md:order-1 bg-slate-50 rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between relative overflow-hidden">
+          <div class="order-2 md:order-1 podium-silver rounded-3xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden interactive-card">
             <div class="absolute top-4 right-4">
-              <span class="w-8 h-8 rounded-full bg-slate-200 text-slate-700 font-black text-sm flex items-center justify-center border-2 border-white shadow-2xs">2</span>
+              <span class="w-8 h-8 rounded-full bg-slate-200 text-slate-800 font-black text-sm flex items-center justify-center border-2 border-white shadow-2xs">🥈 2</span>
             </div>
             <div>
               <div class="flex items-center gap-4 mb-4">
-                <div class="w-16 h-16 rounded-full bg-slate-200 border-2 border-slate-300 flex items-center justify-center font-bold text-slate-700 text-xl overflow-hidden shrink-0">
-                  <span class="bg-gradient-to-br from-slate-400 to-slate-500 w-full h-full flex items-center justify-center text-white font-extrabold">HN</span>
+                <div class="w-16 h-16 rounded-full bg-slate-200 border-2 border-slate-300 flex items-center justify-center font-bold text-slate-700 text-xl overflow-hidden shrink-0 shadow-xs">
+                  <span class="bg-gradient-to-br from-slate-400 to-slate-600 w-full h-full flex items-center justify-center text-white font-extrabold">HN</span>
                 </div>
                 <div>
                   <h3 class="font-bold text-slate-900 text-base">Trần Hoàng Nam</h3>
                   <p class="text-xs text-slate-500">Khoa NN&VH Nhật Bản • K57</p>
-                  <span class="inline-block mt-1 px-2 py-0.5 bg-slate-200/80 text-slate-800 text-[10px] font-bold rounded">Cán bộ CLB Năng nổ</span>
+                  <span class="inline-block mt-1 px-2 py-0.5 bg-slate-200/90 text-slate-800 text-[10px] font-bold rounded">Cán bộ CLB Năng nổ</span>
                 </div>
               </div>
               <div class="grid grid-cols-3 gap-2 p-3 bg-white rounded-2xl border border-slate-200/80 text-center mb-4">
                 <div>
                   <span class="block text-base font-extrabold text-[#0B2341] tabular-nums">13</span>
-                  <span class="text-[10px] text-slate-500 font-medium">Huy hiệu</span>
+                  <span class="text-[10px] text-slate-500 font-medium uppercase">Huy hiệu</span>
                 </div>
                 <div class="border-x border-slate-100">
                   <span class="block text-base font-extrabold text-emerald-700 tabular-nums">95</span>
-                  <span class="text-[10px] text-slate-500 font-medium">Điểm RL</span>
+                  <span class="text-[10px] text-slate-500 font-medium uppercase">Điểm RL</span>
                 </div>
                 <div>
                   <span class="block text-base font-extrabold text-amber-700 tabular-nums">8</span>
-                  <span class="text-[10px] text-slate-500 font-medium">Sự kiện</span>
+                  <span class="text-[10px] text-slate-500 font-medium uppercase">Sự kiện</span>
                 </div>
               </div>
             </div>
@@ -360,13 +389,13 @@
           </div>
 
           <!-- Hạng 1: Vàng (Nổi bật, Elevated) -->
-          <div class="order-1 md:order-2 bg-gradient-to-b from-amber-50/70 via-white to-amber-50/30 rounded-3xl p-6 sm:p-7 border-2 border-amber-300 shadow-md flex flex-col justify-between relative overflow-hidden -translate-y-2">
+          <div class="order-1 md:order-2 podium-gold rounded-3xl p-6 sm:p-7 shadow-md flex flex-col justify-between relative overflow-hidden -translate-y-2 interactive-card">
             <div class="absolute top-4 right-4">
-              <span class="w-9 h-9 rounded-full bg-amber-500 text-amber-950 font-black text-sm flex items-center justify-center border-2 border-white shadow-xs">👑 1</span>
+              <span class="px-3 py-1 rounded-full bg-amber-500 text-amber-950 font-black text-xs flex items-center gap-1 border-2 border-white shadow-xs">👑 TOP 1</span>
             </div>
             <div>
               <div class="flex items-center gap-4 mb-5">
-                <div class="w-18 h-18 rounded-full bg-amber-100 border-2 border-amber-400 flex items-center justify-center font-bold text-amber-900 text-2xl overflow-hidden shrink-0 shadow-xs">
+                <div class="w-18 h-18 rounded-full bg-amber-100 border-2 border-amber-400 flex items-center justify-center font-bold text-amber-900 text-2xl overflow-hidden shrink-0 shadow-xs ring-4 ring-amber-200/60">
                   <span class="bg-gradient-to-br from-amber-400 to-amber-600 w-full h-full flex items-center justify-center text-white font-extrabold">MC</span>
                 </div>
                 <div>
@@ -397,19 +426,19 @@
             </div>
             <div class="pt-3 border-t border-amber-200 flex items-center justify-between text-xs">
               <span class="text-amber-950 font-semibold">Tích lũy trọn vẹn A1 • A2 • A3</span>
-              <button onclick="showToast('Nguyễn Minh Châu đã đạt danh hiệu Sinh viên Xuất sắc Tháng 11!', 'success')" class="font-bold text-amber-900 hover:underline">Vinh danh ✨</button>
+              <button onclick="showToast('Nguyễn Minh Châu đã đạt danh hiệu Sinh viên Xuất sắc Tháng 11!', 'success')" class="font-bold text-amber-900 hover:underline cursor-pointer">Vinh danh ✨</button>
             </div>
           </div>
 
           <!-- Hạng 3: Đồng -->
-          <div class="order-3 bg-slate-50 rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between relative overflow-hidden">
+          <div class="order-3 podium-bronze rounded-3xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden interactive-card">
             <div class="absolute top-4 right-4">
-              <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-900 font-black text-sm flex items-center justify-center border-2 border-white shadow-2xs">3</span>
+              <span class="w-8 h-8 rounded-full bg-orange-200 text-amber-950 font-black text-sm flex items-center justify-center border-2 border-white shadow-2xs">🥉 3</span>
             </div>
             <div>
               <div class="flex items-center gap-4 mb-4">
-                <div class="w-16 h-16 rounded-full bg-amber-100 border-2 border-amber-300 flex items-center justify-center font-bold text-amber-800 text-xl overflow-hidden shrink-0">
-                  <span class="bg-gradient-to-br from-amber-600 to-amber-700 w-full h-full flex items-center justify-center text-white font-extrabold">PT</span>
+                <div class="w-16 h-16 rounded-full bg-amber-100 border-2 border-amber-300 flex items-center justify-center font-bold text-amber-800 text-xl overflow-hidden shrink-0 shadow-xs">
+                  <span class="bg-gradient-to-br from-amber-600 to-amber-800 w-full h-full flex items-center justify-center text-white font-extrabold">PT</span>
                 </div>
                 <div>
                   <h3 class="font-bold text-slate-900 text-base">Lê Phương Thảo</h3>
@@ -420,15 +449,15 @@
               <div class="grid grid-cols-3 gap-2 p-3 bg-white rounded-2xl border border-slate-200/80 text-center mb-4">
                 <div>
                   <span class="block text-base font-extrabold text-[#0B2341] tabular-nums">11</span>
-                  <span class="text-[10px] text-slate-500 font-medium">Huy hiệu</span>
+                  <span class="text-[10px] text-slate-500 font-medium uppercase">Huy hiệu</span>
                 </div>
                 <div class="border-x border-slate-100">
                   <span class="block text-base font-extrabold text-emerald-700 tabular-nums">92</span>
-                  <span class="text-[10px] text-slate-500 font-medium">Điểm RL</span>
+                  <span class="text-[10px] text-slate-500 font-medium uppercase">Điểm RL</span>
                 </div>
                 <div>
                   <span class="block text-base font-extrabold text-amber-700 tabular-nums">7</span>
-                  <span class="text-[10px] text-slate-500 font-medium">Sự kiện</span>
+                  <span class="text-[10px] text-slate-500 font-medium uppercase">Sự kiện</span>
                 </div>
               </div>
             </div>
@@ -3313,6 +3342,128 @@
         </div>
       </div>
 
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================== -->
+        <!-- BỘ TÍNH ĐIỂM RÈN LUYỆN (ĐRL) TƯƠNG TÁC THỜI GIAN THỰC -->
+        <!-- ==================================================== -->
+        <div id="drl-simulator-card" class="mt-10 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+            <div>
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="px-3 py-1 bg-emerald-100 text-emerald-950 rounded-full text-xs font-bold flex items-center gap-1.5">
+                  <i data-lucide="calculator" class="w-3.5 h-3.5 text-emerald-700"></i> Tính năng Độc quyền Đề án 109
+                </span>
+                <span class="text-xs text-slate-500 hidden sm:inline">• Chuẩn Quy chế ĐHQGHN</span>
+              </div>
+              <h3 class="text-2xl font-black text-slate-900 tracking-tight">
+                Bộ Mô Phỏng & Dự Phóng Điểm Rèn Luyện (ĐRL) Học Kỳ
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl">
+                Tự điều chỉnh số lượng chứng nhận A1, A2, A3 bạn dự định tham gia để xem tổng điểm ĐRL dự kiến, xếp loại rèn luyện và khả năng đạt Học bổng Khuyến khích Học tập.
+              </p>
+            </div>
+            <button onclick="calculateDrlScore()" class="px-4 py-2.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-xs shrink-0 cursor-pointer">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-amber-400"></i> Tính toán lại
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
+            <!-- Cột trái: 4 Sliders/Inputs -->
+            <div class="lg:col-span-7 space-y-5">
+              
+              <!-- Input 1: Điểm nền -->
+              <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200/80">
+                <div class="flex items-center justify-between mb-2">
+                  <label for="drl-calc-base" class="text-xs font-bold text-slate-800 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> Điểm nền rèn luyện & Ý thức học tập
+                  </label>
+                  <span class="text-xs font-extrabold text-[#0B2341] tabular-nums" id="drl-base-val">70 điểm</span>
+                </div>
+                <input type="range" id="drl-calc-base" min="50" max="85" value="70" step="1" oninput="document.getElementById('drl-base-val').textContent = this.value + ' điểm'; calculateDrlScore();" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-950" />
+                <div class="flex justify-between text-[10px] text-slate-600 mt-1">
+                  <span>50đ (Cơ bản)</span>
+                  <span>70đ (Trung bình ULIS)</span>
+                  <span>85đ (Ý thức tốt)</span>
+                </div>
+              </div>
+
+              <!-- Input 2: Cert A1 -->
+              <div class="p-4 bg-blue-50/70 rounded-2xl border border-blue-200/80">
+                <div class="flex items-center justify-between mb-2">
+                  <label for="drl-calc-a1" class="text-xs font-bold text-blue-950 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-700"></span> Số sự kiện Cert A1 (Học thuật & NCKH)
+                    <span class="px-2 py-0.5 rounded bg-blue-200 text-blue-950 text-[10px] font-bold">+5đ / sự kiện</span>
+                  </label>
+                  <span class="text-xs font-extrabold text-blue-950 tabular-nums" id="drl-a1-val">2 sự kiện (+10đ)</span>
+                </div>
+                <input type="range" id="drl-calc-a1" min="0" max="5" value="2" step="1" oninput="document.getElementById('drl-a1-val').textContent = this.value + ' sự kiện (+' + (this.value*5) + 'đ)'; calculateDrlScore();" class="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer accent-blue-950" />
+              </div>
+
+              <!-- Input 3: Cert A2 -->
+              <div class="p-4 bg-amber-50/70 rounded-2xl border border-amber-200/80">
+                <div class="flex items-center justify-between mb-2">
+                  <label for="drl-calc-a2" class="text-xs font-bold text-amber-950 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span> Số sự kiện Cert A2 (Kỹ năng & Ngoại khóa)
+                    <span class="px-2 py-0.5 rounded bg-amber-200 text-amber-950 text-[10px] font-bold">+3đ / sự kiện</span>
+                  </label>
+                  <span class="text-xs font-extrabold text-amber-950 tabular-nums" id="drl-a2-val">2 sự kiện (+6đ)</span>
+                </div>
+                <input type="range" id="drl-calc-a2" min="0" max="5" value="2" step="1" oninput="document.getElementById('drl-a2-val').textContent = this.value + ' sự kiện (+' + (this.value*3) + 'đ)'; calculateDrlScore();" class="w-full h-2 bg-amber-200 rounded-lg appearance-none cursor-pointer accent-amber-600" />
+              </div>
+
+              <!-- Input 4: Cert A3 -->
+              <div class="p-4 bg-emerald-50/70 rounded-2xl border border-emerald-200/80">
+                <div class="flex items-center justify-between mb-2">
+                  <label for="drl-calc-a3" class="text-xs font-bold text-emerald-950 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Số sự kiện Cert A3 (Tình nguyện & Xã hội)
+                    <span class="px-2 py-0.5 rounded bg-emerald-200 text-emerald-950 text-[10px] font-bold">+4đ / sự kiện</span>
+                  </label>
+                  <span class="text-xs font-extrabold text-emerald-950 tabular-nums" id="drl-a3-val">1 sự kiện (+4đ)</span>
+                </div>
+                <input type="range" id="drl-calc-a3" min="0" max="5" value="1" step="1" oninput="document.getElementById('drl-a3-val').textContent = this.value + ' sự kiện (+' + (this.value*4) + 'đ)'; calculateDrlScore();" class="w-full h-2 bg-emerald-200 rounded-lg appearance-none cursor-pointer accent-emerald-600" />
+              </div>
+
+            </div>
+
+            <!-- Cột phải: Live Result Card -->
+            <div class="lg:col-span-5 bg-gradient-to-br from-[#0B2341] via-blue-950 to-slate-900 rounded-3xl p-6 sm:p-7 text-white flex flex-col justify-between shadow-lg relative overflow-hidden">
+              <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+              <div>
+                <span class="text-xs font-bold text-blue-200 uppercase tracking-wider block mb-2">Kết quả mô phỏng dự kiến</span>
+                <div class="flex items-baseline gap-2 mb-3">
+                  <span id="drl-calc-total" class="text-5xl font-black text-amber-400 tabular-nums">90</span>
+                  <span class="text-base text-blue-200 font-bold">/ 100 ĐRL</span>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-blue-900/80 rounded-full h-3 mb-4 overflow-hidden border border-blue-800">
+                  <div id="drl-calc-bar" class="bg-gradient-to-r from-amber-400 via-emerald-400 to-emerald-500 h-full rounded-full transition-all duration-300" style="width: 90%;"></div>
+                </div>
+
+                <div class="flex items-center justify-between mb-4 pb-4 border-b border-blue-800/80">
+                  <span class="text-xs text-blue-200 font-medium">Xếp loại rèn luyện:</span>
+                  <div id="drl-calc-rank">
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-950 font-black text-xs">Xuất Sắc 🏆</span>
+                  </div>
+                </div>
+
+                <div id="drl-calc-scholarship" class="p-3 bg-blue-900/60 rounded-xl border border-blue-800 text-xs">
+                  <span class="text-emerald-300 font-bold flex items-center gap-1.5">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i> Đủ điều kiện xét Học bổng KKHT & Vinh danh Top ĐHQGHN
+                  </span>
+                </div>
+              </div>
+
+              <div class="pt-5 mt-4 border-t border-blue-900 flex items-center justify-between text-xs">
+                <span class="text-blue-300">Cần tư vấn sâu theo khóa?</span>
+                <button onclick="toggleChatbot()" class="font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 cursor-pointer">
+                  Hỏi Chatbot AI <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>

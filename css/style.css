@@ -134,14 +134,50 @@ header nav a {
 
 /* Card Transitions & Single Elevation */
 .interactive-card {
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
   border-radius: 16px;
 }
 
 .interactive-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08), 0 4px 8px -4px rgba(15, 23, 42, 0.04);
-  border-color: #CBD5E1;
+  transform: translateY(-4px);
+  box-shadow: 0 20px 30px -10px rgba(11, 35, 65, 0.08), 0 8px 16px -6px rgba(11, 35, 65, 0.04);
+  border-color: #94A3B8;
+}
+
+.interactive-card:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* Podium Cards */
+.podium-gold {
+  background: linear-gradient(180deg, rgba(254, 243, 199, 0.7) 0%, #FFFFFF 60%);
+  border: 2px solid #F59E0B !important;
+  box-shadow: 0 20px 40px -12px rgba(245, 158, 11, 0.25), 0 0 0 1px rgba(245, 158, 11, 0.2);
+}
+.podium-silver {
+  background: linear-gradient(180deg, rgba(241, 245, 249, 0.8) 0%, #FFFFFF 60%);
+  border: 1.5px solid #94A3B8 !important;
+  box-shadow: 0 12px 24px -8px rgba(148, 163, 184, 0.2);
+}
+.podium-bronze {
+  background: linear-gradient(180deg, rgba(254, 237, 230, 0.7) 0%, #FFFFFF 60%);
+  border: 1.5px solid #FDBA74 !important;
+  box-shadow: 0 12px 24px -8px rgba(251, 146, 60, 0.2);
+}
+
+/* Tactile Button Response */
+button:active:not(:disabled), 
+a:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Toast Notification */

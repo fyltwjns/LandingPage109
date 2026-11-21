@@ -2939,3 +2939,59 @@ function handleChatbotInputSubmit(e) {
 }
 window.handleChatbotInputSubmit = handleChatbotInputSubmit;
 
+// ====================================================
+// 10. INTERACTIVE ĐRL CALCULATOR WIDGET (CERT HUB)
+// ====================================================
+function calculateDrlScore() {
+  const baseInput = document.getElementById("drl-calc-base");
+  const a1Input = document.getElementById("drl-calc-a1");
+  const a2Input = document.getElementById("drl-calc-a2");
+  const a3Input = document.getElementById("drl-calc-a3");
+
+  if (!baseInput || !a1Input || !a2Input || !a3Input) return;
+
+  const base = parseInt(baseInput.value) || 70;
+  const a1 = parseInt(a1Input.value) || 0;
+  const a2 = parseInt(a2Input.value) || 0;
+  const a3 = parseInt(a3Input.value) || 0;
+
+  const a1Points = a1 * 5;
+  const a2Points = a2 * 3;
+  const a3Points = a3 * 4;
+  const totalRaw = base + a1Points + a2Points + a3Points;
+  const total = Math.min(100, Math.max(0, totalRaw));
+
+  // Update DOM values
+  const totalEl = document.getElementById("drl-calc-total");
+  const rankEl = document.getElementById("drl-calc-rank");
+  const scholarshipEl = document.getElementById("drl-calc-scholarship");
+  const barEl = document.getElementById("drl-calc-bar");
+
+  if (totalEl) totalEl.textContent = total;
+  if (barEl) barEl.style.width = total + "%";
+
+  if (rankEl && scholarshipEl) {
+    if (total >= 90) {
+      rankEl.innerHTML = `<span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-950 font-black text-xs">Xuất Sắc 🏆</span>`;
+      scholarshipEl.innerHTML = `<span class="text-emerald-800 font-bold flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-700"></i> Đủ điều kiện xét Học bổng KKHT & Vinh danh Top ĐHQGHN</span>`;
+    } else if (total >= 80) {
+      rankEl.innerHTML = `<span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-950 font-black text-xs">Tốt 🥇</span>`;
+      scholarshipEl.innerHTML = `<span class="text-blue-900 font-medium">Đạt chuẩn xét học bổng Khá/Tốt (Cần thêm +${90 - total}đ để đạt Xuất sắc)</span>`;
+    } else if (total >= 65) {
+      rankEl.innerHTML = `<span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-950 font-black text-xs">Khá 🥈</span>`;
+      scholarshipEl.innerHTML = `<span class="text-amber-900 font-medium">Mức ĐRL an toàn, chưa đủ điều kiện xét học bổng (Cần thêm +${80 - total}đ lên Tốt)</span>`;
+    } else if (total >= 50) {
+      rankEl.innerHTML = `<span class="px-2.5 py-1 rounded-full bg-orange-100 text-orange-950 font-black text-xs">Trung Bình 🥉</span>`;
+      scholarshipEl.innerHTML = `<span class="text-orange-900 font-medium">Cần tham gia thêm sự kiện khẩn cấp để cải thiện ĐRL</span>`;
+    } else {
+      rankEl.innerHTML = `<span class="px-2.5 py-1 rounded-full bg-red-100 text-red-950 font-black text-xs">Yếu 🚨</span>`;
+      scholarshipEl.innerHTML = `<span class="text-red-900 font-bold">Cảnh báo rèn luyện: Hãy mở Chatbot AI để nhận lộ trình cứu điểm ngay!</span>`;
+    }
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  }
+}
+window.calculateDrlScore = calculateDrlScore;
+
+
