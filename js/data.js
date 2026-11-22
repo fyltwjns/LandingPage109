@@ -100,6 +100,7 @@ const ULIS_DATA = {
     // 1. NHÓM HỌC THUẬT (ACADEMIC)
     {
       id: "ec-ulis",
+      image: "./assets/clubs/ec-ulis.webp",
       name: "CLB Tiếng Anh (English Club - EC ULIS)",
       acronym: "EC ULIS",
       category: "academic",
@@ -124,6 +125,7 @@ const ULIS_DATA = {
     },
     {
       id: "src-ulis",
+      image: "./assets/clubs/src-ulis.webp",
       name: "CLB Nghiên cứu Khoa học Sinh viên (SRC ULIS)",
       acronym: "SRC ULIS",
       category: "academic",
@@ -148,6 +150,7 @@ const ULIS_DATA = {
     },
     {
       id: "chinese-club",
+      image: "./assets/clubs/chinese-club.webp",
       name: "CLB Tiếng Trung (Hán Ngữ ULIS - HanYu Club)",
       acronym: "HYC",
       category: "academic",
@@ -172,6 +175,7 @@ const ULIS_DATA = {
     },
     {
       id: "japanese-club",
+      image: "./assets/clubs/japanese-club.webp",
       name: "CLB Tiếng Nhật Hikari (Hikari Japanese Club)",
       acronym: "HJC",
       category: "academic",
@@ -196,6 +200,7 @@ const ULIS_DATA = {
     },
     {
       id: "korean-club",
+      image: "./assets/clubs/korean-club.webp",
       name: "CLB Tiếng Hàn & Văn Hóa Hàn Quốc (K-ULIS)",
       acronym: "K-ULIS",
       category: "academic",
@@ -220,6 +225,7 @@ const ULIS_DATA = {
     },
     {
       id: "translation-club",
+      image: "./assets/clubs/translation-club.webp",
       name: "CLB Biên Phiên Dịch Trẻ (Young Translators Club - YTC)",
       acronym: "YTC ULIS",
       category: "academic",
@@ -246,6 +252,7 @@ const ULIS_DATA = {
     // 2. NHÓM SỞ THÍCH VÀ NĂNG KHIẾU (INTERESTS & TALENTS)
     {
       id: "mmc-ulis",
+      image: "./assets/clubs/mmc-ulis.webp",
       name: "CLB Âm Nhạc Ngoại Ngữ (Modern Music Club - MMC)",
       acronym: "MMC ULIS",
       category: "talents",
@@ -270,6 +277,7 @@ const ULIS_DATA = {
     },
     {
       id: "udc-ulis",
+      image: "./assets/clubs/udc-ulis.webp",
       name: "CLB Vũ Đạo Ngoại Ngữ (ULIS Dance Club - UDC)",
       acronym: "UDC ULIS",
       category: "talents",
@@ -294,6 +302,7 @@ const ULIS_DATA = {
     },
     {
       id: "umc-ulis",
+      image: "./assets/clubs/umc-ulis.webp",
       name: "CLB Truyền Thông & Nhiếp Ảnh (ULIS Media Club - UMC)",
       acronym: "UMC ULIS",
       category: "talents",
@@ -318,6 +327,7 @@ const ULIS_DATA = {
     },
     {
       id: "ufc-ulis",
+      image: "./assets/clubs/ufc-ulis.webp",
       name: "CLB Bóng Đá Sinh Viên ULIS (ULIS Football Club)",
       acronym: "UFC",
       category: "talents",
@@ -342,6 +352,7 @@ const ULIS_DATA = {
     },
     {
       id: "drama-club",
+      image: "./assets/clubs/drama-club.webp",
       name: "CLB Kịch Nghệ & Điện Ảnh Ngoại Ngữ (Drama Club)",
       acronym: "UDC Drama",
       category: "talents",
@@ -368,6 +379,7 @@ const ULIS_DATA = {
     // 3. NHÓM KỸ NĂNG VÀ TÌNH NGUYỆN (SKILLS & VOLUNTEERING)
     {
       id: "reception-team",
+      image: "./assets/clubs/reception-team.webp",
       name: "Đội Lễ Tân Ngoại Ngữ (ULIS Reception Team - URT)",
       acronym: "URT ULIS",
       category: "volunteering",
@@ -392,6 +404,7 @@ const ULIS_DATA = {
     },
     {
       id: "volunteer-club",
+      image: "./assets/clubs/volunteer-club.webp",
       name: "CLB Tình Nguyện Hoa Đá ULIS (Hoa Da Volunteer Club)",
       acronym: "HDC ULIS",
       category: "volunteering",
@@ -416,6 +429,7 @@ const ULIS_DATA = {
     },
     {
       id: "youth-taskforce",
+      image: "./assets/clubs/youth-taskforce.webp",
       name: "Đội Thanh Niên Xung Kích ULIS (Youth Taskforce)",
       acronym: "TNXK ULIS",
       category: "volunteering",
@@ -440,6 +454,7 @@ const ULIS_DATA = {
     },
     {
       id: "soft-skills-club",
+      image: "./assets/clubs/soft-skills-club.webp",
       name: "CLB Kỹ Năng Mềm & Hướng Nghiệp (Soft Skills Club - SSC)",
       acronym: "SSC ULIS",
       category: "volunteering",
@@ -464,6 +479,7 @@ const ULIS_DATA = {
     },
     {
       id: "blood-donation",
+      image: "./assets/clubs/blood-donation.webp",
       name: "CLB Vận Động Hiến Máu Nhân Đạo ULIS (Đội Máu ULIS)",
       acronym: "Đội Máu ULIS",
       category: "volunteering",
@@ -488,6 +504,7 @@ const ULIS_DATA = {
     },
     {
       id: "buddy-club",
+      image: "./assets/clubs/buddy-club.webp",
       name: "CLB Bạn Đồng Hành Sinh Viên Quốc Tế (ULIS Buddy Club)",
       acronym: "UBC",
       category: "volunteering",

@@ -106,74 +106,80 @@ const clubsHtml = D.clubs.map(club => {
                  club.category === "talents" ? "bg-amber-600" : "bg-emerald-600";
 
   return `
-      <div data-club-id="${club.id}" data-category="${club.category}" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="${club.id}" data-category="${club.category}" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('${club.id}')">
+          <img src="./assets/clubs/${club.id}.webp" alt="${club.name}" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/${club.id}.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full ${catDot}"></span>
               ${club.categoryName}
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              ${club.acronym}
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('${club.id}')">
-            ${club.name}
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"${club.slogan}"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            ${club.description}
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                ${club.activities[0]} • ${club.activities[1]}
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                ${club.targetAudience}
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                ${club.recruitmentPeriod}
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            ${club.acronym}
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="${club.facebook}" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:${club.email}" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('${club.id}')">
+              ${club.name}
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"${club.slogan}"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              ${club.description}
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  ${club.activities[0]} • ${club.activities[1]}
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  ${club.targetAudience}
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  ${club.recruitmentPeriod}
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('${club.id}')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="${club.formLink}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="${club.facebook}" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:${club.email}" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('${club.id}')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="${club.formLink}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -1170,37 +1176,60 @@ ${eventsHtml}
             <span class="text-xs text-slate-500">Được đánh giá dựa trên tần suất tổ chức sự kiện & số thành viên</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-200 rounded mb-2 inline-block">HỌC THUẬT</span>
-                <h4 class="text-sm font-bold text-slate-900">CLB Tiếng Anh (EC)</h4>
-                <p class="text-xs text-slate-500 mt-1">240 thành viên • 12 sự kiện</p>
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between overflow-hidden group">
+              <div class="aspect-video w-full overflow-hidden bg-slate-900 cursor-pointer relative" onclick="openClubModal('ec-ulis')">
+                <img src="./assets/clubs/ec-ulis.webp" alt="CLB Tiếng Anh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='./assets/clubs/ec-ulis.png';" />
+                <span class="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-white/95 text-slate-800 rounded shadow-xs">HỌC THUẬT</span>
               </div>
-              <button onclick="openClubModal('ec')" class="mt-3 text-xs font-bold text-blue-900 hover:underline text-left flex items-center gap-1">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              <div class="p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900 hover:text-blue-900 cursor-pointer" onclick="openClubModal('ec-ulis')">CLB Tiếng Anh (EC ULIS)</h4>
+                  <p class="text-xs text-slate-500 mt-1">240 thành viên • 12 sự kiện</p>
+                </div>
+                <button onclick="openClubModal('ec-ulis')" class="mt-3 text-xs font-bold text-blue-900 hover:underline text-left flex items-center gap-1 cursor-pointer">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              </div>
             </div>
-            <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-200 rounded mb-2 inline-block">HỌC THUẬT</span>
-                <h4 class="text-sm font-bold text-slate-900">CLB Tiếng Nhật (JPC)</h4>
-                <p class="text-xs text-slate-500 mt-1">180 thành viên • 9 sự kiện</p>
+
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between overflow-hidden group">
+              <div class="aspect-video w-full overflow-hidden bg-slate-900 cursor-pointer relative" onclick="openClubModal('japanese-club')">
+                <img src="./assets/clubs/japanese-club.webp" alt="CLB Tiếng Nhật" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='./assets/clubs/japanese-club.png';" />
+                <span class="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-white/95 text-slate-800 rounded shadow-xs">HỌC THUẬT</span>
               </div>
-              <button onclick="openClubModal('jpc')" class="mt-3 text-xs font-bold text-blue-900 hover:underline text-left flex items-center gap-1">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              <div class="p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900 hover:text-blue-900 cursor-pointer" onclick="openClubModal('japanese-club')">CLB Tiếng Nhật Hikari</h4>
+                  <p class="text-xs text-slate-500 mt-1">180 thành viên • 9 sự kiện</p>
+                </div>
+                <button onclick="openClubModal('japanese-club')" class="mt-3 text-xs font-bold text-blue-900 hover:underline text-left flex items-center gap-1 cursor-pointer">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              </div>
             </div>
-            <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-200 rounded mb-2 inline-block">TÌNH NGUYỆN</span>
-                <h4 class="text-sm font-bold text-slate-900">CLB Tình Nguyện (V-ULIS)</h4>
-                <p class="text-xs text-slate-500 mt-1">310 thành viên • 15 sự kiện</p>
+
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between overflow-hidden group">
+              <div class="aspect-video w-full overflow-hidden bg-slate-900 cursor-pointer relative" onclick="openClubModal('volunteer-club')">
+                <img src="./assets/clubs/volunteer-club.webp" alt="CLB Hoa Đá" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='./assets/clubs/volunteer-club.png';" />
+                <span class="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-white/95 text-slate-800 rounded shadow-xs">TÌNH NGUYỆN</span>
               </div>
-              <button onclick="openClubModal('vulis')" class="mt-3 text-xs font-bold text-emerald-900 hover:underline text-left flex items-center gap-1">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              <div class="p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900 hover:text-emerald-900 cursor-pointer" onclick="openClubModal('volunteer-club')">CLB Tình Nguyện Hoa Đá</h4>
+                  <p class="text-xs text-slate-500 mt-1">310 thành viên • 15 sự kiện</p>
+                </div>
+                <button onclick="openClubModal('volunteer-club')" class="mt-3 text-xs font-bold text-emerald-900 hover:underline text-left flex items-center gap-1 cursor-pointer">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              </div>
             </div>
-            <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-200 rounded mb-2 inline-block">KỸ NĂNG</span>
-                <h4 class="text-sm font-bold text-slate-900">ULIS Debate Club (UDC)</h4>
-                <p class="text-xs text-slate-500 mt-1">120 thành viên • 8 sự kiện</p>
+
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between overflow-hidden group">
+              <div class="aspect-video w-full overflow-hidden bg-slate-900 cursor-pointer relative" onclick="openClubModal('reception-team')">
+                <img src="./assets/clubs/reception-team.webp" alt="Đội Lễ Tân URT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='./assets/clubs/reception-team.png';" />
+                <span class="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-white/95 text-slate-800 rounded shadow-xs">KỸ NĂNG</span>
               </div>
-              <button onclick="openClubModal('udc')" class="mt-3 text-xs font-bold text-amber-900 hover:underline text-left flex items-center gap-1">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              <div class="p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900 hover:text-amber-900 cursor-pointer" onclick="openClubModal('reception-team')">Đội Lễ Tân Ngoại Ngữ URT</h4>
+                  <p class="text-xs text-slate-500 mt-1">120 thành viên • 14 sự kiện</p>
+                </div>
+                <button onclick="openClubModal('reception-team')" class="mt-3 text-xs font-bold text-amber-900 hover:underline text-left flex items-center gap-1 cursor-pointer">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              </div>
             </div>
           </div>
         </div>

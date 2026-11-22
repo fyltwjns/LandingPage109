@@ -1650,37 +1650,60 @@
             <span class="text-xs text-slate-500">Được đánh giá dựa trên tần suất tổ chức sự kiện & số thành viên</span>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-200 rounded mb-2 inline-block">HỌC THUẬT</span>
-                <h4 class="text-sm font-bold text-slate-900">CLB Tiếng Anh (EC)</h4>
-                <p class="text-xs text-slate-500 mt-1">240 thành viên • 12 sự kiện</p>
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between overflow-hidden group">
+              <div class="aspect-video w-full overflow-hidden bg-slate-900 cursor-pointer relative" onclick="openClubModal('ec-ulis')">
+                <img src="./assets/clubs/ec-ulis.webp" alt="CLB Tiếng Anh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='./assets/clubs/ec-ulis.png';" />
+                <span class="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-white/95 text-slate-800 rounded shadow-xs">HỌC THUẬT</span>
               </div>
-              <button onclick="openClubModal('ec')" class="mt-3 text-xs font-bold text-blue-900 hover:underline text-left flex items-center gap-1">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              <div class="p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900 hover:text-blue-900 cursor-pointer" onclick="openClubModal('ec-ulis')">CLB Tiếng Anh (EC ULIS)</h4>
+                  <p class="text-xs text-slate-500 mt-1">240 thành viên • 12 sự kiện</p>
+                </div>
+                <button onclick="openClubModal('ec-ulis')" class="mt-3 text-xs font-bold text-blue-900 hover:underline text-left flex items-center gap-1 cursor-pointer">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              </div>
             </div>
-            <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-200 rounded mb-2 inline-block">HỌC THUẬT</span>
-                <h4 class="text-sm font-bold text-slate-900">CLB Tiếng Nhật (JPC)</h4>
-                <p class="text-xs text-slate-500 mt-1">180 thành viên • 9 sự kiện</p>
+
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between overflow-hidden group">
+              <div class="aspect-video w-full overflow-hidden bg-slate-900 cursor-pointer relative" onclick="openClubModal('japanese-club')">
+                <img src="./assets/clubs/japanese-club.webp" alt="CLB Tiếng Nhật" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='./assets/clubs/japanese-club.png';" />
+                <span class="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-white/95 text-slate-800 rounded shadow-xs">HỌC THUẬT</span>
               </div>
-              <button onclick="openClubModal('jpc')" class="mt-3 text-xs font-bold text-blue-900 hover:underline text-left flex items-center gap-1">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              <div class="p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900 hover:text-blue-900 cursor-pointer" onclick="openClubModal('japanese-club')">CLB Tiếng Nhật Hikari</h4>
+                  <p class="text-xs text-slate-500 mt-1">180 thành viên • 9 sự kiện</p>
+                </div>
+                <button onclick="openClubModal('japanese-club')" class="mt-3 text-xs font-bold text-blue-900 hover:underline text-left flex items-center gap-1 cursor-pointer">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              </div>
             </div>
-            <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-200 rounded mb-2 inline-block">TÌNH NGUYỆN</span>
-                <h4 class="text-sm font-bold text-slate-900">CLB Tình Nguyện (V-ULIS)</h4>
-                <p class="text-xs text-slate-500 mt-1">310 thành viên • 15 sự kiện</p>
+
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between overflow-hidden group">
+              <div class="aspect-video w-full overflow-hidden bg-slate-900 cursor-pointer relative" onclick="openClubModal('volunteer-club')">
+                <img src="./assets/clubs/volunteer-club.webp" alt="CLB Hoa Đá" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='./assets/clubs/volunteer-club.png';" />
+                <span class="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-white/95 text-slate-800 rounded shadow-xs">TÌNH NGUYỆN</span>
               </div>
-              <button onclick="openClubModal('vulis')" class="mt-3 text-xs font-bold text-emerald-900 hover:underline text-left flex items-center gap-1">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              <div class="p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900 hover:text-emerald-900 cursor-pointer" onclick="openClubModal('volunteer-club')">CLB Tình Nguyện Hoa Đá</h4>
+                  <p class="text-xs text-slate-500 mt-1">310 thành viên • 15 sự kiện</p>
+                </div>
+                <button onclick="openClubModal('volunteer-club')" class="mt-3 text-xs font-bold text-emerald-900 hover:underline text-left flex items-center gap-1 cursor-pointer">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              </div>
             </div>
-            <div class="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between">
-              <div>
-                <span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-200 rounded mb-2 inline-block">KỸ NĂNG</span>
-                <h4 class="text-sm font-bold text-slate-900">ULIS Debate Club (UDC)</h4>
-                <p class="text-xs text-slate-500 mt-1">120 thành viên • 8 sự kiện</p>
+
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition flex flex-col justify-between overflow-hidden group">
+              <div class="aspect-video w-full overflow-hidden bg-slate-900 cursor-pointer relative" onclick="openClubModal('reception-team')">
+                <img src="./assets/clubs/reception-team.webp" alt="Đội Lễ Tân URT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='./assets/clubs/reception-team.png';" />
+                <span class="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-white/95 text-slate-800 rounded shadow-xs">KỸ NĂNG</span>
               </div>
-              <button onclick="openClubModal('udc')" class="mt-3 text-xs font-bold text-amber-900 hover:underline text-left flex items-center gap-1">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              <div class="p-4 flex flex-col justify-between flex-1">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900 hover:text-amber-900 cursor-pointer" onclick="openClubModal('reception-team')">Đội Lễ Tân Ngoại Ngữ URT</h4>
+                  <p class="text-xs text-slate-500 mt-1">120 thành viên • 14 sự kiện</p>
+                </div>
+                <button onclick="openClubModal('reception-team')" class="mt-3 text-xs font-bold text-amber-900 hover:underline text-left flex items-center gap-1 cursor-pointer">Xem CLB <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              </div>
             </div>
           </div>
         </div>
@@ -1718,1242 +1741,1344 @@
         <!-- Clubs Grid Container -->
         <div id="clubs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      <div data-club-id="ec-ulis" data-category="academic" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="ec-ulis" data-category="academic" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('ec-ulis')">
+          <img src="./assets/clubs/ec-ulis.webp" alt="CLB Tiếng Anh (English Club - EC ULIS)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/ec-ulis.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               CLB Học thuật
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              EC ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('ec-ulis')">
-            CLB Tiếng Anh (English Club - EC ULIS)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Connect, Inspire, Empower through English"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Câu lạc bộ học thuật ngôn ngữ lớn và giàu truyền thống nhất trường Đại học Ngoại ngữ, tạo môi trường luyện nói, tranh biện và giao lưu học thuật tiếng Anh hàng đầu cho sinh viên.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh hoạt định kỳ Speak Out thứ Năm hàng tuần tại Không gian Sáng tạo Sunwah • Cuộc thi Hùng biện Tiếng Anh thường niên toàn trường English Challenge
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên toàn trường yêu thích tiếng Anh, có mong muốn cải thiện sự tự tin khi thuyết trình và mở rộng vốn từ chuyên ngành.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tuyển quân Mùa Thu (Tháng 10 - 11) & Tuyển bổ sung (Tháng 2)
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            EC ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/ec.ulis.vnu" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:ec.ulis.vnu@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('ec-ulis')">
+              CLB Tiếng Anh (English Club - EC ULIS)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Connect, Inspire, Empower through English"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Câu lạc bộ học thuật ngôn ngữ lớn và giàu truyền thống nhất trường Đại học Ngoại ngữ, tạo môi trường luyện nói, tranh biện và giao lưu học thuật tiếng Anh hàng đầu cho sinh viên.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh hoạt định kỳ Speak Out thứ Năm hàng tuần tại Không gian Sáng tạo Sunwah • Cuộc thi Hùng biện Tiếng Anh thường niên toàn trường English Challenge
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên toàn trường yêu thích tiếng Anh, có mong muốn cải thiện sự tự tin khi thuyết trình và mở rộng vốn từ chuyên ngành.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tuyển quân Mùa Thu (Tháng 10 - 11) & Tuyển bổ sung (Tháng 2)
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('ec-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/ulis-ec-recruitment-2026" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/ec.ulis.vnu" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:ec.ulis.vnu@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('ec-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/ulis-ec-recruitment-2026" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="src-ulis" data-category="academic" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="src-ulis" data-category="academic" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('src-ulis')">
+          <img src="./assets/clubs/src-ulis.webp" alt="CLB Nghiên cứu Khoa học Sinh viên (SRC ULIS)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/src-ulis.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               CLB Học thuật
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              SRC ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('src-ulis')">
-            CLB Nghiên cứu Khoa học Sinh viên (SRC ULIS)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Nurturing Academic Passion & Research Excellence"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Tổ chức học thuật trực thuộc Đoàn Thanh niên - Hội Sinh viên phối hợp cùng Phòng KHCN, kết nối sinh viên đam mê nghiên cứu khoa học và viết bài báo quốc tế.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Chuỗi Seminar 'Phương pháp NCKH và xử lý dữ liệu định lượng/định tính' • Hỗ trợ tìm kiếm Giảng viên hướng dẫn cho đề tài NCKH sinh viên cấp Khoa/Trường
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên năm 1-4 yêu thích nghiên cứu khoa học ngôn ngữ, giáo dục học, văn hóa học, muốn tích lũy chứng nhận A1 và giải thưởng SV NCKH.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tuyển quân đợt 1 (Tháng 11/2026) & Đợt 2 (Tháng 1/2027)
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            SRC ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/src.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:src.ulis@vnu.edu.vn" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('src-ulis')">
+              CLB Nghiên cứu Khoa học Sinh viên (SRC ULIS)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Nurturing Academic Passion & Research Excellence"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Tổ chức học thuật trực thuộc Đoàn Thanh niên - Hội Sinh viên phối hợp cùng Phòng KHCN, kết nối sinh viên đam mê nghiên cứu khoa học và viết bài báo quốc tế.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Chuỗi Seminar 'Phương pháp NCKH và xử lý dữ liệu định lượng/định tính' • Hỗ trợ tìm kiếm Giảng viên hướng dẫn cho đề tài NCKH sinh viên cấp Khoa/Trường
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên năm 1-4 yêu thích nghiên cứu khoa học ngôn ngữ, giáo dục học, văn hóa học, muốn tích lũy chứng nhận A1 và giải thưởng SV NCKH.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tuyển quân đợt 1 (Tháng 11/2026) & Đợt 2 (Tháng 1/2027)
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('src-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/src-ulis-apply-2026" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/src.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:src.ulis@vnu.edu.vn" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('src-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/src-ulis-apply-2026" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="chinese-club" data-category="academic" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="chinese-club" data-category="academic" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('chinese-club')">
+          <img src="./assets/clubs/chinese-club.webp" alt="CLB Tiếng Trung (Hán Ngữ ULIS - HanYu Club)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/chinese-club.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               CLB Học thuật
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              HYC
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('chinese-club')">
-            CLB Tiếng Trung (Hán Ngữ ULIS - HanYu Club)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Thế giới rộng lớn – Tiếng Trung kết nối"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Mái nhà chung của sinh viên khoa Ngôn ngữ & Văn hóa Trung Quốc cùng các bạn sinh viên toàn trường yêu thích tiếng Trung, văn hóa và nghệ thuật thư pháp Đông Á.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Góc đàm thoại Hán ngữ thứ Tư hàng tuần tại khuôn viên A2 • Lễ hội Văn hóa Trung Hoa & Gian hàng ẩm thực truyền thống
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên chuyên ngành tiếng Trung và sinh viên các ngoại ngữ khác đang học ngoại ngữ 2 tiếng Trung.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Đầu mỗi học kỳ (Tháng 10 và Tháng 2)
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            HYC
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/hanyu.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:hanyu.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('chinese-club')">
+              CLB Tiếng Trung (Hán Ngữ ULIS - HanYu Club)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Thế giới rộng lớn – Tiếng Trung kết nối"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Mái nhà chung của sinh viên khoa Ngôn ngữ & Văn hóa Trung Quốc cùng các bạn sinh viên toàn trường yêu thích tiếng Trung, văn hóa và nghệ thuật thư pháp Đông Á.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Góc đàm thoại Hán ngữ thứ Tư hàng tuần tại khuôn viên A2 • Lễ hội Văn hóa Trung Hoa & Gian hàng ẩm thực truyền thống
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên chuyên ngành tiếng Trung và sinh viên các ngoại ngữ khác đang học ngoại ngữ 2 tiếng Trung.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Đầu mỗi học kỳ (Tháng 10 và Tháng 2)
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('chinese-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/hanyu-club-reg" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/hanyu.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:hanyu.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('chinese-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/hanyu-club-reg" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="japanese-club" data-category="academic" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="japanese-club" data-category="academic" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('japanese-club')">
+          <img src="./assets/clubs/japanese-club.webp" alt="CLB Tiếng Nhật Hikari (Hikari Japanese Club)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/japanese-club.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               CLB Học thuật
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              HJC
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('japanese-club')">
-            CLB Tiếng Nhật Hikari (Hikari Japanese Club)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Lan tỏa ánh sáng văn hóa & ngôn ngữ Phù Tang"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            CLB chuyên sâu về giao lưu ngôn ngữ tiếng Nhật, văn hóa trà đạo, cosplay và kết nối cơ hội thực tập, việc làm tại các tập đoàn Nhật Bản.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Kaiwa Club - Luyện phản xạ giao tiếp với sinh viên tình nguyện Nhật Bản • Ngày hội Văn hóa Nhật Bản Bunkasai tại Hội trường Sunwah
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Tất cả sinh viên có đam mê với đất nước mặt trời mọc, từ sơ cấp N5 đến cao cấp N1.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 11 hàng năm
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            HJC
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/hikari.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:hikari.japan.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('japanese-club')">
+              CLB Tiếng Nhật Hikari (Hikari Japanese Club)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Lan tỏa ánh sáng văn hóa & ngôn ngữ Phù Tang"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              CLB chuyên sâu về giao lưu ngôn ngữ tiếng Nhật, văn hóa trà đạo, cosplay và kết nối cơ hội thực tập, việc làm tại các tập đoàn Nhật Bản.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Kaiwa Club - Luyện phản xạ giao tiếp với sinh viên tình nguyện Nhật Bản • Ngày hội Văn hóa Nhật Bản Bunkasai tại Hội trường Sunwah
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Tất cả sinh viên có đam mê với đất nước mặt trời mọc, từ sơ cấp N5 đến cao cấp N1.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 11 hàng năm
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('japanese-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/hikari-apply" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/hikari.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:hikari.japan.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('japanese-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/hikari-apply" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="korean-club" data-category="academic" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="korean-club" data-category="academic" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('korean-club')">
+          <img src="./assets/clubs/korean-club.webp" alt="CLB Tiếng Hàn & Văn Hóa Hàn Quốc (K-ULIS)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/korean-club.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               CLB Học thuật
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              K-ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('korean-club')">
-            CLB Tiếng Hàn & Văn Hóa Hàn Quốc (K-ULIS)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Kết nối đam mê – Trải nghiệm bản sắc Hàn Quốc"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Không gian học tập và thực hành tiếng Hàn sôi động, tổ chức các cuộc thi nói tiếng Hàn, trải nghiệm Hanbok và ẩm thực xứ kim chi.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Lớp học ôn thi TOPIK II cấp tốc do sinh viên năm 4 và cựu sinh viên giảng dạy • Cuộc thi K-Speech Contest phối hợp với Trung tâm Văn hóa Hàn Quốc KCC
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên Khoa NN&VH Hàn Quốc và sinh viên học tiếng Hàn ngoại ngữ 2.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 10 - Tháng 12
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            K-ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/kulis.official" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:kulis.club@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('korean-club')">
+              CLB Tiếng Hàn & Văn Hóa Hàn Quốc (K-ULIS)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Kết nối đam mê – Trải nghiệm bản sắc Hàn Quốc"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Không gian học tập và thực hành tiếng Hàn sôi động, tổ chức các cuộc thi nói tiếng Hàn, trải nghiệm Hanbok và ẩm thực xứ kim chi.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Lớp học ôn thi TOPIK II cấp tốc do sinh viên năm 4 và cựu sinh viên giảng dạy • Cuộc thi K-Speech Contest phối hợp với Trung tâm Văn hóa Hàn Quốc KCC
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên Khoa NN&VH Hàn Quốc và sinh viên học tiếng Hàn ngoại ngữ 2.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 10 - Tháng 12
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('korean-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/kulis-member" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/kulis.official" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:kulis.club@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('korean-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/kulis-member" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="translation-club" data-category="academic" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="translation-club" data-category="academic" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('translation-club')">
+          <img src="./assets/clubs/translation-club.webp" alt="CLB Biên Phiên Dịch Trẻ (Young Translators Club - YTC)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/translation-club.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
               CLB Học thuật
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              YTC ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('translation-club')">
-            CLB Biên Phiên Dịch Trẻ (Young Translators Club - YTC)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Chính xác từng câu từ – Nâng tầm bản dịch"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Môi trường rèn luyện kỹ năng dịch thuật văn bản học thuật, hợp đồng thương mại và thực hành Cabin phiên dịch song song với trang thiết bị chuyên dụng của trường.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Mock Conference - Mô phỏng hội nghị quốc tế và thực hành dịch Cabin • Biên dịch các tài liệu tin tức, bài nghiên cứu và phụ đề video phi lợi nhuận
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên năm 2 trở lên của tất cả các chuyên ngành ngôn ngữ có định hướng nghề nghiệp biên phiên dịch chuyên nghiệp.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 11 và Tháng 3
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            YTC ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/ytc.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:ytc.ulis.translators@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('translation-club')">
+              CLB Biên Phiên Dịch Trẻ (Young Translators Club - YTC)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Chính xác từng câu từ – Nâng tầm bản dịch"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Môi trường rèn luyện kỹ năng dịch thuật văn bản học thuật, hợp đồng thương mại và thực hành Cabin phiên dịch song song với trang thiết bị chuyên dụng của trường.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Mock Conference - Mô phỏng hội nghị quốc tế và thực hành dịch Cabin • Biên dịch các tài liệu tin tức, bài nghiên cứu và phụ đề video phi lợi nhuận
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên năm 2 trở lên của tất cả các chuyên ngành ngôn ngữ có định hướng nghề nghiệp biên phiên dịch chuyên nghiệp.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 11 và Tháng 3
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('translation-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/ytc-recruitment-2026" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/ytc.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:ytc.ulis.translators@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('translation-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/ytc-recruitment-2026" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="mmc-ulis" data-category="talents" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="mmc-ulis" data-category="talents" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('mmc-ulis')">
+          <img src="./assets/clubs/mmc-ulis.webp" alt="CLB Âm Nhạc Ngoại Ngữ (Modern Music Club - MMC)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/mmc-ulis.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
               Sở thích & Năng khiếu
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              MMC ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('mmc-ulis')">
-            CLB Âm Nhạc Ngoại Ngữ (Modern Music Club - MMC)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Nơi âm nhạc xóa nhòa mọi ranh giới ngôn ngữ"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Câu lạc bộ nghệ thuật nổi bật với các ban chuyên môn: Hát (Vocal), Nhạc cụ (Band), Sản xuất âm nhạc và Truyền thông sự kiện, linh hồn của các đêm nhạc ULIS.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Đêm nhạc thường niên MMC Acoustic Night tại sân tượng đài ULIS • Biểu diễn trong các chương trình Gala Chào tân sinh viên, Ngày hội Việc làm
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên có giọng hát, khả năng chơi bất kỳ nhạc cụ nào hoặc đam mê kỹ thuật âm thanh, sân khấu.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 10 - Tháng 11 (Vòng casting trực tiếp)
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            MMC ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/mmc.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:mmc.modernmusic@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('mmc-ulis')">
+              CLB Âm Nhạc Ngoại Ngữ (Modern Music Club - MMC)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Nơi âm nhạc xóa nhòa mọi ranh giới ngôn ngữ"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Câu lạc bộ nghệ thuật nổi bật với các ban chuyên môn: Hát (Vocal), Nhạc cụ (Band), Sản xuất âm nhạc và Truyền thông sự kiện, linh hồn của các đêm nhạc ULIS.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Đêm nhạc thường niên MMC Acoustic Night tại sân tượng đài ULIS • Biểu diễn trong các chương trình Gala Chào tân sinh viên, Ngày hội Việc làm
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên có giọng hát, khả năng chơi bất kỳ nhạc cụ nào hoặc đam mê kỹ thuật âm thanh, sân khấu.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 10 - Tháng 11 (Vòng casting trực tiếp)
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('mmc-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/mmc-ulis-casting" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/mmc.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:mmc.modernmusic@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('mmc-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/mmc-ulis-casting" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="udc-ulis" data-category="talents" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="udc-ulis" data-category="talents" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('udc-ulis')">
+          <img src="./assets/clubs/udc-ulis.webp" alt="CLB Vũ Đạo Ngoại Ngữ (ULIS Dance Club - UDC)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/udc-ulis.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
               Sở thích & Năng khiếu
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              UDC ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('udc-ulis')">
-            CLB Vũ Đạo Ngoại Ngữ (ULIS Dance Club - UDC)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Dance with Passion, Shine with Rhythm"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Đội nhảy đại diện trường tham gia các giải đấu nhảy sinh viên toàn quốc (VUG), biểu diễn các thể loại Street Dance, Kpop Cover, Choreography và Contemporary.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Luyện tập thể lực và vũ đạo cơ bản 3 buổi/tuần tại sảnh nhà C • Đại diện trường tham dự Giải Nhảy Đối Kháng Sinh viên Hà Nội
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên đam mê nhảy múa, có tinh thần đồng đội cao và mong muốn rèn luyện sức khỏe, phong thái tự tin.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 10 hàng năm
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            UDC ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/ulisdanceclub" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:udc.dance@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('udc-ulis')">
+              CLB Vũ Đạo Ngoại Ngữ (ULIS Dance Club - UDC)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Dance with Passion, Shine with Rhythm"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Đội nhảy đại diện trường tham gia các giải đấu nhảy sinh viên toàn quốc (VUG), biểu diễn các thể loại Street Dance, Kpop Cover, Choreography và Contemporary.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Luyện tập thể lực và vũ đạo cơ bản 3 buổi/tuần tại sảnh nhà C • Đại diện trường tham dự Giải Nhảy Đối Kháng Sinh viên Hà Nội
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên đam mê nhảy múa, có tinh thần đồng đội cao và mong muốn rèn luyện sức khỏe, phong thái tự tin.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 10 hàng năm
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('udc-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/udc-audition" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/ulisdanceclub" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:udc.dance@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('udc-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/udc-audition" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="umc-ulis" data-category="talents" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="umc-ulis" data-category="talents" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('umc-ulis')">
+          <img src="./assets/clubs/umc-ulis.webp" alt="CLB Truyền Thông & Nhiếp Ảnh (ULIS Media Club - UMC)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/umc-ulis.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
               Sở thích & Năng khiếu
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              UMC ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('umc-ulis')">
-            CLB Truyền Thông & Nhiếp Ảnh (ULIS Media Club - UMC)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Lưu giữ từng khoảnh khắc thanh xuân dưới mái trường ULIS"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Đơn vị phụ trách hình ảnh, quay phim, chụp ảnh và sản xuất nội dung số cho các sự kiện cấp trường và các chiến dịch truyền thông của Đoàn - Hội.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Nhiếp ảnh tác nghiệp tại tất cả các sự kiện lớn của ULIS • Khóa đào tạo Photoshop, Premiere, Lightroom và tư duy bố cục ảnh
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên yêu thích chụp ảnh máy cơ/điện thoại, thiết kế đồ họa, viết kịch bản hoặc dựng video ngắn.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tuyển quân Tháng 11/2026
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            UMC ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/umc.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:media.umc.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('umc-ulis')">
+              CLB Truyền Thông & Nhiếp Ảnh (ULIS Media Club - UMC)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Lưu giữ từng khoảnh khắc thanh xuân dưới mái trường ULIS"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Đơn vị phụ trách hình ảnh, quay phim, chụp ảnh và sản xuất nội dung số cho các sự kiện cấp trường và các chiến dịch truyền thông của Đoàn - Hội.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Nhiếp ảnh tác nghiệp tại tất cả các sự kiện lớn của ULIS • Khóa đào tạo Photoshop, Premiere, Lightroom và tư duy bố cục ảnh
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên yêu thích chụp ảnh máy cơ/điện thoại, thiết kế đồ họa, viết kịch bản hoặc dựng video ngắn.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tuyển quân Tháng 11/2026
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('umc-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/umc-recruitment-gen12" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/umc.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:media.umc.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('umc-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/umc-recruitment-gen12" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="ufc-ulis" data-category="talents" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="ufc-ulis" data-category="talents" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('ufc-ulis')">
+          <img src="./assets/clubs/ufc-ulis.webp" alt="CLB Bóng Đá Sinh Viên ULIS (ULIS Football Club)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/ufc-ulis.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
               Sở thích & Năng khiếu
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              UFC
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('ufc-ulis')">
-            CLB Bóng Đá Sinh Viên ULIS (ULIS Football Club)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Đoàn kết – Cống hiến – Hết mình vì màu cờ sắc áo"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Đội tuyển bóng đá nam và nữ đại diện trường thi đấu tại giải bóng đá sinh viên VNU và tổ chức giải bóng đá nội bộ ULIS Cup.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Tập luyện chiến thuật hàng tuần tại Sân vận động Ngoại ngữ • Tổ chức giải bóng đá sinh viên liên khoa ULIS Cup thường niên
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên nam và nữ yêu thích môn thể thao vua, có tinh thần rèn luyện thể lực bền bỉ.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Đầu kỳ 1 và Đầu kỳ 2
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            UFC
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/ufc.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:ufc.football@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('ufc-ulis')">
+              CLB Bóng Đá Sinh Viên ULIS (ULIS Football Club)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Đoàn kết – Cống hiến – Hết mình vì màu cờ sắc áo"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Đội tuyển bóng đá nam và nữ đại diện trường thi đấu tại giải bóng đá sinh viên VNU và tổ chức giải bóng đá nội bộ ULIS Cup.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Tập luyện chiến thuật hàng tuần tại Sân vận động Ngoại ngữ • Tổ chức giải bóng đá sinh viên liên khoa ULIS Cup thường niên
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên nam và nữ yêu thích môn thể thao vua, có tinh thần rèn luyện thể lực bền bỉ.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Đầu kỳ 1 và Đầu kỳ 2
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('ufc-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/ufc-tryout" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/ufc.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:ufc.football@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('ufc-ulis')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/ufc-tryout" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="drama-club" data-category="talents" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="drama-club" data-category="talents" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('drama-club')">
+          <img src="./assets/clubs/drama-club.webp" alt="CLB Kịch Nghệ & Điện Ảnh Ngoại Ngữ (Drama Club)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/drama-club.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
               Sở thích & Năng khiếu
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              UDC Drama
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('drama-club')">
-            CLB Kịch Nghệ & Điện Ảnh Ngoại Ngữ (Drama Club)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Sân khấu là nơi hiện thực hóa những giấc mơ nghệ thuật"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Sân chơi kịch nghệ đa ngôn ngữ, dàn dựng các vở kịch kinh điển bằng tiếng Anh, Pháp, Trung, Nga và sáng tác kịch ngắn đương đại.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Công diễn vở kịch sân khấu thường niên tại Hội trường Vũ Đình Liên • Lớp tập huấn diễn xuất, biểu cảm hình thể và biên kịch kịch bản
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên yêu thích diễn xuất, biên kịch, thiết kế đạo cụ sân khấu và trang điểm nghệ thuật.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 11 hàng năm
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            UDC Drama
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/dramaclub.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:drama.club.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
-          </div>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('drama-club')">
+              CLB Kịch Nghệ & Điện Ảnh Ngoại Ngữ (Drama Club)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Sân khấu là nơi hiện thực hóa những giấc mơ nghệ thuật"</p>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('drama-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/drama-ulis-casting" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-  
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Sân chơi kịch nghệ đa ngôn ngữ, dàn dựng các vở kịch kinh điển bằng tiếng Anh, Pháp, Trung, Nga và sáng tác kịch ngắn đương đại.
+            </p>
 
-      <div data-club-id="reception-team" data-category="volunteering" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-              Kỹ năng & Tình nguyện
-            </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              URT ULIS
-            </span>
-          </div>
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Công diễn vở kịch sân khấu thường niên tại Hội trường Vũ Đình Liên • Lớp tập huấn diễn xuất, biểu cảm hình thể và biên kịch kịch bản
+                </p>
+              </div>
 
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('reception-team')">
-            Đội Lễ Tân Ngoại Ngữ (ULIS Reception Team - URT)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Thanh lịch – Chuyên nghiệp – Tự tin tỏa sáng"</p>
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên yêu thích diễn xuất, biên kịch, thiết kế đạo cụ sân khấu và trang điểm nghệ thuật.
+                </p>
+              </div>
 
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Đội hình tiêu biểu đại diện cho bộ mặt của sinh viên ULIS trong công tác đón tiếp đại biểu quốc tế, lãnh đạo Nhà nước và các sự kiện ngoại giao trọng thể.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Đón tiếp đại sứ quán, khách quốc tế và lãnh đạo ĐHQGHN tại Hội trường Sunwah • Khóa tập huấn chuyên sâu về nghi thức ngoại giao, dáng đi, nụ cười và giao tiếp lễ tân
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên có ngoại hình thanh lịch, chiều cao phù hợp (Nữ >= 1m60, Nam >= 1m70), giọng nói chuẩn và khả năng giao tiếp ngoại ngữ lưu loát.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 11/2026 (Tuyển quân khóa mới)
-              </p>
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 11 hàng năm
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/urt.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:letan.ulis@vnu.edu.vn" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
-          </div>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/dramaclub.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:drama.club.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('reception-team')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/urt-gen9-recruitment" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('drama-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/drama-ulis-casting" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="volunteer-club" data-category="volunteering" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="reception-team" data-category="volunteering" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('reception-team')">
+          <img src="./assets/clubs/reception-team.webp" alt="Đội Lễ Tân Ngoại Ngữ (ULIS Reception Team - URT)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/reception-team.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
               Kỹ năng & Tình nguyện
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              HDC ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('volunteer-club')">
-            CLB Tình Nguyện Hoa Đá ULIS (Hoa Da Volunteer Club)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Sống là cho đâu chỉ nhận riêng mình"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Câu lạc bộ tình nguyện giàu truyền thống với hàng loạt chiến dịch vì cộng đồng, dạy học cho trẻ em vùng cao và hỗ trợ người có hoàn cảnh khó khăn.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Chiến dịch Mùa Hè Xanh tại các xã khó khăn thuộc tỉnh miền núi phía Bắc • Chương trình 'Đông Ấm Vùng Cao' trao tặng áo ấm và sách vở cho học sinh nghèo
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Tất cả sinh viên có trái tim nhiệt huyết, không ngại khó khăn và mong muốn mang lại giá trị tích cực cho xã hội.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 10 và Tháng 12 hàng năm
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            URT ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/hoada.volunteer.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:tinhnguyenhoada.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('reception-team')">
+              Đội Lễ Tân Ngoại Ngữ (ULIS Reception Team - URT)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Thanh lịch – Chuyên nghiệp – Tự tin tỏa sáng"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Đội hình tiêu biểu đại diện cho bộ mặt của sinh viên ULIS trong công tác đón tiếp đại biểu quốc tế, lãnh đạo Nhà nước và các sự kiện ngoại giao trọng thể.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Đón tiếp đại sứ quán, khách quốc tế và lãnh đạo ĐHQGHN tại Hội trường Sunwah • Khóa tập huấn chuyên sâu về nghi thức ngoại giao, dáng đi, nụ cười và giao tiếp lễ tân
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên có ngoại hình thanh lịch, chiều cao phù hợp (Nữ >= 1m60, Nam >= 1m70), giọng nói chuẩn và khả năng giao tiếp ngoại ngữ lưu loát.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 11/2026 (Tuyển quân khóa mới)
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('volunteer-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/hoada-dongam2026" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/urt.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:letan.ulis@vnu.edu.vn" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('reception-team')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/urt-gen9-recruitment" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="youth-taskforce" data-category="volunteering" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="volunteer-club" data-category="volunteering" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('volunteer-club')">
+          <img src="./assets/clubs/volunteer-club.webp" alt="CLB Tình Nguyện Hoa Đá ULIS (Hoa Da Volunteer Club)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/volunteer-club.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
               Kỹ năng & Tình nguyện
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              TNXK ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('youth-taskforce')">
-            Đội Thanh Niên Xung Kích ULIS (Youth Taskforce)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Xung kích – Tiên phong – Kỷ luật – Trách nhiệm"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Cánh tay đắc lực của Đoàn Thanh niên - Hội Sinh viên trường, nòng cốt trong công tác an ninh, điều phối sự kiện lớn và các hoạt động phong trào thanh niên.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Đảm bảo trật tự và phân luồng giao thông trong các kỳ thi VSTEP, THPT Chuyên Ngoại ngữ • Chương trình Tiếp Sức Mùa Thi hàng năm tại các điểm thi trường Đại học Ngoại ngữ
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên năng động, có tinh thần trách nhiệm cao, tác phong nghiêm túc, muốn rèn luyện bản lĩnh chỉ huy.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 11/2026
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            HDC ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/tnxk.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:thanhnienxungkich@ulis.vnu.edu.vn" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('volunteer-club')">
+              CLB Tình Nguyện Hoa Đá ULIS (Hoa Da Volunteer Club)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Sống là cho đâu chỉ nhận riêng mình"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Câu lạc bộ tình nguyện giàu truyền thống với hàng loạt chiến dịch vì cộng đồng, dạy học cho trẻ em vùng cao và hỗ trợ người có hoàn cảnh khó khăn.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Chiến dịch Mùa Hè Xanh tại các xã khó khăn thuộc tỉnh miền núi phía Bắc • Chương trình 'Đông Ấm Vùng Cao' trao tặng áo ấm và sách vở cho học sinh nghèo
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Tất cả sinh viên có trái tim nhiệt huyết, không ngại khó khăn và mong muốn mang lại giá trị tích cực cho xã hội.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 10 và Tháng 12 hàng năm
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('youth-taskforce')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/tnxk-recruitment" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/hoada.volunteer.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:tinhnguyenhoada.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('volunteer-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/hoada-dongam2026" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="soft-skills-club" data-category="volunteering" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="youth-taskforce" data-category="volunteering" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('youth-taskforce')">
+          <img src="./assets/clubs/youth-taskforce.webp" alt="Đội Thanh Niên Xung Kích ULIS (Youth Taskforce)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/youth-taskforce.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
               Kỹ năng & Tình nguyện
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              SSC ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('soft-skills-club')">
-            CLB Kỹ Năng Mềm & Hướng Nghiệp (Soft Skills Club - SSC)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Trang bị kỹ năng vững vàng – Định hướng tương lai bứt phá"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Tổ chức chuyên sâu tổ chức các chuỗi đào tạo về kỹ năng thuyết trình, quản lý thời gian, tư duy phản biện, làm việc nhóm và kết nối ngày hội việc làm.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Chuỗi workshop 'Chinh phục nhà tuyển dụng đa quốc gia' cùng các HR Manager • Buổi sửa CV 1-1 miễn phí cho sinh viên năm 3 và năm 4
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên mọi khóa muốn nâng cao kỹ năng làm việc thực tế, sẵn sàng cho thị trường lao động toàn cầu.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 10 và Tháng 1 hàng năm
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            TNXK ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/ssc.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:softskills.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('youth-taskforce')">
+              Đội Thanh Niên Xung Kích ULIS (Youth Taskforce)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Xung kích – Tiên phong – Kỷ luật – Trách nhiệm"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Cánh tay đắc lực của Đoàn Thanh niên - Hội Sinh viên trường, nòng cốt trong công tác an ninh, điều phối sự kiện lớn và các hoạt động phong trào thanh niên.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Đảm bảo trật tự và phân luồng giao thông trong các kỳ thi VSTEP, THPT Chuyên Ngoại ngữ • Chương trình Tiếp Sức Mùa Thi hàng năm tại các điểm thi trường Đại học Ngoại ngữ
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên năng động, có tinh thần trách nhiệm cao, tác phong nghiêm túc, muốn rèn luyện bản lĩnh chỉ huy.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 11/2026
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('soft-skills-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/ssc-recruitment" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/tnxk.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:thanhnienxungkich@ulis.vnu.edu.vn" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('youth-taskforce')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/tnxk-recruitment" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="blood-donation" data-category="volunteering" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="soft-skills-club" data-category="volunteering" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('soft-skills-club')">
+          <img src="./assets/clubs/soft-skills-club.webp" alt="CLB Kỹ Năng Mềm & Hướng Nghiệp (Soft Skills Club - SSC)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/soft-skills-club.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
               Kỹ năng & Tình nguyện
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              Đội Máu ULIS
-            </span>
           </div>
-
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('blood-donation')">
-            CLB Vận Động Hiến Máu Nhân Đạo ULIS (Đội Máu ULIS)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Một giọt máu cho đi – Một cuộc đời ở lại"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Đơn vị phối hợp cùng Viện Huyết học - Truyền máu Trung ương tổ chức các ngày hội hiến máu toàn trường quy mô hàng ngàn đơn vị máu mỗi năm.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Ngày hội hiến máu 'Nắng Ngoại Ngữ' và 'Giọt Hồng Tri Ân' định kỳ 2 lần/năm • Tuyên truyền lưu động về ý nghĩa nhân văn của việc hiến máu cứu người
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên có lòng nhân ái, mong muốn rèn luyện kỹ năng truyền thông trực tiếp và gắn kết cộng đồng hiến máu.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 11 và Tháng 3
-              </p>
-            </div>
-          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            SSC ULIS
+          </span>
         </div>
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/doimau.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:doimauulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('soft-skills-club')">
+              CLB Kỹ Năng Mềm & Hướng Nghiệp (Soft Skills Club - SSC)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Trang bị kỹ năng vững vàng – Định hướng tương lai bứt phá"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Tổ chức chuyên sâu tổ chức các chuỗi đào tạo về kỹ năng thuyết trình, quản lý thời gian, tư duy phản biện, làm việc nhóm và kết nối ngày hội việc làm.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Chuỗi workshop 'Chinh phục nhà tuyển dụng đa quốc gia' cùng các HR Manager • Buổi sửa CV 1-1 miễn phí cho sinh viên năm 3 và năm 4
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên mọi khóa muốn nâng cao kỹ năng làm việc thực tế, sẵn sàng cho thị trường lao động toàn cầu.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 10 và Tháng 1 hàng năm
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('blood-donation')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/doimau-ulis-apply" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/ssc.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:softskills.ulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('soft-skills-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/ssc-recruitment" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
   
 
-      <div data-club-id="buddy-club" data-category="volunteering" class="club-card-item bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
-        <div class="p-6">
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+      <div data-club-id="blood-donation" data-category="volunteering" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('blood-donation')">
+          <img src="./assets/clubs/blood-donation.webp" alt="CLB Vận Động Hiến Máu Nhân Đạo ULIS (Đội Máu ULIS)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/blood-donation.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
               Kỹ năng & Tình nguyện
             </span>
-            <span class="text-[11px] font-bold text-slate-600 bg-slate-50 border border-slate-200/60 px-2 py-0.5 rounded">
-              UBC
-            </span>
+          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            Đội Máu ULIS
+          </span>
+        </div>
+
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('blood-donation')">
+              CLB Vận Động Hiến Máu Nhân Đạo ULIS (Đội Máu ULIS)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Một giọt máu cho đi – Một cuộc đời ở lại"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Đơn vị phối hợp cùng Viện Huyết học - Truyền máu Trung ương tổ chức các ngày hội hiến máu toàn trường quy mô hàng ngàn đơn vị máu mỗi năm.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Ngày hội hiến máu 'Nắng Ngoại Ngữ' và 'Giọt Hồng Tri Ân' định kỳ 2 lần/năm • Tuyên truyền lưu động về ý nghĩa nhân văn của việc hiến máu cứu người
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên có lòng nhân ái, mong muốn rèn luyện kỹ năng truyền thông trực tiếp và gắn kết cộng đồng hiến máu.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 11 và Tháng 3
+                </p>
+              </div>
+            </div>
           </div>
 
-          <h3 class="text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition" onclick="openClubModal('buddy-club')">
-            CLB Bạn Đồng Hành Sinh Viên Quốc Tế (ULIS Buddy Club)
-          </h3>
-          <p class="text-xs text-blue-900 font-medium italic mb-3">"Be a Buddy, Make Global Friends"</p>
-
-          <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
-            Cầu nối trực tiếp hỗ trợ lưu học sinh nước ngoài (Hàn Quốc, Nhật Bản, Trung Quốc, Pháp, Mỹ, Đức...) khi sang học tập và trải nghiệm tại ULIS.
-          </p>
-
-          <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Đón tiếp và hỗ trợ thủ tục ký túc xá, làm thẻ ngân hàng cho lưu học sinh • City Tour khám phá văn hóa Hà Nội và các danh lam thắng cảnh miền Bắc
-              </p>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/doimau.ulis" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:doimauulis@gmail.com" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
             </div>
 
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
-              </span>
-              <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
-                Sinh viên có khả năng ngoại ngữ tốt, yêu thích giao lưu văn hóa và có tính cách thân thiện, chu đáo.
-              </p>
-            </div>
-
-            <div>
-              <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
-              </span>
-              <p class="text-slate-700 pl-5 text-[11px] font-semibold">
-                Tháng 12/2026 & Tháng 8 hàng năm
-              </p>
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('blood-donation')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/doimau-ulis-apply" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
             </div>
           </div>
         </div>
+      </div>
+  
 
-        <div class="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <a href="https://facebook.com/ulisbuddyclub" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
-              <i data-lucide="facebook" class="w-4 h-4"></i>
-            </a>
-            <a href="mailto:buddy.club@vnu.edu.vn" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
-              <i data-lucide="mail" class="w-4 h-4"></i>
-            </a>
+      <div data-club-id="buddy-club" data-category="volunteering" class="club-card-item group bg-white rounded-2xl border border-slate-200/85 shadow-2xs hover:shadow-md hover:border-slate-300 interactive-card flex flex-col justify-between overflow-hidden transition-all duration-300">
+        <!-- Club Banner Thumbnail (16:9 clean poster) -->
+        <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('buddy-club')">
+          <img src="./assets/clubs/buddy-club.webp" alt="CLB Bạn Đồng Hành Sinh Viên Quốc Tế (ULIS Buddy Club)" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/buddy-club.png';" />
+          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+              Kỹ năng & Tình nguyện
+            </span>
+          </div>
+          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
+            UBC
+          </span>
+        </div>
+
+        <div class="p-6 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('buddy-club')">
+              CLB Bạn Đồng Hành Sinh Viên Quốc Tế (ULIS Buddy Club)
+            </h3>
+            <p class="text-xs text-blue-900 font-medium italic mb-3">"Be a Buddy, Make Global Friends"</p>
+
+            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">
+              Cầu nối trực tiếp hỗ trợ lưu học sinh nước ngoài (Hàn Quốc, Nhật Bản, Trung Quốc, Pháp, Mỹ, Đức...) khi sang học tập và trải nghiệm tại ULIS.
+            </p>
+
+            <div class="space-y-2.5 pt-3 border-t border-slate-100 text-xs text-slate-600">
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-blue-700"></i> Hoạt động chính:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Đón tiếp và hỗ trợ thủ tục ký túc xá, làm thẻ ngân hàng cho lưu học sinh • City Tour khám phá văn hóa Hà Nội và các danh lam thắng cảnh miền Bắc
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="users" class="w-3.5 h-3.5 text-emerald-700"></i> Đối tượng phù hợp:
+                </span>
+                <p class="text-slate-500 line-clamp-2 pl-5 text-[11px]">
+                  Sinh viên có khả năng ngoại ngữ tốt, yêu thích giao lưu văn hóa và có tính cách thân thiện, chu đáo.
+                </p>
+              </div>
+
+              <div>
+                <span class="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-700"></i> Lịch tuyển quân:
+                </span>
+                <p class="text-slate-700 pl-5 text-[11px] font-semibold">
+                  Tháng 12/2026 & Tháng 8 hàng năm
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="flex items-center gap-2">
-            <button onclick="openClubModal('buddy-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-white rounded-lg transition">
-              Chi tiết CLB
-            </button>
-            <a href="https://forms.gle/ulis-buddy-reg" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
-              Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
-            </a>
+          <div class="px-0 pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <a href="https://facebook.com/ulisbuddyclub" target="_blank" rel="noopener noreferrer" class="p-1.5 text-blue-700 hover:bg-blue-100 rounded-lg transition" title="Fanpage Facebook">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+              </a>
+              <a href="mailto:buddy.club@vnu.edu.vn" class="p-1.5 text-slate-500 hover:bg-slate-200 rounded-lg transition" title="Gửi Email">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="openClubModal('buddy-club')" class="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-blue-900 hover:bg-slate-100 rounded-lg transition cursor-pointer">
+                Chi tiết CLB
+              </button>
+              <a href="https://forms.gle/ulis-buddy-reg" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-[#0B2341] hover:bg-blue-900 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition shadow-2xs">
+                Ứng tuyển <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
