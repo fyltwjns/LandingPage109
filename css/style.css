@@ -1,16 +1,24 @@
-/* Impeccable Design System for ULIS Vibe */
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+/* Impeccable Design System for ULIS Vibe - Professional Minimalism Gradient */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap');
 
 :root {
-  --ulis-navy: #002B7F;
-  --ulis-blue: #003399;
-  --ulis-blue-light: #1E4ED8;
-  --ulis-amber: #D97706;
-  --ulis-amber-bg: #FEF3C7;
+  --ulis-navy: #0B2341;
+  --ulis-navy-dark: #071527;
+  --ulis-blue: #1E3A8A;
+  --ulis-blue-accent: #2563EB;
   --font-sans: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Minimalism Palette */
+  --surface-ground: #F8FAFC;
+  --surface-card: #FFFFFF;
+  --surface-border: rgba(226, 232, 240, 0.85);
+  --surface-border-subtle: rgba(241, 245, 249, 0.9);
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
 }
 
-/* Browser Surfaces & Base Typography */
+/* Base Reset & Typography */
 html {
   font-family: var(--font-sans);
   scroll-behavior: smooth;
@@ -21,28 +29,37 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: #F8FAFC;
-  color: #0F172A;
+  background-color: var(--surface-ground);
+  color: var(--text-primary);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  caret-color: var(--ulis-blue);
+  caret-color: var(--ulis-blue-accent);
+}
+
+/* Subtle Architectural Ambient Background */
+.bg-minimal-mesh {
+  background-color: #F8FAFC;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(37, 99, 235, 0.03) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(15, 23, 42, 0.03) 0px, transparent 50%);
 }
 
 /* Themed Text Selection */
 ::selection {
-  background-color: #002B7F;
+  background-color: #0B2341;
   color: #FFFFFF;
 }
 
 ::-moz-selection {
-  background-color: #002B7F;
+  background-color: #0B2341;
   color: #FFFFFF;
 }
 
 /* Accessible Focus Rings */
 :focus-visible {
-  outline: 2px solid #003399;
+  outline: 2px solid #1E3A8A;
   outline-offset: 2px;
 }
 
@@ -53,10 +70,10 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Custom Scrollbar */
+/* Custom Sleek Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #F1F5F9;
@@ -69,31 +86,100 @@ body {
   background: #94A3B8;
 }
 
-/* Semantic Badges */
+/* ========================================== */
+/* MINIMALISM GRADIENT COMPONENTS             */
+/* ========================================== */
+
+/* High-End Minimal Gradient Text */
+.minimal-gradient-text {
+  background: linear-gradient(135deg, #0B2341 0%, #1E3A8A 55%, #2563EB 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Frosted Glass Surface */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.glass-panel-dark {
+  background: linear-gradient(145deg, #0A192F 0%, #0F2744 50%, #132E52 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Subtle Card Hover & Elevation */
+.interactive-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  border-radius: 20px;
+}
+
+.interactive-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 35px -12px rgba(15, 23, 42, 0.07), 0 8px 16px -6px rgba(15, 23, 42, 0.03);
+  border-color: #CBD5E1;
+}
+
+.interactive-card:active {
+  transform: translateY(-1px) scale(0.995);
+}
+
+/* ========================================== */
+/* REFINED EDITORIAL PODIUM (NO TOY GOLD)    */
+/* ========================================== */
+
+/* Rank 1: Elite Midnight Sapphire Obsidian */
+.podium-rank-1 {
+  background: linear-gradient(145deg, #071527 0%, #0B2341 50%, #112F55 100%);
+  border: 1px solid rgba(147, 197, 253, 0.28) !important;
+  box-shadow: 0 24px 48px -12px rgba(7, 21, 39, 0.45), 0 0 0 1px rgba(147, 197, 253, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+/* Rank 2 & 3: Editorial Frosted Architectural Cards */
+.podium-rank-2 {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(203, 213, 225, 0.9) !important;
+  box-shadow: 0 16px 32px -10px rgba(15, 23, 42, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.podium-rank-3 {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 16px 32px -10px rgba(15, 23, 42, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ========================================== */
+/* REFINED MICRO-BADGES (NON-SATURATED)       */
+/* ========================================== */
 .badge-a1 {
-  background-color: #EFF6FF !important;
-  color: #1E40AF !important;
-  border: 1px solid #BFDBFE !important;
+  background-color: #F8FAFC !important;
+  color: #1E3A8A !important;
+  border: 1px solid #DBEAFE !important;
 }
 .badge-a2 {
-  background-color: #FFFBEB !important;
-  color: #92400E !important;
-  border: 1px solid #FDE68A !important;
+  background-color: #F8FAFC !important;
+  color: #854D0E !important;
+  border: 1px solid #FEF08A !important;
 }
 .badge-a3 {
-  background-color: #ECFDF5 !important;
+  background-color: #F8FAFC !important;
   color: #065F46 !important;
   border: 1px solid #A7F3D0 !important;
 }
 
 /* Active Tabs */
 .tab-active {
-  background-color: #002B7F !important;
+  background-color: #0B2341 !important;
   color: #FFFFFF !important;
-  box-shadow: 0 4px 12px rgba(0, 43, 127, 0.2);
+  box-shadow: 0 4px 12px rgba(11, 35, 65, 0.2);
 }
 
-/* Event Banner Framing (Strict 16:9 ratio revealing 100% of banner information) */
+/* Event Banner Framing (Strict 16:9 ratio) */
 .event-banner-container {
   aspect-ratio: 16 / 9;
   width: 100%;
@@ -132,43 +218,10 @@ header nav a {
   scrollbar-width: none;
 }
 
-/* Card Transitions & Single Elevation */
-.interactive-card {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
-  border-radius: 16px;
-}
-
-.interactive-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 30px -10px rgba(11, 35, 65, 0.08), 0 8px 16px -6px rgba(11, 35, 65, 0.04);
-  border-color: #94A3B8;
-}
-
-.interactive-card:active {
-  transform: translateY(-1px) scale(0.99);
-}
-
-/* Podium Cards */
-.podium-gold {
-  background: linear-gradient(180deg, rgba(254, 243, 199, 0.7) 0%, #FFFFFF 60%);
-  border: 2px solid #F59E0B !important;
-  box-shadow: 0 20px 40px -12px rgba(245, 158, 11, 0.25), 0 0 0 1px rgba(245, 158, 11, 0.2);
-}
-.podium-silver {
-  background: linear-gradient(180deg, rgba(241, 245, 249, 0.8) 0%, #FFFFFF 60%);
-  border: 1.5px solid #94A3B8 !important;
-  box-shadow: 0 12px 24px -8px rgba(148, 163, 184, 0.2);
-}
-.podium-bronze {
-  background: linear-gradient(180deg, rgba(254, 237, 230, 0.7) 0%, #FFFFFF 60%);
-  border: 1.5px solid #FDBA74 !important;
-  box-shadow: 0 12px 24px -8px rgba(251, 146, 60, 0.2);
-}
-
 /* Tactile Button Response */
 button:active:not(:disabled), 
 a:active:not(:disabled) {
-  transform: scale(0.97);
+  transform: scale(0.975);
 }
 
 /* Animations */
@@ -177,7 +230,7 @@ a:active:not(:disabled) {
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Toast Notification */
@@ -193,18 +246,18 @@ a:active:not(:disabled) {
   pointer-events: auto;
 }
 
-/* Modal Backdrop & Modal Container */
+/* Modal Backdrop & Container */
 .modal-backdrop {
   background-color: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 #app-modal {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
 }
 #app-modal::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 #app-modal::-webkit-scrollbar-track {
   background: transparent;
@@ -222,60 +275,49 @@ a:active:not(:disabled) {
   position: relative;
 }
 
-/* Strictly enforce single-line desktop navbar items */
-header nav {
-  white-space: nowrap !important;
-}
-header nav a {
-  white-space: nowrap !important;
-  word-break: keep-all !important;
-}
-
-/* Responsive and Smooth Motion Defaults */
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
 /* Quick Filter Buttons */
 .quick-filter-btn {
   padding: 0.25rem 0.625rem;
-  background-color: #F1F5F9;
-  color: #1E293B;
+  background-color: #F8FAFC;
+  color: #334155;
   border-radius: 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.75rem;
   transition: all 0.15s ease;
   border: 1px solid #E2E8F0;
 }
 .quick-filter-btn:hover {
-  background-color: #002B7F;
+  background-color: #0B2341;
   color: #FFFFFF;
-  border-color: #002B7F;
+  border-color: #0B2341;
 }
 
-/* Print Optimization */
-@media print {
-  .no-print {
-    display: none !important;
-  }
-  body {
-    background-color: #FFFFFF !important;
-    color: #000000 !important;
-  }
-  .interactive-card {
-    box-shadow: none !important;
-    border: 1px solid #D1D5DB !important;
-    break-inside: avoid;
-  }
+/* Custom Range Slider (ĐRL Simulator) */
+input[type="range"] {
+  -webkit-appearance: none;
+  background: #E2E8F0;
+  border-radius: 9999px;
+  height: 6px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0B2341;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: #1E3A8A;
 }
 
 /* ========================================== */
-/* CHATBOT AI WIDGET & 6-PHASE GUIDED FLOW   */
+/* CHATBOT AI ASSISTANT                       */
 /* ========================================== */
 #chatbot-window {
   position: fixed !important;
@@ -300,7 +342,7 @@ header nav a {
 .chatbot-chip {
   padding: 0.375rem 0.75rem;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   border-radius: 9999px;
   background-color: #F8FAFC;
   color: #1E293B;
@@ -327,17 +369,17 @@ header nav a {
   color: #0F172A;
   border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
   padding: 0.875rem 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
   max-width: 90%;
   line-height: 1.5;
 }
 
 .user-msg-bubble {
-  background-color: #0B2341;
+  background: linear-gradient(135deg, #0B2341 0%, #1E3A8A 100%);
   color: #FFFFFF;
   border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
   padding: 0.875rem 1rem;
-  box-shadow: 0 2px 4px rgba(11, 35, 65, 0.2);
+  box-shadow: 0 2px 6px rgba(11, 35, 65, 0.2);
   margin-left: auto;
   max-width: 85%;
   line-height: 1.5;
@@ -361,3 +403,28 @@ header nav a {
   40% { transform: scale(1); opacity: 1; }
 }
 
+/* Responsive and Smooth Motion Defaults */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Optimization */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .interactive-card {
+    box-shadow: none !important;
+    border: 1px solid #D1D5DB !important;
+    break-inside: avoid;
+  }
+}
