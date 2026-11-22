@@ -575,13 +575,13 @@ const templateHtml = `<!DOCTYPE html>
         <!-- Right Action Buttons — shrink-0, ml-auto khi không có nav (mobile sm) -->
         <div class="hidden sm:flex items-center gap-2 shrink-0 ml-auto lg:ml-0">
           <!-- Saved Events Button -->
-          <button id="btn-view-saved" class="relative p-2 rounded-xl border border-slate-200 text-slate-700 hover:text-blue-950 hover:bg-slate-100 transition shrink-0 cursor-pointer" title="Sự kiện đã lưu">
+          <button id="btn-view-saved" class="relative p-2 rounded-lg border border-slate-200/80 text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition shrink-0 cursor-pointer" title="Sự kiện đã lưu">
             <i data-lucide="bookmark" class="w-4 h-4"></i>
             <span id="saved-events-badge" class="hidden absolute -top-1.5 -right-1.5 w-4 h-4 bg-amber-500 text-amber-950 font-bold text-[10px] rounded-full flex items-center justify-center border-2 border-white shadow-xs">0</span>
           </button>
 
           <!-- VNU Mail SSO Login Button — shrink-0 + min-w-max = không bao giờ clip -->
-          <button onclick="openLoginModal()" class="px-3.5 py-2 bg-[#0B2341] hover:bg-blue-900 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap shrink-0 min-w-max cursor-pointer">
+          <button onclick="openLoginModal()" class="px-3.5 py-2 bg-[#0B2341] hover:bg-[#071b30] text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap shrink-0 min-w-max cursor-pointer">
             <i data-lucide="user" class="w-3.5 h-3.5 text-blue-300 shrink-0"></i>
             <span>Đăng nhập VNU Mail</span>
           </button>
@@ -589,7 +589,7 @@ const templateHtml = `<!DOCTYPE html>
 
         <!-- Mobile Menu Toggle Button -->
         <div class="lg:hidden flex items-center gap-2">
-          <button id="mobile-menu-btn" class="p-2.5 rounded-xl text-slate-700 hover:bg-slate-100" aria-label="Toggle Menu">
+          <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition" aria-label="Toggle Menu">
             <i data-lucide="menu" class="w-6 h-6"></i>
           </button>
         </div>
@@ -601,14 +601,14 @@ const templateHtml = `<!DOCTYPE html>
       <div class="pb-2">
         <input type="text" id="mobile-search-input" placeholder="Tìm kiếm sự kiện, CLB, chứng chỉ..." class="w-full px-3.5 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-900" />
       </div>
-      <a href="#hero" class="mobile-nav-link block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100">Trang chủ</a>
-      <a href="#event-hub" class="mobile-nav-link block px-3 py-2.5 rounded-xl text-sm font-bold text-blue-950 bg-blue-50">Sự kiện & Tuyển quân (Event Hub)</a>
-      <a href="#club-directory" class="mobile-nav-link block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100">Danh bạ 50+ CLB ULIS (3 Nhóm)</a>
-      <a href="#leaderboard" class="mobile-nav-link block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-800 hover:bg-slate-100">Bảng vàng Top sinh viên tích cực</a>
-      <a href="#cert-hub" class="mobile-nav-link block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100">Tra cứu Cert Hub (A1, A2, A3 Chuẩn Hóa)</a>
-      <a href="#news" class="mobile-nav-link block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100">Tin tức & Thông báo Đoàn - Hội</a>
-      <a href="#gallery" class="mobile-nav-link block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100">Khoảnh khắc sinh viên ULIS</a>
-      <a href="#team-plan" class="mobile-nav-link block px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100">Kế hoạch & Nhóm thực hiện 109</a>
+      <a href="#hero" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-100">Trang chủ</a>
+      <a href="#event-hub" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-bold text-blue-950 bg-blue-50">Sự kiện & Tuyển quân (Event Hub)</a>
+      <a href="#club-directory" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-100">Danh bạ 50+ CLB ULIS (3 Nhóm)</a>
+      <a href="#leaderboard" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-800 hover:bg-slate-100">Bảng vàng Top sinh viên tích cực</a>
+      <a href="#cert-hub" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-100">Tra cứu Cert Hub (A1, A2, A3 Chuẩn Hóa)</a>
+      <a href="#news" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-100">Tin tức & Thông báo Đoàn - Hội</a>
+      <a href="#gallery" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-100">Khoảnh khắc sinh viên ULIS</a>
+      <a href="#team-plan" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-100">Kế hoạch & Nhóm thực hiện 109</a>
       <div class="pt-3 border-t border-slate-100 space-y-2">
         <button onclick="openLoginModal()" class="w-full py-2.5 bg-[#0B2341] text-white rounded-xl text-center text-xs font-bold block">
           Đăng nhập bằng tài khoản VNU Mail (@vnu.edu.vn)
@@ -624,17 +624,13 @@ const templateHtml = `<!DOCTYPE html>
     <!-- ==================================================== -->
     <!-- KHU VỰC 1: ĐẦU TRANG (HERO SECTION MINIMALISM GRADIENT) -->
     <!-- ==================================================== -->
-    <section id="hero" class="relative pt-14 pb-18 overflow-hidden bg-minimal-mesh">
-      <!-- Ambient subtle decorative glow -->
-      <div class="absolute inset-0 pointer-events-none opacity-50">
-        <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-gradient-to-b from-blue-100/40 via-sky-50/20 to-transparent rounded-full blur-3xl"></div>
-      </div>
+    <section id="hero" class="relative pt-16 pb-20 overflow-hidden bg-minimal-mesh">
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-4xl mx-auto">
 
           <!-- Academic Status Eyebrow Badge -->
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-slate-200/90 text-slate-700 text-xs font-semibold mb-6 shadow-2xs">
+          <div class="inline-flex items-center gap-2 text-slate-500 text-xs font-medium mb-6 tracking-wide">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>ĐHQGHN • Trường Đại học Ngoại ngữ • Cổng Ngoại Khóa Số</span>
             <span class="text-slate-300">|</span>
@@ -642,7 +638,7 @@ const templateHtml = `<!DOCTYPE html>
           </div>
 
           <!-- Main Heading with Minimalism Gradient Text -->
-          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-[#0B2341] tracking-tight leading-tight mb-5">
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-[#0B2341] tracking-tighter leading-[1.08] mb-6">
             Không còn bỏ lỡ sự kiện & cơ hội với <span class="minimal-gradient-text">ULIS Vibe</span>
           </h1>
 
@@ -651,37 +647,37 @@ const templateHtml = `<!DOCTYPE html>
             Nền tảng tập trung duy nhất đồng bộ hóa <strong>Lịch sự kiện toàn trường</strong>, <strong>Hệ thống tuyển quân 50+ CLB</strong> và <strong>Tra cứu chuẩn hóa chứng nhận A1, A2, A3</strong> dành riêng cho sinh viên Đại học Ngoại ngữ - ĐHQGHN.
           </p>
 
-          <!-- Realtime Academic Highlights Bar -->
-          <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10 text-xs font-semibold text-slate-700">
-            <div class="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-md rounded-xl border border-slate-200/90 shadow-2xs hover:border-slate-300 transition">
-              <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-              <span><strong>12</strong> Sự kiện mở đơn</span>
+          <!-- Realtime Stat Bar — plain divider metrics, no floating chips -->
+          <div class="flex items-center justify-center gap-0 mb-10 text-sm text-slate-500 divide-x divide-slate-200/80">
+            <div class="flex items-center gap-2 px-5 first:pl-0">
+              <span class="text-2xl font-black text-[#0B2341] tracking-tighter tabular-nums">12</span>
+              <span class="text-xs text-slate-500 leading-tight">Sự kiện<br>mở đơn</span>
             </div>
-            <div class="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-md rounded-xl border border-slate-200/90 shadow-2xs hover:border-slate-300 transition">
-              <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
-              <span><strong>50+</strong> CLB tuyển thành viên</span>
+            <div class="flex items-center gap-2 px-5">
+              <span class="text-2xl font-black text-[#0B2341] tracking-tighter tabular-nums">50+</span>
+              <span class="text-xs text-slate-500 leading-tight">CLB tuyển<br>thành viên</span>
             </div>
-            <div class="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-md rounded-xl border border-slate-200/90 shadow-2xs hover:border-slate-300 transition">
-              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-              <span><strong>100%</strong> Chuẩn Cert A1 • A2 • A3</span>
+            <div class="flex items-center gap-2 px-5">
+              <span class="text-2xl font-black text-[#0B2341] tracking-tighter tabular-nums">100%</span>
+              <span class="text-xs text-slate-500 leading-tight">Chuẩn Cert<br>A1 · A2 · A3</span>
             </div>
           </div>
 
           <!-- 3 Core Navigation CTA Buttons -->
           <div class="flex flex-wrap items-center justify-center gap-3.5">
-            <a href="#event-hub" class="px-6 py-3.5 bg-gradient-to-r from-[#0B2341] to-[#1E3A8A] hover:from-blue-900 hover:to-blue-800 text-white rounded-2xl text-sm font-bold flex items-center gap-2.5 transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95">
+            <a href="#event-hub" class="px-6 py-3.5 bg-[#0B2341] hover:bg-[#071b30] text-white rounded-lg text-sm font-bold flex items-center gap-2.5 transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95">
               <i data-lucide="calendar" class="w-4 h-4 text-blue-200"></i>
               <span>Khám phá Event Hub</span>
               <i data-lucide="chevron-right" class="w-4 h-4 opacity-70"></i>
             </a>
 
-            <a href="#club-directory" class="px-6 py-3.5 bg-white/90 hover:bg-white text-slate-800 border border-slate-200/90 rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-2xs hover:shadow-xs hover:-translate-y-0.5 active:scale-95">
+            <a href="#club-directory" class="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 rounded-lg text-sm font-bold flex items-center gap-2.5 transition shadow-sm hover:-translate-y-0.5 active:scale-95">
               <i data-lucide="users" class="w-4 h-4 text-slate-600"></i>
               <span>Duyệt Club Directory</span>
               
             </a>
 
-            <a href="#cert-hub" class="px-6 py-3.5 bg-white/90 hover:bg-white text-slate-800 border border-slate-200/90 rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-2xs hover:shadow-xs hover:-translate-y-0.5 active:scale-95">
+            <a href="#cert-hub" class="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 rounded-lg text-sm font-bold flex items-center gap-2.5 transition shadow-sm hover:-translate-y-0.5 active:scale-95">
               <i data-lucide="award" class="w-4 h-4 text-slate-600"></i>
               <span>Tra cứu Cert Hub</span>
               
@@ -695,52 +691,52 @@ const templateHtml = `<!DOCTYPE html>
     <!-- ==================================================== -->
     <!-- QUICK FEATURE ACCESS HUB (MINIMALISM GRADIENT UNIFIED) -->
     <!-- ==================================================== -->
-    <section class="py-6 sm:py-8 bg-white/60 backdrop-blur-md border-b border-slate-200/70">
+    <section class="py-5 sm:py-7 bg-white border-b border-slate-200/60">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           
-          <a href="#event-hub" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 border border-blue-100/80 flex items-center justify-center mb-2.5 group-hover:bg-blue-700 group-hover:text-white transition-all duration-300 shadow-2xs">
+          <a href="#event-hub" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-xl transition-all duration-200 shadow-none hover:shadow-sm hover:-translate-y-0.5 border-slate-200/60 hover:border-slate-300 flex flex-col items-center text-center">
+            <div class="w-11 h-11 rounded-lg bg-blue-50 text-blue-700 border border-blue-100 flex items-center justify-center mb-3 group-hover:bg-blue-700 group-hover:text-white transition-colors duration-200">
               <i data-lucide="calendar" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Sự kiện & Workshop</span>
             <span class="text-[11px] text-slate-500 mt-0.5">12 sự kiện mở đơn</span>
           </a>
 
-          <a href="#club-directory" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-100/80 flex items-center justify-center mb-2.5 group-hover:bg-indigo-700 group-hover:text-white transition-all duration-300 shadow-2xs">
+          <a href="#club-directory" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-xl transition-all duration-200 shadow-none hover:shadow-sm hover:-translate-y-0.5 border-slate-200/60 hover:border-slate-300 flex flex-col items-center text-center">
+            <div class="w-11 h-11 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-100 flex items-center justify-center mb-3 group-hover:bg-indigo-700 group-hover:text-white transition-colors duration-200">
               <i data-lucide="users" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Tổ chức & 50+ CLB</span>
             <span class="text-[11px] text-slate-500 mt-0.5">3 nhóm chuyên môn</span>
           </a>
 
-          <a href="#leaderboard" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-700 border border-amber-100/80 flex items-center justify-center mb-2.5 group-hover:bg-amber-700 group-hover:text-white transition-all duration-300 shadow-2xs">
+          <a href="#leaderboard" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-xl transition-all duration-200 shadow-none hover:shadow-sm hover:-translate-y-0.5 border-slate-200/60 hover:border-slate-300 flex flex-col items-center text-center">
+            <div class="w-11 h-11 rounded-lg bg-amber-50 text-amber-700 border border-amber-100 flex items-center justify-center mb-3 group-hover:bg-amber-700 group-hover:text-white transition-colors duration-200">
               <i data-lucide="award" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Bảng vàng Vinh danh</span>
             <span class="text-[11px] text-slate-500 mt-0.5">Top SV tích cực</span>
           </a>
 
-          <a href="#cert-hub" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-100/80 flex items-center justify-center mb-2.5 group-hover:bg-emerald-700 group-hover:text-white transition-all duration-300 shadow-2xs">
+          <a href="#cert-hub" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-xl transition-all duration-200 shadow-none hover:shadow-sm hover:-translate-y-0.5 border-slate-200/60 hover:border-slate-300 flex flex-col items-center text-center">
+            <div class="w-11 h-11 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100 flex items-center justify-center mb-3 group-hover:bg-emerald-700 group-hover:text-white transition-colors duration-200">
               <i data-lucide="file-check-2" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Chuẩn Cert A1-A2-A3</span>
             <span class="text-[11px] text-slate-500 mt-0.5">Minh chứng ĐRL</span>
           </a>
 
-          <a href="#news" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-sky-50 text-sky-700 border border-sky-100/80 flex items-center justify-center mb-2.5 group-hover:bg-sky-700 group-hover:text-white transition-all duration-300 shadow-2xs">
+          <a href="#news" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-xl transition-all duration-200 shadow-none hover:shadow-sm hover:-translate-y-0.5 border-slate-200/60 hover:border-slate-300 flex flex-col items-center text-center">
+            <div class="w-11 h-11 rounded-lg bg-sky-50 text-sky-700 border border-sky-100 flex items-center justify-center mb-3 group-hover:bg-sky-700 group-hover:text-white transition-colors duration-200">
               <i data-lucide="newspaper" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Tin tức & Phong trào</span>
             <span class="text-[11px] text-slate-500 mt-0.5">Bản tin Đoàn - Hội</span>
           </a>
 
-          <a href="#gallery" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-rose-50 text-rose-600 border border-rose-100/80 flex items-center justify-center mb-2.5 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300 shadow-2xs">
+          <a href="#gallery" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-xl transition-all duration-200 shadow-none hover:shadow-sm hover:-translate-y-0.5 border-slate-200/60 hover:border-slate-300 flex flex-col items-center text-center">
+            <div class="w-11 h-11 rounded-lg bg-rose-50 text-rose-600 border border-rose-100 flex items-center justify-center mb-3 group-hover:bg-rose-600 group-hover:text-white transition-colors duration-200">
               <i data-lucide="camera" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Khoảnh khắc ULIS</span>
@@ -762,7 +758,7 @@ const templateHtml = `<!DOCTYPE html>
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <!-- Video Showcase Frame (Pure 16:9 Motion Display) -->
-        <div class="rounded-3xl border border-slate-200 shadow-2xl overflow-hidden max-w-5xl mx-auto bg-slate-950">
+        <div class="rounded-2xl border border-slate-200 shadow-xl overflow-hidden max-w-5xl mx-auto bg-slate-950">
           <div class="w-full relative aspect-video overflow-hidden">
             <iframe 
               id="video-intro-iframe"
@@ -786,13 +782,12 @@ const templateHtml = `<!DOCTYPE html>
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <div class="flex items-center gap-2 mb-2">
-              <span class="px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200/80 rounded-full text-xs font-semibold flex items-center gap-1.5">
+              <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600">
                 <i data-lucide="trophy" class="w-3.5 h-3.5 text-blue-700"></i> Bảng Vàng & Vinh Danh Sinh Viên
               </span>
               <span class="text-xs text-slate-500 hidden sm:inline">• Cập nhật hàng tuần</span>
             </div>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Top Sinh Viên Tích Cực — Bảng Vàng Hoạt Động & Rèn Luyện
+            <h2 class="text-3xl sm:text-4xl font-black text-[#0B2341] tracking-tighter">Top Sinh Viên Tích Cực — Bảng Vàng Hoạt Động & Rèn Luyện
             </h2>
             <p class="text-sm text-slate-600 mt-2 max-w-2xl">
               Vinh danh các gương mặt sinh viên năng nổ tham gia các hoạt động ngoại khóa, hội thảo học thuật và phong trào tình nguyện, tích lũy điểm rèn luyện (ĐRL) xuất sắc nhất Trường Đại học Ngoại ngữ.
@@ -800,11 +795,11 @@ const templateHtml = `<!DOCTYPE html>
           </div>
 
           <!-- Switcher Tabs -->
-          <div class="flex items-center p-1 bg-slate-100 rounded-2xl border border-slate-200 shrink-0 self-start md:self-auto">
-            <button id="tab-lb-month" onclick="switchLeaderboardTab('month')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0B2341] text-white transition shadow-2xs">
+          <div class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200/80 shrink-0 self-start md:self-auto">
+            <button id="tab-lb-month" onclick="switchLeaderboardTab('month')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold bg-[#0B2341] text-white transition shadow-xs">
               Theo Tháng 11/2026
             </button>
-            <button id="tab-lb-term" onclick="switchLeaderboardTab('term')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:text-blue-950 transition">
+            <button id="tab-lb-term" onclick="switchLeaderboardTab('term')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 transition">
               Toàn Học Kỳ I (2026-2027)
             </button>
           </div>
@@ -814,17 +809,15 @@ const templateHtml = `<!DOCTYPE html>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           
           <!-- Hạng 2: Á Quân Bạc (Frosted Architectural Card) -->
-          <div class="order-2 md:order-1 podium-rank-2 rounded-3xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden interactive-card">
+          <div class="order-2 md:order-1 podium-rank-2 rounded-2xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden interactive-card">
             <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-bold tracking-wider uppercase">
-                HẠNG 02
-              </span>
+              <span class="text-xs font-black text-slate-400 tracking-widest uppercase">02</span>
               <span class="text-xs text-slate-500 font-medium">Khóa K57</span>
             </div>
             <div>
               <div class="flex items-center gap-4 mb-4">
-                <div class="w-14 h-14 rounded-full bg-slate-200 border-2 border-slate-300 flex items-center justify-center font-bold text-slate-700 text-lg overflow-hidden shrink-0 shadow-xs">
-                  <span class="bg-gradient-to-br from-slate-500 to-slate-700 w-full h-full flex items-center justify-center text-white font-bold">HN</span>
+                <div class="w-14 h-14 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-slate-700 text-base overflow-hidden shrink-0">
+                  <span class="bg-slate-800 w-full h-full flex items-center justify-center text-white font-bold text-sm">HN</span>
                 </div>
                 <div>
                   <h3 class="font-bold text-slate-900 text-base">Trần Hoàng Nam</h3>
@@ -854,16 +847,14 @@ const templateHtml = `<!DOCTYPE html>
           </div>
 
           <!-- Hạng 1: Quán Quân (Elite Midnight Sapphire Obsidian Card) -->
-          <div class="order-1 md:order-2 podium-rank-1 rounded-3xl p-6 sm:p-7 shadow-xl flex flex-col justify-between relative overflow-hidden -translate-y-2 interactive-card">
+          <div class="order-1 md:order-2 podium-rank-1 rounded-2xl p-6 sm:p-7 shadow-xl flex flex-col justify-between relative overflow-hidden -translate-y-2 interactive-card">
             <div class="flex items-center justify-between mb-5">
-              <span class="px-3 py-1 rounded-full bg-white/10 text-blue-200 border border-white/20 text-[10px] font-black tracking-wider uppercase backdrop-blur-md">
-                TOP 1 • QUÁN QUÂN THÁNG 11
-              </span>
+              <span class="text-[10px] font-black text-blue-300 tracking-widest uppercase">01 — QUÁN QUÂN</span>
               <span class="text-xs text-blue-300 font-semibold">Khóa K58</span>
             </div>
             <div>
               <div class="flex items-center gap-4 mb-5">
-                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 border-2 border-white/40 flex items-center justify-center font-bold text-white text-xl overflow-hidden shrink-0 shadow-lg">
+                <div class="w-16 h-16 rounded-full bg-blue-800 border-2 border-blue-600/60 flex items-center justify-center font-bold text-white text-xl overflow-hidden shrink-0">
                   MC
                 </div>
                 <div>
@@ -894,22 +885,20 @@ const templateHtml = `<!DOCTYPE html>
             </div>
             <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-blue-200">
               <span>Tích lũy trọn vẹn A1 • A2 • A3</span>
-              <button onclick="showToast('Nguyễn Minh Châu đã đạt danh hiệu Sinh viên Xuất sắc Tháng 11!', 'success')" class="font-bold text-white hover:text-blue-300 transition cursor-pointer">Vinh danh ✨</button>
+              <button onclick="showToast('Nguyễn Minh Châu đã đạt danh hiệu Sinh viên Xuất sắc Tháng 11!', 'success')" class="font-bold text-white hover:text-blue-300 transition cursor-pointer">Vinh danh →</button>
             </div>
           </div>
 
           <!-- Hạng 3: Á Quân Đồng (Frosted Architectural Card) -->
-          <div class="order-3 podium-rank-3 rounded-3xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden interactive-card">
+          <div class="order-3 podium-rank-3 rounded-2xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden interactive-card">
             <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-bold tracking-wider uppercase">
-                HẠNG 03
-              </span>
+              <span class="text-xs font-black text-slate-400 tracking-widest uppercase">03</span>
               <span class="text-xs text-slate-500 font-medium">Khóa K58</span>
             </div>
             <div>
               <div class="flex items-center gap-4 mb-4">
-                <div class="w-14 h-14 rounded-full bg-slate-200 border-2 border-slate-300 flex items-center justify-center font-bold text-slate-700 text-lg overflow-hidden shrink-0 shadow-xs">
-                  <span class="bg-gradient-to-br from-amber-600 to-amber-800 w-full h-full flex items-center justify-center text-white font-bold">PT</span>
+                <div class="w-14 h-14 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-slate-700 text-base overflow-hidden shrink-0">
+                  <span class="bg-slate-700 w-full h-full flex items-center justify-center text-white font-bold text-sm">PT</span>
                 </div>
                 <div>
                   <h3 class="font-bold text-slate-900 text-base">Lê Phương Thảo</h3>
@@ -942,7 +931,7 @@ const templateHtml = `<!DOCTYPE html>
 
         <!-- Leaderboard Row 4, 5, 6 & Rèn Luyện Conversion Box -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-7 bg-slate-50 p-6 rounded-3xl border border-slate-200">
+          <div class="lg:col-span-7 bg-slate-50 p-5 rounded-xl border border-slate-200/80">
             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-600 mb-4 flex items-center justify-between">
               <span>Gương mặt tiêu biểu tiếp theo (Top 4 - 6)</span>
               <a href="#event-hub" class="text-blue-900 hover:underline normal-case font-semibold">Tham gia sự kiện để lên bảng vàng →</a>
@@ -993,7 +982,7 @@ const templateHtml = `<!DOCTYPE html>
           </div>
 
           <!-- Quy chế cộng điểm rèn luyện ĐHQGHN Box -->
-          <div class="lg:col-span-5 bg-[#0B2341] p-6 rounded-3xl text-white flex flex-col justify-between shadow-sm">
+          <div class="lg:col-span-5 bg-[#0B2341] p-6 rounded-2xl text-white flex flex-col justify-between shadow-sm">
             <div>
               <div class="flex items-center gap-2 mb-3">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
@@ -1005,15 +994,15 @@ const templateHtml = `<!DOCTYPE html>
               </p>
               <div class="space-y-2 text-xs">
                 <div class="p-2.5 bg-blue-900/60 rounded-xl border border-blue-800 flex items-center justify-between">
-                  <span>📘 Chứng nhận A1 (Học thuật & NCKH):</span>
+                  <span><span class="inline-flex items-center justify-center w-5 h-5 mr-1 rounded bg-blue-900/50 text-blue-200 text-[9px] font-black">A1</span>Chứng nhận A1 (Học thuật & NCKH):</span>
                   <strong class="text-amber-300 font-bold tabular-nums">+5 ĐRL / Sự kiện</strong>
                 </div>
                 <div class="p-2.5 bg-blue-900/60 rounded-xl border border-blue-800 flex items-center justify-between">
-                  <span>📙 Chứng nhận A2 (Kỹ năng & Ngoại khóa):</span>
+                  <span><span class="inline-flex items-center justify-center w-5 h-5 mr-1 rounded bg-blue-900/50 text-amber-200 text-[9px] font-black">A2</span>Chứng nhận A2 (Kỹ năng & Ngoại khóa):</span>
                   <strong class="text-amber-300 font-bold tabular-nums">+3 ĐRL / Sự kiện</strong>
                 </div>
                 <div class="p-2.5 bg-blue-900/60 rounded-xl border border-blue-800 flex items-center justify-between">
-                  <span>📗 Chứng nhận A3 (Tình nguyện & Xã hội):</span>
+                  <span><span class="inline-flex items-center justify-center w-5 h-5 mr-1 rounded bg-blue-900/50 text-emerald-200 text-[9px] font-black">A3</span>Chứng nhận A3 (Tình nguyện & Xã hội):</span>
                   <strong class="text-amber-300 font-bold tabular-nums">+4 ĐRL / Sự kiện</strong>
                 </div>
               </div>
@@ -1038,12 +1027,11 @@ const templateHtml = `<!DOCTYPE html>
         <!-- Header -->
         <div class="text-center max-w-3xl mx-auto mb-10">
           <div class="flex items-center justify-center gap-2 mb-2">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200/80 rounded-md text-xs font-bold uppercase tracking-wider">
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-500">
               <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span> Sự kiện & Workshop
             </span>
           </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Event Hub – Lịch Sự Kiện & Tuyển Quân Toàn Trường
+          <h2 class="text-3xl sm:text-4xl font-black text-[#0B2341] tracking-tighter">Event Hub – Lịch Sự Kiện & Tuyển Quân Toàn Trường
           </h2>
           <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
             Tập trung toàn bộ hội thảo chuyên môn, hoạt động rèn luyện và các đợt mở đơn tuyển thành viên của mọi CLB tại ULIS. Dễ dàng lọc theo loại chứng nhận A1, A2, A3 hoặc nhóm hoạt động.
@@ -1051,26 +1039,33 @@ const templateHtml = `<!DOCTYPE html>
         </div>
 
         <!-- Event Category Tabs (Mô phỏng youth.is.vnu.edu.vn Tabs) -->
-        <div class="flex items-center justify-center gap-2 mb-8 overflow-x-auto no-scrollbar p-1.5">
-          <button onclick="filterEventsByStatus('all')" class="event-filter-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-[#0B2341] text-white shadow-2xs whitespace-nowrap transition">
-            Tất cả sự kiện
-          </button>
-          <button onclick="filterEventsByStatus('open')" class="event-filter-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 whitespace-nowrap transition flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Đang mở đăng ký
-          </button>
-          <button onclick="filterEventsByStatus('closing_soon')" class="event-filter-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 whitespace-nowrap transition flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-amber-500"></span> Sắp diễn ra
-          </button>
-          <button onclick="filterEventsByCert('A1')" class="event-filter-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 whitespace-nowrap transition">
-            Học thuật & NCKH (A1)
-          </button>
-          <button onclick="filterEventsByCert('A2')" class="event-filter-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 whitespace-nowrap transition">
-            Kỹ năng & Ngoại khóa (A2)
-          </button>
-          <button onclick="filterEventsByCert('A3')" class="event-filter-pill px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 whitespace-nowrap transition">
-            Tình nguyện & Xã hội (A3)
-          </button>
+        
+    param($m)
+    @'
+<div class="flex items-center justify-center mb-8">
+          <div class="inline-flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200/80 gap-0.5 overflow-x-auto no-scrollbar">
+            <button onclick="filterEventsByStatus('all')" class="event-filter-pill px-4 py-2 rounded-lg text-xs sm:text-sm font-bold bg-[#0B2341] text-white whitespace-nowrap transition shadow-xs">
+              Tất cả
+            </button>
+            <button onclick="filterEventsByStatus('open')" class="event-filter-pill px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-white whitespace-nowrap transition flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Đang mở đăng ký
+            </button>
+            <button onclick="filterEventsByStatus('closing_soon')" class="event-filter-pill px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-white whitespace-nowrap transition flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Sắp diễn ra
+            </button>
+            <button onclick="filterEventsByCert('A1')" class="event-filter-pill px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-white whitespace-nowrap transition">
+              Học thuật A1
+            </button>
+            <button onclick="filterEventsByCert('A2')" class="event-filter-pill px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-white whitespace-nowrap transition">
+              Kỹ năng A2
+            </button>
+            <button onclick="filterEventsByCert('A3')" class="event-filter-pill px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-white whitespace-nowrap transition">
+              Tình nguyện A3
+            </button>
+          </div>
         </div>
+'@
+
 
         <!-- Filter & Search Controls Bar -->
         <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm mb-8 space-y-4">
@@ -1125,11 +1120,11 @@ const templateHtml = `<!DOCTYPE html>
 
             <div class="flex items-center gap-2">
               <span class="text-xs text-slate-500 mr-1 hidden sm:inline">Chế độ xem:</span>
-              <div class="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200">
-                <button id="btn-view-cards" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-900 text-white transition flex items-center gap-1.5">
+              <div class="flex items-center p-1 bg-slate-100 rounded-lg border border-slate-200/80">
+                <button id="btn-view-cards" class="px-3 py-1.5 rounded-md text-xs font-bold bg-[#0B2341] text-white transition flex items-center gap-1.5">
                   <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> Thẻ (Cards)
                 </button>
-                <button id="btn-view-calendar" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-700 transition flex items-center gap-1.5">
+                <button id="btn-view-calendar" class="px-3 py-1.5 rounded-md text-xs font-bold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
                   <i data-lucide="calendar-days" class="w-3.5 h-3.5"></i> Lịch tháng
                 </button>
               </div>
@@ -1154,11 +1149,11 @@ ${eventsHtml}
         <!-- Header -->
         <div class="text-center max-w-3xl mx-auto mb-12">
           <div class="flex items-center justify-center gap-2 mb-2">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200/80 rounded-md text-xs font-bold uppercase tracking-wider">
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-500">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> 50+ CLB & Tổ chức
             </span>
           </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 class="text-3xl sm:text-4xl font-black text-[#0B2341] tracking-tighter">
             Club Directory – Danh Bạ Hệ Thống Câu Lạc Bộ ULIS
           </h2>
           <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
@@ -1167,7 +1162,7 @@ ${eventsHtml}
         </div>
 
         <!-- Khối "Tổ chức tích cực" (Top Active Clubs mô phỏng youth.is.vnu) -->
-        <div class="mb-10 bg-slate-50 p-6 rounded-3xl border border-slate-200">
+        <div class="mb-10 bg-slate-50/60 p-5 rounded-xl border border-slate-200/70">
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
               <i data-lucide="trending-up" class="w-4 h-4 text-slate-600"></i> Tổ Chức & Câu Lạc Bộ Hoạt Động Tích Cực Nhất
@@ -1257,12 +1252,12 @@ ${clubsHtml}
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <div class="flex items-center gap-2 mb-2">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200/80 rounded-md text-xs font-bold uppercase tracking-wider">
+              <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-500">
                 <span class="w-1.5 h-1.5 rounded-full bg-sky-600"></span> Bản tin & Thông báo
               </span>
               <span class="text-xs text-slate-500 hidden sm:inline">• Tin tức chính thức</span>
             </div>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h2 class="text-3xl sm:text-4xl font-black text-[#0B2341] tracking-tighter">
               Tin Tức & Nhịp Sống Ngoại Khóa ULIS
             </h2>
             <p class="text-sm text-slate-600 mt-2 max-w-2xl">
@@ -1279,7 +1274,7 @@ ${clubsHtml}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           <!-- News Card 1 -->
-          <article class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col justify-between group">
+          <article class="bg-white rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col justify-between group">
             <div>
               <div class="aspect-video w-full overflow-hidden bg-slate-900">
                 <img src="./assets/news/news-01.webp" alt="Kế hoạch xét cấp chứng nhận A1-A2-A3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='./assets/news/news-01.png'" />
@@ -1308,7 +1303,7 @@ ${clubsHtml}
           </article>
 
           <!-- News Card 2 -->
-          <article class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col justify-between group">
+          <article class="bg-white rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col justify-between group">
             <div>
               <div class="aspect-video w-full overflow-hidden bg-slate-900">
                 <img src="./assets/news/news-02.webp" alt="Chiến dịch Sinh viên 5 Tốt" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='./assets/news/news-02.png'" />
@@ -1337,7 +1332,7 @@ ${clubsHtml}
           </article>
 
           <!-- News Card 3 -->
-          <article class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col justify-between group">
+          <article class="bg-white rounded-xl border border-slate-200/80 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col justify-between group">
             <div>
               <div class="aspect-video w-full overflow-hidden bg-slate-900">
                 <img src="./assets/news/news-03.webp" alt="Khai mạc Tuần lễ Văn hóa Quốc tế" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='./assets/news/news-03.png'" />
@@ -1378,11 +1373,11 @@ ${clubsHtml}
         
         <div class="text-center max-w-3xl mx-auto mb-12">
           <div class="flex items-center justify-center gap-2 mb-2">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200/80 rounded-md text-xs font-bold uppercase tracking-wider">
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-500">
               <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span> Gallery Sinh viên
             </span>
           </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 class="text-3xl sm:text-4xl font-black text-[#0B2341] tracking-tighter">
             Khoảnh Khắc Sinh Viên ULIS
           </h2>
           <p class="text-sm text-slate-600 mt-2">
@@ -1392,7 +1387,7 @@ ${clubsHtml}
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          <div class="group relative rounded-3xl overflow-hidden bg-slate-900 shadow-sm border border-slate-200">
+          <div class="group relative rounded-xl overflow-hidden bg-slate-900 shadow-sm border border-slate-200/80">
             <div class="aspect-[4/3] w-full overflow-hidden">
               <img src="./assets/gallery/gal-01.webp" alt="ULIS International Day" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='./assets/gallery/gal-01.png'" />
             </div>
@@ -1403,7 +1398,7 @@ ${clubsHtml}
             </div>
           </div>
 
-          <div class="group relative rounded-3xl overflow-hidden bg-slate-900 shadow-sm border border-slate-200">
+          <div class="group relative rounded-xl overflow-hidden bg-slate-900 shadow-sm border border-slate-200/80">
             <div class="aspect-[4/3] w-full overflow-hidden">
               <img src="./assets/gallery/gal-02.webp" alt="Chung Kết Hùng Biện Tiếng Anh" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='./assets/gallery/gal-02.png'" />
             </div>
@@ -1414,7 +1409,7 @@ ${clubsHtml}
             </div>
           </div>
 
-          <div class="group relative rounded-3xl overflow-hidden bg-slate-900 shadow-sm border border-slate-200">
+          <div class="group relative rounded-xl overflow-hidden bg-slate-900 shadow-sm border border-slate-200/80">
             <div class="aspect-[4/3] w-full overflow-hidden">
               <img src="./assets/gallery/gal-03.webp" alt="Mùa Hè Xanh Ba Vì" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='./assets/gallery/gal-03.png'" />
             </div>
@@ -1425,7 +1420,7 @@ ${clubsHtml}
             </div>
           </div>
 
-          <div class="group relative rounded-3xl overflow-hidden bg-slate-900 shadow-sm border border-slate-200">
+          <div class="group relative rounded-xl overflow-hidden bg-slate-900 shadow-sm border border-slate-200/80">
             <div class="aspect-[4/3] w-full overflow-hidden">
               <img src="./assets/gallery/gal-04.webp" alt="Lễ Tuyên Dương Sinh Viên 5 Tốt" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='./assets/gallery/gal-04.png'" />
             </div>
@@ -1449,7 +1444,7 @@ ${clubsHtml}
         
         <!-- Header -->
         <div class="text-center max-w-3xl mx-auto mb-12">
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 class="text-3xl sm:text-4xl font-black text-[#0B2341] tracking-tighter">
             Cert Hub – Bảng Tra Cứu Chuẩn Hóa Chứng Nhận A1, A2, A3
           </h2>
           <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
@@ -1479,7 +1474,7 @@ ${certA1Html}
         </div>
 
         <!-- Interactive Cert Recommender / Calculator Tool -->
-        <div class="bg-blue-950 rounded-3xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
+        <div class="bg-blue-950 rounded-2xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
           <div class="max-w-3xl">
             <h3 class="text-2xl sm:text-3xl font-black mb-3 text-white">Công cụ Gợi Ý Lộ Trình Chứng Nhận Thông Minh</h3>
             <p class="text-sm text-blue-200 leading-relaxed mb-6">
@@ -1522,11 +1517,11 @@ ${certRecommenderInitHtml}
         <!-- ==================================================== -->
         <!-- BỘ TÍNH ĐIỂM RÈN LUYỆN (ĐRL) TƯƠNG TÁC THỜI GIAN THỰC -->
         <!-- ==================================================== -->
-        <div id="drl-simulator-card" class="mt-10 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+        <div id="drl-simulator-card" class="mt-10 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
             <div>
               <div class="flex items-center gap-2 mb-1.5">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-800 border border-slate-200/80 rounded-md text-xs font-bold uppercase tracking-wider">
+                <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-slate-500">
                   <i data-lucide="calculator" class="w-3.5 h-3.5 text-emerald-700"></i> Tính năng Độc quyền Đề án 109
                 </span>
                 <span class="text-xs text-slate-500 hidden sm:inline">• Chuẩn Quy chế ĐHQGHN</span>
@@ -1602,7 +1597,7 @@ ${certRecommenderInitHtml}
             </div>
 
             <!-- Cột phải: Live Result Card -->
-            <div class="lg:col-span-5 bg-gradient-to-br from-[#0B2341] via-blue-950 to-slate-900 rounded-3xl p-6 sm:p-7 text-white flex flex-col justify-between shadow-lg relative overflow-hidden">
+            <div class="lg:col-span-5 bg-gradient-to-br from-[#0B2341] via-blue-950 to-slate-900 rounded-2xl p-6 sm:p-7 text-white flex flex-col justify-between shadow-lg relative overflow-hidden">
               <div class="absolute -right-10 -bottom-10 w-44 h-44 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
               <div>
@@ -1620,7 +1615,7 @@ ${certRecommenderInitHtml}
                 <div class="flex items-center justify-between mb-4 pb-4 border-b border-blue-800/80">
                   <span class="text-xs text-blue-200 font-medium">Xếp loại rèn luyện:</span>
                   <div id="drl-calc-rank">
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-950 font-black text-xs">Xuất Sắc 🏆</span>
+                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-950 font-black text-xs">Xuất Sắc</span>
                   </div>
                 </div>
 
@@ -1655,7 +1650,7 @@ ${certRecommenderInitHtml}
           <!-- Cột trái: Câu hỏi thường gặp (FAQ) -->
           <div class="lg:col-span-6 space-y-6">
             <div>
-              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              <h2 class="text-2xl sm:text-3xl font-black text-[#0B2341] tracking-tighter">
                 Câu Hỏi Thường Gặp Về CLB & Hoạt Động Ngoại Khóa
               </h2>
               <p class="text-xs sm:text-sm text-slate-600 mt-2">
@@ -1670,7 +1665,7 @@ ${faqHtml}
 
           <!-- Cột phải: Biểu mẫu góp ý ẩn danh (Feedback Form) -->
           <div id="feedback-section" class="lg:col-span-6">
-            <div class="bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm relative">
+            <div class="bg-slate-50 rounded-xl p-5 sm:p-6 border border-slate-200/80 shadow-sm relative">
               <div class="flex items-center justify-between mb-4">
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-950 rounded-full text-xs font-bold">
                   <i data-lucide="shield-check" class="w-4 h-4 text-emerald-700"></i> 100% Ẩn danh
@@ -1753,7 +1748,7 @@ ${faqHtml}
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 class="text-3xl sm:text-4xl font-black text-[#0B2341] tracking-tighter">
             Kế Hoạch Dự Án & Đội Ngũ Nhóm 109
           </h2>
           <p class="text-sm text-slate-600 mt-2">
@@ -1764,7 +1759,7 @@ ${faqHtml}
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
           
           <!-- Cột 1: Kế hoạch triển khai (15 bước - Bảng 3 Đề án) -->
-          <div class="lg:col-span-5 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="lg:col-span-5 bg-white p-5 rounded-xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between gap-2 mb-2">
                 <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
@@ -1813,7 +1808,7 @@ ${roadmapTableHtml}
           <div class="lg:col-span-7 space-y-8">
             
             <!-- Bảng Kế hoạch truyền thông (Bảng 4 File Word) -->
-            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+            <div class="bg-white p-5 rounded-xl border border-slate-200/80 shadow-sm">
               <div class="flex items-center justify-between gap-2 mb-2">
                 <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
                   <i data-lucide="megaphone" class="w-5 h-5 text-amber-600"></i> Kế hoạch truyền thông (7 Bài đăng Fanpage)
@@ -1843,7 +1838,7 @@ ${mediaHtml}
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               
               <!-- Bảng Dự toán kinh phí chi tiết (Bảng 5 File Word) -->
-              <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div class="bg-white p-5 rounded-xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
                 <div>
                   <div class="flex items-center justify-between gap-2 mb-1">
                     <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
@@ -1905,7 +1900,7 @@ ${mediaHtml}
               </div>
 
               <!-- Chữ ký người lập đề xuất từ file Word gốc -->
-              <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between text-center">
+              <div class="bg-white p-5 rounded-xl border border-slate-200/80 shadow-sm flex flex-col justify-between text-center">
                 <div>
                   <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Người lập đề xuất</span>
                   <p class="text-xs text-slate-600 mt-0.5 tabular-nums">Hà Nội, ngày 20/11/2026</p>
@@ -1939,7 +1934,7 @@ ${mediaHtml}
           </div>
 
           <!-- Bảng Phân Công Nhiệm Vụ Thành Viên (Official Matrix Table) -->
-          <div class="mb-10 overflow-x-auto rounded-3xl border border-slate-200 shadow-sm bg-white p-2">
+          <div class="mb-10 overflow-x-auto rounded-xl border border-slate-200/80 shadow-sm bg-white p-2">
             <table class="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
                 <tr class="bg-blue-950 text-white font-bold text-[11px] uppercase tracking-wider">
