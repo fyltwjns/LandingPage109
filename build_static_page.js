@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 
 // Load data
 const dataCode = fs.readFileSync('./js/data.js', 'utf8');
@@ -678,13 +678,13 @@ const templateHtml = `<!DOCTYPE html>
             <a href="#club-directory" class="px-6 py-3.5 bg-white/90 hover:bg-white text-slate-800 border border-slate-200/90 rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-2xs hover:shadow-xs hover:-translate-y-0.5 active:scale-95">
               <i data-lucide="users" class="w-4 h-4 text-slate-600"></i>
               <span>Duyệt Club Directory</span>
-              <span class="px-2 py-0.5 text-[10px] bg-slate-100 text-slate-700 rounded font-bold border border-slate-200/60">50+ CLB</span>
+              
             </a>
 
             <a href="#cert-hub" class="px-6 py-3.5 bg-white/90 hover:bg-white text-slate-800 border border-slate-200/90 rounded-2xl text-sm font-bold flex items-center gap-2.5 transition shadow-2xs hover:shadow-xs hover:-translate-y-0.5 active:scale-95">
               <i data-lucide="award" class="w-4 h-4 text-slate-600"></i>
               <span>Tra cứu Cert Hub</span>
-              <span class="px-2 py-0.5 text-[10px] bg-slate-100 text-slate-700 rounded font-bold border border-slate-200/60">A1 • A2 • A3</span>
+              
             </a>
           </div>
 
@@ -700,7 +700,7 @@ const templateHtml = `<!DOCTYPE html>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           
           <a href="#event-hub" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-slate-100 text-[#0B2341] flex items-center justify-center mb-2.5 group-hover:bg-[#0B2341] group-hover:text-white transition-all duration-300 shadow-2xs">
+            <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 border border-blue-100/80 flex items-center justify-center mb-2.5 group-hover:bg-blue-700 group-hover:text-white transition-all duration-300 shadow-2xs">
               <i data-lucide="calendar" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Sự kiện & Workshop</span>
@@ -708,7 +708,7 @@ const templateHtml = `<!DOCTYPE html>
           </a>
 
           <a href="#club-directory" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-slate-100 text-[#0B2341] flex items-center justify-center mb-2.5 group-hover:bg-[#0B2341] group-hover:text-white transition-all duration-300 shadow-2xs">
+            <div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-100/80 flex items-center justify-center mb-2.5 group-hover:bg-indigo-700 group-hover:text-white transition-all duration-300 shadow-2xs">
               <i data-lucide="users" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Tổ chức & 50+ CLB</span>
@@ -716,7 +716,7 @@ const templateHtml = `<!DOCTYPE html>
           </a>
 
           <a href="#leaderboard" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-slate-100 text-[#0B2341] flex items-center justify-center mb-2.5 group-hover:bg-[#0B2341] group-hover:text-white transition-all duration-300 shadow-2xs">
+            <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-700 border border-amber-100/80 flex items-center justify-center mb-2.5 group-hover:bg-amber-700 group-hover:text-white transition-all duration-300 shadow-2xs">
               <i data-lucide="award" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Bảng vàng Vinh danh</span>
@@ -724,7 +724,7 @@ const templateHtml = `<!DOCTYPE html>
           </a>
 
           <a href="#cert-hub" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-slate-100 text-[#0B2341] flex items-center justify-center mb-2.5 group-hover:bg-[#0B2341] group-hover:text-white transition-all duration-300 shadow-2xs">
+            <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-100/80 flex items-center justify-center mb-2.5 group-hover:bg-emerald-700 group-hover:text-white transition-all duration-300 shadow-2xs">
               <i data-lucide="file-check-2" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Chuẩn Cert A1-A2-A3</span>
@@ -732,7 +732,7 @@ const templateHtml = `<!DOCTYPE html>
           </a>
 
           <a href="#news" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-slate-100 text-[#0B2341] flex items-center justify-center mb-2.5 group-hover:bg-[#0B2341] group-hover:text-white transition-all duration-300 shadow-2xs">
+            <div class="w-11 h-11 rounded-xl bg-sky-50 text-sky-700 border border-sky-100/80 flex items-center justify-center mb-2.5 group-hover:bg-sky-700 group-hover:text-white transition-all duration-300 shadow-2xs">
               <i data-lucide="newspaper" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Tin tức & Phong trào</span>
@@ -740,7 +740,7 @@ const templateHtml = `<!DOCTYPE html>
           </a>
 
           <a href="#gallery" class="group p-4 bg-white/80 hover:bg-white border border-slate-200/80 hover:border-slate-300 rounded-2xl transition-all duration-300 shadow-2xs hover:shadow-md hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden">
-            <div class="w-11 h-11 rounded-xl bg-slate-100 text-[#0B2341] flex items-center justify-center mb-2.5 group-hover:bg-[#0B2341] group-hover:text-white transition-all duration-300 shadow-2xs">
+            <div class="w-11 h-11 rounded-xl bg-rose-50 text-rose-600 border border-rose-100/80 flex items-center justify-center mb-2.5 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300 shadow-2xs">
               <i data-lucide="camera" class="w-5 h-5"></i>
             </div>
             <span class="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-blue-950">Khoảnh khắc ULIS</span>
@@ -1073,7 +1073,7 @@ const templateHtml = `<!DOCTYPE html>
         </div>
 
         <!-- Filter & Search Controls Bar -->
-        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm mb-8 space-y-4">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm mb-8 space-y-4">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             
             <!-- Search -->
@@ -1120,12 +1120,7 @@ const templateHtml = `<!DOCTYPE html>
               <span id="events-count-badge" class="px-3 py-1 bg-blue-50 text-blue-900 rounded-lg text-xs font-bold tabular-nums">
                 12 sự kiện & đợt tuyển
               </span>
-              <div class="hidden sm:flex items-center gap-1.5 text-xs text-slate-600">
-                <span class="text-slate-500">Lọc nhanh:</span>
-                <button data-type="cert" data-value="A1" class="quick-filter-event quick-filter-btn">A1 Học thuật</button>
-                <button data-type="cert" data-value="A2" class="quick-filter-event quick-filter-btn">A2 Kỹ năng</button>
-                <button data-type="cert" data-value="A3" class="quick-filter-event quick-filter-btn">A3 Tình nguyện</button>
-              </div>
+              
             </div>
 
             <div class="flex items-center gap-2">
@@ -1175,7 +1170,7 @@ ${eventsHtml}
         <div class="mb-10 bg-slate-50 p-6 rounded-3xl border border-slate-200">
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
             <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-2">
-              <i data-lucide="flame" class="w-4 h-4 text-amber-500"></i> Tổ Chức & Câu Lạc Bộ Hoạt Động Tích Cực Nhất
+              <i data-lucide="trending-up" class="w-4 h-4 text-slate-600"></i> Tổ Chức & Câu Lạc Bộ Hoạt Động Tích Cực Nhất
             </h3>
             <span class="text-xs text-slate-500">Được đánh giá dựa trên tần suất tổ chức sự kiện & số thành viên</span>
           </div>

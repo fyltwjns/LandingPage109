@@ -1,4 +1,4 @@
-/* Impeccable Design System for ULIS Vibe - Professional Minimalism Gradient */
+﻿/* Impeccable Design System for ULIS Vibe - Professional Minimalism Gradient */
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap');
 
 :root {
@@ -276,21 +276,11 @@ a:active:not(:disabled) {
 }
 
 /* Quick Filter Buttons */
-.quick-filter-btn {
-  padding: 0.25rem 0.625rem;
-  background-color: #F8FAFC;
-  color: #334155;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  font-size: 0.75rem;
-  transition: all 0.15s ease;
-  border: 1px solid #E2E8F0;
+/* Feature Hub semantic icon containers */
+.feature-hub-icon {
+  transition: background-color 0.25s cubic-bezier(0.16,1,0.3,1), color 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s;
 }
-.quick-filter-btn:hover {
-  background-color: #0B2341;
-  color: #FFFFFF;
-  border-color: #0B2341;
-}
+
 
 /* Custom Range Slider (ĐRL Simulator) */
 input[type="range"] {
