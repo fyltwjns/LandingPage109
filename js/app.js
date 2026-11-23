@@ -783,19 +783,19 @@ function renderClubs() {
         <!-- Club Banner Thumbnail (16:9 clean poster) -->
         <div class="event-banner-container aspect-video cursor-pointer relative overflow-hidden bg-slate-950" onclick="openClubModal('${club.id}')">
           <img src="./assets/clubs/${club.id}.webp" alt="${club.name}" class="event-banner-img group-hover:scale-102 transition-transform duration-300" loading="lazy" onerror="this.onerror=null; this.src='./assets/clubs/${club.id}.png';" />
-          <div class="absolute top-2.5 left-2.5 flex items-center gap-1.5">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 shadow-xs">
-              <span class="w-1.5 h-1.5 rounded-full ${catDot}"></span>
-              ${club.categoryName}
-            </span>
-          </div>
-          <span class="absolute top-2.5 right-2.5 text-[11px] font-bold text-slate-700 bg-white/95 backdrop-blur-md border border-slate-200/80 px-2 py-0.5 rounded shadow-xs">
-            ${club.acronym}
-          </span>
         </div>
 
         <div class="p-6 flex flex-col flex-1 justify-between">
           <div>
+            <div class="flex items-center justify-between gap-1.5 mb-3">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-md bg-slate-100 text-slate-800 border border-slate-200/80">
+                <span class="w-1.5 h-1.5 rounded-full ${catDot}"></span>
+                ${club.categoryName}
+              </span>
+              <span class="text-[11px] font-bold text-slate-700 bg-slate-50 border border-slate-200/80 px-2 py-0.5 rounded-md">
+                ${club.acronym}
+              </span>
+            </div>
             <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1 hover:text-blue-900 cursor-pointer transition line-clamp-1" onclick="openClubModal('${club.id}')">
               ${club.name}
             </h3>
